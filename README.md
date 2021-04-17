@@ -16,4 +16,4 @@ Installation:
   - Install mongodb driver: 
     + $ sudo pecl install mongodb
     + Add "extension=mongodb.so" to php.ini file (/etc/php/8.0/apache2/php.ini or /opt/lampp/etc/php.ini with XAMPP)
-  - Run $ composer require mongodb/mongodb in the project folder
+  - Run _$ composer require mongodb/mongodb_ in the project folder
