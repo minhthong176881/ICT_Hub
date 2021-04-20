@@ -10,10 +10,11 @@ Techologies:
 Requirements:
   - OS: linux
   - php 8.0, mongodb, composer
-  - XAMPP or apache2 
+  - apache2 
 
 Installation:
   - Install mongodb driver: 
-    + $ sudo pecl install mongodb
-    + Add "extension=mongodb.so" to php.ini file (/etc/php/8.0/apache2/php.ini or /opt/lampp/etc/php.ini with XAMPP)
+    + $ sudo pecl install mongodb 
+    + $ sudo apt install php-mongodb
+    + Add "extension=mongodb.so" to php.ini file (/etc/php/8.0/apache2/php.ini)
   - Run _$ composer require mongodb/mongodb_ in the project folder
