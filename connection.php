@@ -14,11 +14,6 @@ class DB {
             try {
                 $conn = new Client("mongodb://127.0.0.1:27017");
                 self::$instance = $conn->selectDatabase('ict_hub');
-                $document = self::$instance->selectCollection("semesters");
-                $list = $document->find();
-                foreach($list as $item) {
-                    echo $item;
-                }
             } catch (Exception $ex) {
                 die($ex);
             }

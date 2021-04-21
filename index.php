@@ -1,5 +1,5 @@
 <?php
-require_once('connections.php');
+require_once('connection.php');
 
 if (isset($_GET['controller'])) {
     $controller = $_GET['controller'];
