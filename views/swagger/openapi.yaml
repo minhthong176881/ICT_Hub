@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: 'API Test With Swagger'
+  description: 'API Test With Swagger'
+  termsOfService: ''
+  contact:
+    email: dominhthong99@gmail.com
+  version: 1.0.0
+servers:
+  -
+    url: /ict_hub
+paths:
+  '/?controller=semesters':
+    get:
+      summary: 'Return all semester'
+      description: 'Return all semester'
+      operationId: 'SemestersController::index'
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: 'Not found'

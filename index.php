@@ -1,5 +1,9 @@
 <?php
 require_once('connection.php');
+require("vendor/autoload.php");
+// $openapi = \OpenApi\scan('./controllers');
+// header('Content-Type: application/x-yaml');
+// echo $openapi->toYaml();
 
 if (isset($_GET['controller'])) {
     $controller = $_GET['controller'];

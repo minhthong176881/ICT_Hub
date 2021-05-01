@@ -1,6 +1,7 @@
 <?php
 require_once 'controllers/base_controller.php';
 require_once 'models/semester.php';
+use OpenApi\Annotations as OA;
 
 class SemestersController extends BaseController {
     function __construct()
@@ -8,6 +9,21 @@ class SemestersController extends BaseController {
         $this->folder = 'semesters';
     }
 
+    /**
+   * @OA\Get(
+   *     path="/?controller=semesters",
+   *     summary="Return all semester",
+   *     description="Return all semester",
+   *     @OA\Response(
+   *         response=200,
+   *         description="Success",
+   *     ), 
+   *     @OA\Response(
+   *         response=404,
+   *         description="Not found",
+   *     ), 
+   * )
+   */
     public function index() {
         $semsters = Semester::all();
         $data = array('semesters' => $semsters);

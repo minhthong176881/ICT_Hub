@@ -12,7 +12,7 @@ class DB {
     public static function getInstance() {
         if (!isset(self::$instance)) {
             try {
-                $conn = new Client("mongodb://127.0.0.1:27017");
+                $conn = new Client("mongodb+srv://thomii:thomii@ict-hub.oaomx.mongodb.net/ict_hub?retryWrites=true&w=majority");               
                 self::$instance = $conn->selectDatabase('ict_hub');
             } catch (Exception $ex) {
                 die($ex);
