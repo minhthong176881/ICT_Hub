@@ -1,16 +1,25 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 class User {
     private $user;
+
     public function __construct()
     {
         $this->user = DB::getInstance()->selectCollection('users');
     }
+
+    public function all() {
+        $list = [];
+        $req = $this->user->find();
+        foreach ($req as $item) {
+            array_push($list, $item);
+        }
+        return $list;
+    }
+
     public function login($username, $password) { 
-        $req = $this->user->find({'username': $username, 'password': md5($password)});
-        if ($req) return 1;
-        else return 0;
+        $req = $this->user->findOne(['username' => $username, 'password' => $password]);
+        return $req;
+        // if ($req) return 1;
+        // else return 0;
     }
 }

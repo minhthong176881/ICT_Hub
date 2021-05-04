@@ -3,7 +3,7 @@ $controllers = array(
     'pages' => ['home', 'error'],
     'semesters' => ['index'],
     'articles' => ['index'],
-    'users' => ['login']
+    'users' => ['login', 'postLogin', 'all']
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {

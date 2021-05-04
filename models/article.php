@@ -1,6 +1,7 @@
 <?php
 class Article {
     private $article;
+    
     public function __construct()
     {
         $this->article = DB::getInstance()->selectCollection('articles');

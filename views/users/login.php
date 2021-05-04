@@ -1,4 +1,4 @@
-<form method="POST" action="controllers/users_controller.php">
+<form method="POST" action="?controller=users&action=postLogin">
     <p>
         <label for="">Username</label>
         <input type="text" id="username" name="username" required>
