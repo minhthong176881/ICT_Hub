@@ -1,0 +1,164 @@
+<div class="header">
+    <h2>Chapter 01-1- Intro to Web Programming</h2>
+</div>
+<div class="content">
+    <div class="section1">
+        <h3>1. The Internet and WWW</h3>
+        <h4>1.1. The Internet</h4>
+        <ul>
+            <li>A network of networks</li>
+            <li>Began in 1969 as ARPAnet (Advanced Research Projects Agency)</li>
+            <li>No central authority and thus impossible to state the precise size <br></li>
+            <img style="width: 200px; margin-left: 150px;" src="https://i.imgur.com/vK4pzhG.png" alt=""><br>
+            <li>Free access to central servers that allow machines and people to locate other machines by their Internet
+                address.
+                <ul>
+                    <li>e.g. 100.99.88.32</li>
+                    <img style="width: 200px; margin-left: 100px;" src="https://i.imgur.com/mjnTARJ.png" alt="">
+                </ul>
+            </li>
+        </ul>
+        <h4>1.2. The World Wide Web</h4>
+        <ul>
+            <li>Developed by Tim Berners-Lee at CERN in 1990</li>
+            <img src="https://i.imgur.com/2Op9teh.png" style="width: 100px; margin-left: 100px" alt="">
+            <li>The idea of documents that contain hyperlinks to other documents on the Internet</li>
+            <img style="width: 100px; margin-left: 100px" src="https://i.imgur.com/ejCqzoN.png" alt="">
+            <li>W3 or Web for short</li>
+            NeXT computer
+            The First Web server
+            <img src="https://i.imgur.com/lFrpV4N.png" style="width: 200px; margin-left: 50px" alt="">
+            <li>World Wide Web
+                <ul>
+                    <li>a system of interlinked hypertext documents accessed via the Internet</li>
+                </ul>
+            </li>
+            <li>HyperText Markup Language (HTML)
+                <ul>
+                    <li>document layout language for all Web Documents</li>
+                </ul>
+            </li>
+            <li>HyperText Transfer Protocol (HTTP)
+                <ul>
+                    <li>allows any machine to load a document via a hyperlink from any other machine</li>
+                </ul>
+            </li>
+        </ul>
+        <h4>1.3. Web page or Webpage</h4>
+        <ul>
+            <li>a Web document
+                <ul>
+                    <li>a document or resource of information that is suitable for the WWW and can be accessed through a
+                        web browser and displayed on a computer screen</li>
+                </ul>
+            </li>
+            <li>usually in HTML or XHTML format
+                <ul>
+                    <li>XHTML (Extensible HTML): Intersection between HTML and XML</li>
+                </ul>
+            </li>
+            <li>requested and served from web servers using HTTP.</li>
+            <img style="width: 250px; margin-top: 10px" src="https://i.imgur.com/2zAt9MY.png" alt="">
+        </ul>
+        <h4>1.4. Web site or Website</h4>
+        <ul>
+            <li>a collection of related web pages, images, videos or other digital assets that are addressed with a
+                common domain name or IP address in an Internet Protocol-based network</li>
+            <li>hosted on at least one web server, accessible via the Internet or a private local area network.</li>
+            <img src="https://i.imgur.com/DPQregw.png" style="margin-top: 10px" alt="">
+        </ul>
+    </div>
+    <div class="section2">
+        <h3>2. Uniform Resource Identifier (URI)</h3>
+        <h4>2.1. URI (Uniform Resource Identifier)</h4>
+        <ul>
+            <li>A string of characters used to identify or name a resource on the Internet</li>
+            <img src="https://i.imgur.com/d60eglG.png" style="margin-top: 10px; margin-bottom: 10px" alt="">
+            <li>Classification
+                <ul>
+                    <li>URN: a person's name</li>
+                    <li>URL: that person's street-address</li>
+                    <p>->URN defines an item's identity</p>
+                    <p>->URL provides a method for finding it</p>
+                </ul>
+            </li>
+        </ul>
+        <h4>URI Generic Syntax</h4>
+        <ul>
+            <li>RFC 3986</li>
+            <li>Components
+                <ul>
+                    <li>Scheme</li>
+                    <li>Authority</li>
+                    <li>Path</li>
+                    <li>Query</li>
+                    <li>Fragment</li>
+                </ul>
+                <img src="https://i.imgur.com/lNs9zbV.png" style="width: 400px" alt=""><br>
+                <img src="https://i.imgur.com/RijKJ6g.png" style="width: 400px; margin-top: 10px" alt="">
+            </li>
+        </ul>
+        <h4>2.2. Uniform Resource Locator</h4>
+        <ul>
+            <li>created in 1990 by Tim Berners-Lee as part of the URI</li>
+            <li>specifies where an identified resource is available and the mechanism for retrieving it</li>
+            <li>separated by dots, and the file path, separated by slashes, as a coherent hierarchical path</li>
+            <li>Syntax: <span style="color: rgb(192, 192, 3);">resource_type://domain:port/filepathname?query_string#anchor</span>
+            </li>
+            <li>Example</li>
+            <img src="https://i.imgur.com/RnI28oG.png" style="width: 500px" alt="">
+        </ul>
+        <h4>2.3. Uniform Resource Name (URN)</h4>
+        <ul>
+            <li>globally unique and persistent name of a resource on the Internet</li>
+            <li>Syntax: &lt;URN&gt; ::= "urn:" &lt;NID&gt; ":" &lt;NSS&gt;
+                <ul>
+                    <li>&lt;NID&gt; is the Namespace Identifier</li>
+                    <li>&lt;NSS&gt; is the Namespace Specific String</li>
+                </ul>
+            </li>
+            <li>Example
+                <ul>
+                    <li>urn:isbn:0451450523
+                        <ul>
+                            <li>The URN for "The Last Unicorn", identified by its book number.</li>
+                        </ul>
+                    </li>
+                    <li>urn:isan:0000-0000-9E59-0000-O-0000-0000-2
+                        <ul>
+                            <li>The URN for "Spider-Man (film)", identified by its audiovisual number.</li>
+                        </ul>
+                    </li>
+                    <li>...</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="section3">
+        <h3>Web Application Model</h3>
+        <h4>Client Server Model</h4>
+        <ul>
+            <li>A simple network model</li>
+            <li>Used by various network applications</li>
+            <img src="https://i.imgur.com/DR3iChG.png" style="width: 300px" alt="">
+        </ul>
+        <h4>Client Server Model (Web)</h4>
+        <ul>
+            <li>Client: User Agent</li>
+            <li>Server: Web server</li>
+            <img src="https://i.imgur.com/EUVuJip.png" style="width: 300px" alt="">
+        </ul>
+        <h3>Web Application Evolution –Static</h3>
+        <ul>
+            <img src="https://i.imgur.com/MKpGN1s.png" style="width: 500px" alt="">
+            <li>Organizations want to make their information available to as many people in the world as possible</li>
+            <li>This can be achieved by using the Web, delivering the information as static HTML pages</li>
+        </ul>
+        <h4>Web Application Evolution –Dynamic</h4>
+        <img src="https://i.imgur.com/gWTpsVj.png" style="width: 500px" alt="">
+        <h4>Web Application –Dynamic</h4>
+        <img src="https://i.imgur.com/snjwjW6.png" style="width: 500px" alt="">
+        <h4>More than one Web server?</h4>
+        <img src="https://i.imgur.com/iU40SNU.png" style="width: 500px" alt="">
+    </div>
+</div>
