@@ -1,16 +1,15 @@
 <?php
 class Semester {
-    public $name;
+    public $semester;
 
-    function __construct($name)
+    function __construct()
     {
-        $this->name = $name;
+        $this->semester = DB::getInstance()->selectCollection('semesters');
     }
 
-    static function all() {
+    function all() {
         $list = [];
-        $db = DB::getInstance();
-        $req = $db->selectCollection("semesters")->find();
+        $req = $this->semester->find();
         foreach ($req as $item) {
             array_push($list, $item);
         }

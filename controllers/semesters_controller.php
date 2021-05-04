@@ -4,8 +4,10 @@ require_once 'models/semester.php';
 use OpenApi\Annotations as OA;
 
 class SemestersController extends BaseController {
+    private $semester;
     function __construct()
     {
+        $this->semester = new Semester();
         $this->folder = 'semesters';
     }
 
@@ -25,7 +27,7 @@ class SemestersController extends BaseController {
    * )
    */
     public function index() {
-        $semsters = Semester::all();
+        $semsters = $this->semester->all();
         $data = array('semesters' => $semsters);
         $this->render('index', $data);
     }

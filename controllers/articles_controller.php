@@ -4,8 +4,10 @@ require_once 'models/article.php';
 use OpenApi\Annotations as OA;
 
 class ArticlesController extends BaseController {
+    private $article;
     function __construct()
     {
+        $this->article = new Article();
         $this->folder = 'articles';
     }
 
@@ -25,7 +27,7 @@ class ArticlesController extends BaseController {
    * )
    */
     public function index() {
-        $articles = Article::all();
+        $articles = $this->article->all();
         $data = array('articles' => $articles);
         $this->render('index', $data);
     }

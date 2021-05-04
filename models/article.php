@@ -1,9 +1,13 @@
 <?php
 class Article {
-    static function all() {
+    private $article;
+    public function __construct()
+    {
+        $this->article = DB::getInstance()->selectCollection('articles');
+    }
+    public function all() {
         $list = [];
-        $db = DB::getInstance();
-        $req = $db->selectCollection("articles")->find();
+        $req = $this->article->find();
         foreach ($req as $item) {
             array_push($list, $item);
         }
