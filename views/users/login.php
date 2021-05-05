@@ -8,14 +8,14 @@
     <title>Login</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/stylesheets/login.css">
-    <link rel="stylesheet" href="../../assets/stylesheets/components/input.css">
-    <link rel="stylesheet" href="../../assets/stylesheets/components/button.css">
+    <link rel="stylesheet" href="assets/stylesheets/login.css">
+    <link rel="stylesheet" href="assets/stylesheets/components/input.css">
+    <link rel="stylesheet" href="assets/stylesheets/components/button.css">
 </head>
 <body>
     <div class="container">
         <div class="icon">
-            <img id="icon" src="../../assets/icons/ict_hub.jpg" alt="">
+            <img id="icon" src="assets/icons/ict_hub.jpg" alt="">
         </div>
         <div class="form-input">
             <h3>Login to ICT Hub</h3>
