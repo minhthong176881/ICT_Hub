@@ -1,0 +1,677 @@
+<div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h2 id="Chapter-9-XML-amp-XHTML" data-id="Chapter-9-XML-amp-XHTML"><span>Chapter 9. XML &amp; XHTML</span></h2><h3 id="Table-of-Contents" data-id="Table-of-Contents"><span>Table of Contents</span></h3><ol>
+<li><span>XML and XHTML Overview</span></li>
+<li><span>XML Components</span></li>
+<li><span>DTD &amp; XML Schema</span></li>
+<li><span>XML Validation</span></li>
+<li><span>XML Applications</span></li>
+</ol><h3 id="1-XML-and-XHTML-Overview" data-id="1-XML-and-XHTML-Overview"><span>1. XML and XHTML Overview</span></h3><h4 id="11-XML-eXtensible-Markup-Language" data-id="11-XML-eXtensible-Markup-Language"><span>1.1. XML (eXtensible Markup Language)</span></h4><ul>
+<li>
+<p><span>A new standard by W3C, derived from SGML</span></p>
+</li>
+<li>
+<p><span>EXtensible Markup Language (XML) is a meta-language that describes the content of the document (self-describing data)</span><br>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;Java = Portable Programs; XML = Portable Data</span></p>
+</li>
+<li>
+<p><span>XML does not specify the tag set or grammar of the language</span></p>
+<ul>
+<li><span>Tag Set – markup tags that have meaning to a language processor</span></li>
+<li><span>Grammar – defines correct usage of a language’s tag</span></li>
+</ul>
+</li>
+<li>
+<p><span>Applications of XML</span></p>
+<ul>
+<li><span>Media for data interchange</span></li>
+<li><span>A better alternative to proprietary data formats</span></li>
+<li><span>B2B transactions on the Web</span>
+<ul>
+<li><span>Electronic business orders (ebXML)</span></li>
+<li><span>Financial Exchange (IFX)</span></li>
+<li><span>Messaging exchange (SOAP)</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><p><span>Example:</span></p><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;recipe&gt;
+    &lt;name&gt;Iced Tea&lt;/name&gt;
+    &lt;description&gt;An iced tea that we serve everyday&lt;/description&gt;
+    &lt;preparation&gt;...&lt;/preparation&gt;
+&lt;/recipe&gt;
+</code></pre><h4 id="12-XML-vs-SGML" data-id="12-XML-vs-SGML"><span>1.2. XML vs. SGML</span></h4><ul>
+<li><span>SGML ( Standard Generalized Markup Language)</span>
+<ul>
+<li><span>ISO-standard meta-language</span></li>
+<li><span>Powerfull but very complex, suffers from lack of industry support</span></li>
+<li><span>The basis for XML, first published in 1988</span></li>
+</ul>
+</li>
+<li><span>XML (eXtensible Markup Language)</span>
+<ul>
+<li><span>Simpler yet offers most of the power of SGML because it is also a meta-language</span></li>
+<li><span>More likely to have broad industry support, because many companies and universitites involved in development</span></li>
+</ul>
+</li>
+</ul><h4 id="13-XML-vs-HTML" data-id="13-XML-vs-HTML"><span>1.3. XML vs. HTML</span></h4><ul>
+<li><span>Both based on SGML</span>
+<ul>
+<li><span>XML is a subset of SGML</span></li>
+<li><span>HTML is a markup language written in SGML</span></li>
+</ul>
+</li>
+<li><span>XML fundamentally separates content (data and language) from presentation; HTML specifies the presentation</span></li>
+<li><span>HTML explicitly defines a set of legal tags as well as the grammar (intended meaning)</span>
+<ul>
+<li><code>&lt;TABLE&gt; ... &lt;/TABLE&gt;</code></li>
+</ul>
+</li>
+<li><span>XML allows any tags or grammar to be used (hence, eXtensible)</span>
+<ul>
+<li><code>&lt;BOOK&gt; ... &lt;/BOOK&gt;</code></li>
+</ul>
+</li>
+<li><span>HTML</span>
+<ul>
+<li><span>Not extensible – cannot customize</span>
+<ul>
+<li><span>Cannot accommodate special needs (e.g. mathematics, chemical formulas)</span></li>
+<li><span>Proprietary, vendor-specific tags to extends capabilities</span></li>
+</ul>
+</li>
+<li><span>Only codes for display, not document structure, semantics or content</span></li>
+</ul>
+</li>
+<li><span>XML</span>
+<ul>
+<li><span>Can define own markup language → Flexible</span></li>
+<li><span>Tagging/content separate from display</span></li>
+<li><span>Reflects structure and semantics of documents → better searching and navigation</span></li>
+</ul>
+</li>
+</ul><h4 id="14-XHTML" data-id="14-XHTML"><span>1.4. XHTML</span></h4><ul>
+<li><span>History of HTML</span>
+<ul>
+<li><span>HTML 1.0</span></li>
+<li><span>Created by Tim Berners-Lee and submitted to IETF</span></li>
+</ul>
+</li>
+<li><span>HTML 2.0</span>
+<ul>
+<li><span>RFC1866 in Nov. 1995</span></li>
+</ul>
+</li>
+<li><span>HTML 3.2</span>
+<ul>
+<li><span>Jan. 1997</span></li>
+<li><span>moved from IETF to W3C</span></li>
+</ul>
+</li>
+<li><span>HTML 4.0</span>
+<ul>
+<li><span>Dec. 1997</span></li>
+</ul>
+</li>
+<li><span>HTML 4.01</span>
+<ul>
+<li><span>Dec. 1999</span></li>
+</ul>
+</li>
+<li><span>HTML 5.0</span>
+<ul>
+<li><span>2008</span></li>
+</ul>
+</li>
+<li><span>HTML 5.1</span>
+<ul>
+<li><span>2016</span></li>
+</ul>
+</li>
+</ul><p><strong><span>HTML4.01</span></strong></p><ul>
+<li><span>HTML4.01 has three versions</span>
+<ul>
+<li><span>Strict</span><br>
+<code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;</code></li>
+<li><span>Transitional</span><br>
+<code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</code></li>
+<li><span>Frameset</span><br>
+<code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd"&gt;</code></li>
+</ul>
+</li>
+</ul><p><strong><span>XHTML1.0</span></strong></p><ul>
+<li><span>Reformulation of HTML4.01 in XML</span>
+<ul>
+<li><span>more strict syntax than HTML</span></li>
+</ul>
+</li>
+<li><span>Three types of XHTML1.0</span>
+<ul>
+<li><span>Strict</span><br>
+<code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</code></li>
+<li><span>Transitional</span><br>
+<code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</code></li>
+<li><span>Frameset</span><br>
+<code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"&gt;</code></li>
+</ul>
+</li>
+</ul><p><strong><span>HTML, XHTML and XML</span></strong></p><ul>
+<li><span>HTML is an SGML application</span></li>
+<li><span>XHTML is an XML application</span><br>
+<img src="https://i.imgur.com/1YOqkfU.png" alt="" width="400" height="170"></li>
+</ul><h4 id="15-XHTML-Features" data-id="15-XHTML-Features"><span>1.5. XHTML Features</span></h4><ul>
+<li><span>Characters for a tag must be lower case</span>
+<ul>
+<li><code>C &lt;title&gt;</code></li>
+<li><code>I &lt;TITLE&gt;, &lt;Title&gt;</code></li>
+</ul>
+</li>
+<li><span>Close tags must be needed</span>
+<ul>
+<li><code>C &lt;p&gt;Para.&lt;/p&gt;</code></li>
+<li><code>I &lt;p&gt;Para&lt;p&gt;Next para</code></li>
+</ul>
+</li>
+<li><span>An empty element needs “ /&gt;” on the end</span>
+<ul>
+<li><code>C &lt;img src=“” alt=“” /&gt;</code></li>
+<li><code>I &lt;img src=“” alt=“” &gt;</code></li>
+</ul>
+</li>
+</ul><p><strong><span>Example</span></strong><br>
+<img src="https://i.imgur.com/FOwJzUC.png" alt="" height="650" width="400"></p><ul>
+<li><span>An attribute element needs its value</span>
+<ul>
+<li><code>C &lt;select multiple=“multiple” name=“test”&gt;</code></li>
+<li><code>I &lt;select multiple name=“test”&gt;</code></li>
+</ul>
+</li>
+<li><span>Attribute values must be quoted by the single quotation or the double quotation.</span>
+<ul>
+<li><code>C &lt;h1 id=“title”&gt;Title&lt;/h1&gt;</code></li>
+<li><code>I &lt;h1 id=title&gt;Title&lt;/h1&gt;</code></li>
+</ul>
+</li>
+<li><span>XML Declaration is needed</span>
+<ul>
+<li><code>&lt;? xml version=“1.0” encoding=“utf-8” ?&gt;</code></li>
+</ul>
+</li>
+<li><span>xmlns attribute and xml:lang attribute</span>
+<ul>
+<li><code>&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"&gt;</code></li>
+</ul>
+</li>
+</ul><p><strong><span>Example</span></strong><br>
+<img src="https://i.imgur.com/SXUdpdA.png" alt="" width="600" height="500"></p><h3 id="2-XML-Components" data-id="2-XML-Components"><span>2. XML Components</span></h3><ul>
+<li><span>Prolog</span>
+<ul>
+<li><span>Defines the xml version, entity definitions, and DOCTYPE</span></li>
+</ul>
+</li>
+<li><span>Components of the document</span>
+<ul>
+<li><span>Tags and attributes</span></li>
+<li><span>CDATA (character data)</span></li>
+<li><span>Entities</span></li>
+<li><span>Processing instructions</span></li>
+<li><span>Comments</span></li>
+</ul>
+</li>
+</ul><h4 id="21-XML-Prolog" data-id="21-XML-Prolog"><span>2.1. XML Prolog</span></h4><ul>
+<li><span>XML Files always start with a prolog</span></li>
+<li><span>Includes:</span>
+<ul>
+<li><span>Declaration</span></li>
+<li><span>Entities and DTD definitions</span></li>
+</ul>
+</li>
+</ul><h4 id="211-XML-Declaration" data-id="211-XML-Declaration"><span>2.1.1. XML Declaration</span></h4><ul>
+<li><span>XML version and document encoding</span><br>
+<code>&lt;?xml version="1.0" encoding="ISO-8859-1" standalone="no"?&gt;</code>
+<ul>
+<li><span>The version of XML is required</span></li>
+<li><span>The encoding identifies character set (default UTF-8)</span></li>
+<li><span>The value standalone identifies if an external document is referenced for DTD or entity definition</span></li>
+</ul>
+</li>
+</ul><h4 id="212-DOCTYPE-Declaration" data-id="212-DOCTYPE-Declaration"><span>2.1.2. DOCTYPE Declaration</span></h4><ul>
+<li><span>Specifies the location of the DTD defining the syntax and structure of elements in the document</span></li>
+<li><span>Common forms:</span>
+<ul>
+<li>
+&lt;!DOCTYPE root [DTD]&gt;
+</li>
+<li>
+&lt;!DOCTYPE root SYSTEM URL&gt;
+</li>
+<li>
+&lt;!DOCTYPE root PUBLIC FPI-identifier URL&gt;
+</li>
+</ul>
+</li>
+<li><span>The root identifies the starting element (root element) of the document</span></li>
+<li><span>The DTD can be external to the XML document, referenced by a SYSTEM or PUBLIC URL</span>
+<ul>
+<li><span>SYSTEM URL refers to a private DTD</span>
+<ul>
+<li><span>Located on the local file system or HTTP server</span></li>
+</ul>
+</li>
+<li><span>PUBLIC URL refers to a DTD intended for public use</span></li>
+</ul>
+</li>
+</ul><p><img src="https://i.imgur.com/nzzkRf7.png" alt=""></p><p><strong><span>DTD (Document Type Definition)</span></strong></p><ul>
+<li><span>A schema language for SGML and XML</span>
+<ul>
+<li><span>Definitions of elements, attributes, entities</span></li>
+<li><span>Content model: Tree structure by nested elements</span></li>
+</ul>
+</li>
+<li><span>In authors.dtd on </span><a href="http://example.org" target="_blank" rel="noopener"><span>http://example.org</span></a><span>:</span></li>
+</ul><pre><code>&lt;!DOCTYPE authors [
+    &lt;!ELEMENT authors(name)*&gt;
+    &lt;!ELEMENT name(firstname, lastname)&gt;
+    &lt;!ELEMENT firstname(#PCDATA)&gt;
+    &lt;!ELEMENT lastname(#PCDATA)&gt;
+]&gt;
+</code></pre><p><strong><span>Simple XML Example</span></strong></p><pre><code>&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE authors SYSTEM “http://example.org/authors.dtd”&gt;
+&lt;authors&gt;
+    &lt;name&gt;
+        &lt;firstname&gt;Larry&lt;/firstname&gt;
+        &lt;lastname&gt;Brown&lt;/lastname&gt;
+    &lt;/name&gt;
+    &lt;name&gt;
+        &lt;firstname&gt;Marty&lt;/firstname&gt;
+        &lt;lastname&gt;Hall&lt;/lastname&gt;
+    &lt;/name&gt;
+    ...
+&lt;/authors&gt;
+</code></pre><p><strong><span>Standalone XML document</span></strong></p><pre><code>&lt;?xml version="1.0" standalone="yes"?&gt;
+&lt;DOCTYPE authors [
+    &lt;!ELEMENT authors (name)*&gt;
+    &lt;!ELEMENT name (firstname, lastname)&gt;
+    &lt;!ELEMENT firstname (#PCDATA)&gt;
+    &lt;!ELEMENT lastname (#PCDATA)&gt;
+]&gt;
+&lt;authors&gt;
+    &lt;name&gt;
+        &lt;firstname&gt;James&lt;/firstname&gt;
+        &lt;lastname&gt;Gosling&lt;/lastname&gt;
+    &lt;/name&gt;
+    ...
+&lt;/authors&gt;
+</code></pre><p><strong><span>Specifying a PUBLIC DTD</span></strong><br>
+<code>&lt;!DOCTYPE root PUBLIC FPI-identifier URL&gt;</code></p><ul>
+<li><span>The Formal Public Identifier (FPI) has four parts:</span>
+<ol>
+<li><span>Connection of DTD to a formal standard</span>
+<ul>
+<li><span>- if defining yourself</span></li>
+<li><span>+ nonstandards body has approved the DTD</span></li>
+<li><span>ISO if approved by formal standards committee</span></li>
+</ul>
+</li>
+<li><span>Group responsible for the DTD</span></li>
+<li><span>Description and type of document</span></li>
+<li><span>Language used in the DTD</span></li>
+</ol>
+</li>
+<li><span>E.g.</span><br>
+<code>&lt;!DOCTYPE Book PUBLIC "-//W3C//DTD XHMTL 1.0 Transitional//EN" "http://www.w3.org/TR?xhtml1/DTD/xhtml1-transitional.dtd"&gt;</code><br>
+<code>&lt;!DOCYTPE CWP PUBLIC "-//Prentice Hall//DTD Core Series 1.0//EN“ "http://www.prenticehall.com/DTD/Core.dtd"&gt;</code></li>
+</ul><h4 id="22-Component-of-the-document" data-id="22-Component-of-the-document"><span>2.2. Component of the document</span></h4><ul>
+<li><span>Tags and attributes</span></li>
+<li><span>CDATA (character data)</span></li>
+<li><span>Entities</span></li>
+<li><span>Processing instructions</span></li>
+<li><span>Comments</span></li>
+</ul><h4 id="221-XML-Comment" data-id="221-XML-Comment"><span>2.2.1. XML Comment</span></h4><ul>
+<li><span>XML Comments</span>
+<ul>
+<li><span>The same as HTML comments</span></li>
+<li><code>&lt;!-- This is an XML and HTML comment --&gt;</code></li>
+</ul>
+</li>
+</ul><h4 id="222-Processing-Instructions" data-id="222-Processing-Instructions"><span>2.2.2. Processing Instructions</span></h4><ul>
+<li><span>Application-specific instruction to the XML processor</span><br>
+<code>&lt;?processor-instruction?&gt;</code></li>
+<li><span>Example:</span></li>
+</ul><pre><code>&lt;?xml version="1.0" ?&gt;
+&lt;?xml-stylesheet type="text/xml" href="orders.xsl" ?&gt;
+&lt;orders&gt;
+    &lt;order&gt;
+        &lt;count&gt;37&lt;/count&gt;
+        &lt;price&gt;49.99&lt;/price&gt;
+        &lt;book&gt;
+        &lt;isbn&gt;0130897930&lt;/isbn&gt;
+        &lt;title&gt;Core Web Programming Second Edition&lt;/title&gt;
+        &lt;authors&gt;
+            &lt;author&gt;Marty Hall&lt;/author&gt;
+            &lt;author&gt;Larry Brown&lt;/author&gt;
+        &lt;/authors&gt;
+        &lt;/book&gt;
+    &lt;/order&gt;
+&lt;/orders&gt;
+</code></pre><h4 id="223-XML-Root-Element" data-id="223-XML-Root-Element"><span>2.2.3. XML Root Element</span></h4><ul>
+<li><span>Required for XML-aware applications to recognize beginning and end of document</span></li>
+<li><span>Example:</span></li>
+</ul><pre><code>&lt;?xml version="1.0" ?&gt;
+&lt;book&gt;
+    &lt;title&gt;Core Web Programming&lt;/title&gt;
+    &lt;contents&gt;
+        &lt;chapter number="1“&gt; Designing Web Pages with HTML&lt;/chapter&gt;
+        &lt;chapter number="2"&gt; Block-level Elements in HTML 4.0&lt;/chapter&gt;
+        &lt;chapter number="3"&gt; Text-level Elements in HTML 4.0&lt;/chapter&gt;
+    ...
+    &lt;/contents&gt;
+&lt;/book&gt;
+</code></pre><h4 id="224-XML-Tags" data-id="224-XML-Tags"><span>2.2.4. XML Tags</span></h4><ul>
+<li><span>Tag names:</span>
+<ul>
+<li><span>Case sensitive</span></li>
+<li><span>Start with a letter or underscore</span></li>
+<li><span>After first character, numbers, - and . are allowed</span></li>
+<li><span>Cannot contain whitespaces</span></li>
+<li><span>Avoid use of colon except for indicating namespaces</span></li>
+</ul>
+</li>
+<li><span>For a well-formed XML documents</span>
+<ul>
+<li><span>Every tag must have an end tag</span><br>
+<code>&lt;elementOne&gt; ... &lt;/elementOne&gt;</code><br>
+<code>&lt;elementTwo /&gt;</code></li>
+<li><span>All tags are completely nested (tag order cannot be mixed)</span></li>
+</ul>
+</li>
+<li><span>Tags can also have attributes</span></li>
+</ul><pre><code>&lt;message to="Gates@microsoft.com" from="Gosling@sun.com"&gt;
+    &lt;priority/&gt;
+    &lt;text&gt;We put the . in .com. What did you do?&lt;/text&gt;
+&lt;/message&gt;
+</code></pre><h4 id="225-XML-Attributes" data-id="225-XML-Attributes"><span>2.2.5. XML Attributes</span></h4><ul>
+<li><span>Element Attributes</span>
+<ul>
+<li><span>Attributes provide metadata for the element</span></li>
+<li><span>Every attribute must be enclosed in “” with no commas in between</span></li>
+<li><span>Same naming conventions as elements</span></li>
+</ul>
+</li>
+</ul><h4 id="226-Document-Entities" data-id="226-Document-Entities"><span>2.2.6. Document Entities</span></h4><ul>
+<li><span>Entities refer to a data item, typically text</span>
+<ul>
+<li>
+<p><span>General entity references start with &amp; and end with ; parsed</span></p>
+</li>
+<li>
+<p><span>The entity reference is replaced by it’s true value when</span></p>
+</li>
+<li>
+<p><span>The characters &lt; &gt; &amp; ’ " require entity references to avoid conflicts with the XML application (parser)</span><br>
+<code>&amp;lt; &amp;gt; &amp;amp; &amp;quot; &amp;apos;</code></p>
+</li>
+</ul>
+</li>
+<li><span>Entities are user definable</span></li>
+</ul><pre><code>&lt;?xml version="1.0" standalone="yes" ?&gt;
+&lt;!DOCTYPE book [
+    &lt;!ELEMENT book (title)&gt;
+    &lt;!ELEMENT title (#PCDATA)&gt;
+    &lt;!ENTITY COPYRIGHT "2001, Prentice Hall"&gt;
+]&gt;
+&lt;book&gt;
+    &lt;title&gt;Core Web Programming, &amp;COPYRIGHT;&lt;/title&gt;
+&lt;/book&gt;
+</code></pre><h3 id="3-DTD-amp-XML-Schema" data-id="3-DTD-amp-XML-Schema"><span>3. DTD &amp; XML Schema</span></h3><p><strong><span>Well-formed versus Valid</span></strong></p><ul>
+<li><span>An XML document can be well-formed if it follows basic syntax rules</span></li>
+<li><span>An XML document is valid if its structure matches a Document Type Definition (DTD) or an XML</span></li>
+</ul><h4 id="31-Document-Type-Definition-DTD" data-id="31-Document-Type-Definition-DTD"><span>3.1. Document Type Definition (DTD)</span></h4><ul>
+<li><span>Defines Structure of the Document</span>
+<ul>
+<li><span>Allowable tags and their attributes</span></li>
+<li><span>Attribute values constraints</span></li>
+<li><span>Nesting of tags</span></li>
+<li><span>Number of occurrences for tags</span></li>
+<li><span>Entity definitions</span></li>
+</ul>
+</li>
+</ul><p><strong><span>DTD Examples</span></strong></p><pre><code>&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;
+&lt;!ELEMENT perennials (daylily)*&gt;
+&lt;!ELEMENT daylily (cultivar, award*, bloom, cost)+&gt;
+&lt;!ATTLIST daylily
+status (in-stock | limited | sold-out) #REQUIRED&gt;
+&lt;!ELEMENT cultivar (#PCDATA)&gt;
+&lt;!ELEMENT award (name, year)&gt;
+&lt;!ELEMENT name (#PCDATA)&gt;
+&lt;!ATTLIST name note CDATA #IMPLIED&gt;
+&lt;!ELEMENT year (#PCDATA)&gt;
+&lt;!ELEMENT bloom (#PCDATA)&gt;
+&lt;!ATTLIST bloom code (E | EM | M | ML | L | E-L) #REQUIRED&gt;
+&lt;!ELEMENT cost (#PCDATA)&gt;
+&lt;!ATTLIST cost discount CDATA #IMPLIED&gt;
+&lt;!ATTLIST cost currency (US | UK | CAN) "US"&gt;
+</code></pre><h4 id="32-XML-Schema" data-id="32-XML-Schema"><span>3.2. XML Schema</span></h4><ul>
+<li><span>W3C recommendation released May 2001</span>
+<ul>
+<li><a href="http://www.w3.org/TR/xmlschema-0/" target="_blank" rel="noopener"><span>http://www.w3.org/TR/xmlschema-0/</span></a></li>
+<li><a href="http://www.w3.org/TR/xmlschema-1/" target="_blank" rel="noopener"><span>http://www.w3.org/TR/xmlschema-1/</span></a></li>
+<li><a href="http://www.w3.org/TR/xmlschema-2/" target="_blank" rel="noopener"><span>http://www.w3.org/TR/xmlschema-2/</span></a></li>
+<li><span>Depends on following specifications</span>
+<ul>
+<li><span>XML-Infoset, XML-Namespaces, XPath</span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span>Benefits:</span>
+<ul>
+<li><span>Standard and user-defined data types</span></li>
+<li><span>Express data types as patterns</span></li>
+<li><span>Higher degree of type checking</span></li>
+<li><span>Better control of occurrences</span></li>
+</ul>
+</li>
+<li><span>Clearly the future … but limited support</span></li>
+</ul><p><strong><span>XML Schema Example</span></strong></p><pre><code>&lt;xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+    &lt;xsd:element name="perennials" type="PerennialType"/&gt;
+    &lt;xsd:complexType name="PerennialType" &gt;
+        &lt;xsd:element name=daylily" type="DaylilyType" maxOccurs="unbounded"/&gt;
+    &lt;/xsd:complexType&gt;
+&lt;xsd:complexType name="DaylilyType" &gt;
+    &lt;xsd:sequence&gt;
+        &lt;xsd:element name="cultivar" type="xsd:string"/&gt;
+        &lt;xsd:element name="award" type="AwardType"
+        maxOccurs="unbounded"/&gt;
+        &lt;xsd:element name="bloom" type="xsd:string"/&gt;
+        &lt;xsd:element name="cost" type="xsd:decimal"/&gt;
+    &lt;/xsd:sequence&gt;
+    &lt;xsd:attribute name="status" type="StatusType" use="required"/&gt;
+&lt;/xsd:complexType&gt;
+&lt;xsd:simpleType name="StatusType"&gt;
+    &lt;xsd:restriction base="xsd:string"&gt;
+        &lt;xsd:enumeration value="in-stock"/&gt;
+        &lt;xsd:enumeration value="limited"/&gt;
+        &lt;xsd:enumeration value="sold-out"/&gt;
+    &lt;/xsd:restriction&gt;
+&lt;/xsd:simpleType&gt;
+...
+&lt;/xsd:schema&gt;
+</code></pre><p><img src="https://i.imgur.com/Cplv7NY.png" alt=""></p><h3 id="4-XML-Validation" data-id="4-XML-Validation"><span>4. XML Validation</span></h3><ul>
+<li><span>DTD Validaton</span>
+<ul>
+<li><span>Process of checking a document against a DTD</span></li>
+</ul>
+</li>
+<li><span>Correct syntax</span></li>
+<li><span>Correct structure</span>
+<ul>
+<li><span>If the document is invalid, a user agent may not be able to handle it correctly</span>
+<ul>
+<li><span>parse error</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><p><strong><span>Markup Validation Service</span></strong></p><ul>
+<li><span>Validator for HTML</span>
+<ul>
+<li><span>URI, Local File or Direct Input</span></li>
+</ul>
+</li>
+<li><a href="http://validator.w3.org" target="_blank" rel="noopener"><span>http://validator.w3.org</span></a><br>
+<img src="https://i.imgur.com/qPcekUZ.png" alt=""></li>
+</ul><p><strong><span>Validator Results</span></strong><br>
+<img src="https://i.imgur.com/WqosixG.png" alt=""></p><p><strong><span>Web Developer Tool with Validator</span></strong></p><ul>
+<li><span>A link to the validation service on the Tool menu</span>
+<ul>
+<li><span>It posts the URI of the current page to the validator</span></li>
+</ul>
+</li>
+</ul><p><img src="https://i.imgur.com/Kuuda0n.png" alt=""></p><h3 id="5-XML-Application" data-id="5-XML-Application"><span>5. XML Application</span></h3><ul>
+<li><span>MathML</span>
+<ul>
+<li><span>Mathematical expressions</span></li>
+</ul>
+</li>
+<li><span>SVG (Scalable Vector Graphics)</span>
+<ul>
+<li><span>2D graphics applications and images</span></li>
+</ul>
+</li>
+<li><span>KML (Keyhole Markup Language)</span>
+<ul>
+<li><span>Geographical data for Google Earth, Maps, etc…</span></li>
+</ul>
+</li>
+<li><span>XUL (XML User Interface Language, /ˈzuːl/)</span>
+<ul>
+<li><span>GUI descriptions for Mozilla project applications (firefox)</span></li>
+</ul>
+</li>
+<li><span>EPUB (Electronic PUBlications)</span>
+<ul>
+<li><span>E-book description standard</span></li>
+</ul>
+</li>
+<li><span>ATOM</span>
+<ul>
+<li><span>Web content and metadata syndication format</span></li>
+<li><span>Replacement of RSS</span></li>
+</ul>
+</li>
+</ul><p><strong><span>XML Namespace</span></strong></p><ul>
+<li><span>A way to use various XML applications as components for a document</span>
+<ul>
+<li><span>Ex) HTML + MathML + SVG</span></li>
+</ul>
+</li>
+</ul><p><img src="https://i.imgur.com/zbx03GQ.png" alt=""><br>
+<img src="https://i.imgur.com/9rMPy77.png" alt=""></p><ul>
+<li><span>Each namespace has a URI</span></li>
+<li><span>xmlns attribute</span>
+<ul>
+<li><span>Default namespace for the branch</span></li>
+</ul>
+</li>
+</ul><pre><code>&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"&gt;
+&lt;head&gt;&lt;title&gt;XHTML as the host language&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+... XHTML content ...
+&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt; ...MathML content ...&lt;/math&gt;
+...
+</code></pre><p><strong><span>Namespace prefix</span></strong></p><ul>
+<li><span>xmlns:?? attribute</span>
+<ul>
+<li><span>Namespace for the ?? prefix</span></li>
+</ul>
+</li>
+</ul><pre><code>&lt;math xmlns="http://www.w3.org/1998/Math/MathML"
+&lt;xhtml:p xmlns:xhtml=“http://www.w3.org/1999/xhtml”&gt;
+    XHTML Paragraph
+&lt;/xhtml:p&gt;
+&lt;svg:svg version="1.1" xmlns:svg="http://www.w3.org/2000/svg“&gt;
+&lt;/svg:svg&gt;
+</code></pre><h4 id="51-MathML" data-id="51-MathML"><span>5.1. MathML</span></h4><ul>
+<li><span>You can try with firefox &gt; 3.6</span>
+<ul>
+<li><a href="http://www.mozilla.org/projects/mathml/start.xhtml" target="_blank" rel="noopener"><span>http://www.mozilla.org/projects/mathml/start.xhtml</span></a></li>
+</ul>
+</li>
+</ul><pre><code>&lt;mrow xmlns=“&amp;mathml;”&gt;
+    &lt;mi&gt;x&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;
+    &lt;mfrac&gt;
+        &lt;mrow&gt;
+            &lt;mrow&gt;&lt;mo&gt;-&lt;/mo&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;/mrow&gt;
+            &lt;mo&gt;&amp;PlusMinus;&lt;/mo&gt;
+            &lt;msqrt&gt;&lt;mrow&gt;
+                &lt;msup&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;
+                &lt;mo&gt;-&lt;/mo&gt;
+            &lt;mrow&gt;&lt;mn&gt;4&lt;/mn&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;/mrow&gt;
+            &lt;/mrow&gt;&lt;/msqrt&gt;
+        &lt;/mrow&gt;
+        &lt;mrow&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;/mrow&gt;
+    &lt;/mfrac&gt;
+&lt;/mrow&gt;
+</code></pre><p><img src="https://i.imgur.com/fjtzUlh.png" alt=""></p><p><strong><span>MathML example – Doctype and xmlns</span></strong></p><ul>
+<li><span>Both of xhtml and MathML vocabulary in the same document</span></li>
+</ul><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML
+2.0//EN" http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd [
+&lt;!ENTITY mathml "http://www.w3.org/1998/Math/MathML"&gt; ]&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"&gt;
+...
+&lt;mrow xmlns=“&amp;mathml;”&gt;
+</code></pre><h4 id="52-KML-Keyhole-Markup-Language" data-id="52-KML-Keyhole-Markup-Language"><span>5.2. KML (Keyhole Markup Language)</span></h4><ul>
+<li><span>Display geographic data in an Earth browser such as Google Earth, Google Maps</span></li>
+<li><span>Example: sample.kml</span></li>
+</ul><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;kml xmlns="http://www.opengis.net/kml/2.2"&gt;
+    &lt;Placemark&gt;
+        &lt;name&gt;HUST placemark&lt;/name&gt;
+        &lt;description&gt;Location of HUST&lt;/description&gt;
+        &lt;Point&gt;
+            &lt;coordinates&gt;105.84413,21.00438,0&lt;/coordinates&gt;
+        &lt;/Point&gt;
+    &lt;/Placemark&gt;
+&lt;/kml&gt;
+</code></pre><p><strong><span>To open KML files</span></strong></p><ul>
+<li><span>Google Earth: Open from the file menu</span></li>
+<li><span>Google Map: </span><a href="http://maps.google.com" target="_blank" rel="noopener"><span>maps.google.com</span></a>
+<ul>
+<li><span>“My Maps” on the left sidebar</span></li>
+<li><span>Use “import” menu</span></li>
+<li><span>You need google account</span></li>
+</ul>
+</li>
+<li><span>KML Tutorial</span>
+<ul>
+<li><a href="http://code.google.com/intl/en/apis/kml/documentation/kml_tut.html" target="_blank" rel="noopener"><span>http://code.google.com/intl/en/apis/kml/documentation/kml_tut.html</span></a></li>
+</ul>
+</li>
+</ul><h4 id="53-SVG-Scalable-Vector-Graphics" data-id="53-SVG-Scalable-Vector-Graphics"><span>5.3. SVG (Scalable Vector Graphics)</span></h4><ul>
+<li><span>2D vector graphics applications and images</span></li>
+<li><span>You can try with firefox &gt; 3.6</span>
+<ul>
+<li><a href="http://commons.wikimedia.org/wiki/SVG_examples" target="_blank" rel="noopener"><span>http://commons.wikimedia.org/wiki/SVG_examples</span></a></li>
+<li><a href="http://www.carto.net/papers/svg/samples/" target="_blank" rel="noopener"><span>http://www.carto.net/papers/svg/samples/</span></a></li>
+</ul>
+</li>
+</ul><pre><code>&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
+&lt;svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"&gt;
+    &lt;circle cx="100" cy="100" r="50" stroke="black" stroke-width="5" fill="red" /&gt;
+&lt;/svg&gt;
+</code></pre><p><img src="https://i.imgur.com/aRM0gLz.png" alt=""></p><p><strong><span>Standalone SVG document example</span></strong></p><ul>
+<li><span>Doctype and svg element</span></li>
+</ul><pre><code>&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
+&lt;svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"&gt;
+&lt;/svg&gt;
+</code></pre><ul>
+<li><span>Rectangular</span></li>
+</ul><pre><code>&lt;rect x=”20" y=”20" width="250" height="50" fill="green” stroke="black" stroke-width="1" /&gt;
+</code></pre><ul>
+<li><span>Circle</span></li>
+</ul><pre><code>&lt;circle cx="100" cy="100" r="50" stroke="black" stroke-width="5" fill="red" /&gt;
+</code></pre></div>
