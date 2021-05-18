@@ -1,6 +1,6 @@
 <header class="sub-header contact-header">
     <nav>
-        <a href="#"><img src="images/logo.png" alt=""></a>
+        <a href="#"><img src="assets/img/logo.png" alt=""></a>
         <div class="nav-links" id="navLinks">
             <i class="fas fa-times" onclick="hideMenu()"></i>
             <ul>

@@ -51,17 +51,17 @@
 
 <div class="row">
     <div class="facilities-col">
-        <img src="images/library.png" alt="">
+        <img src="assets/img/library.png" alt="">
         <h3>World Class Librabry</h3>
         <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
     </div>
     <div class="facilities-col">
-        <img src="images/basketball.png" alt="">
+        <img src="assets/img/basketball.png" alt="">
         <h3>Largest Stadium</h3>
         <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
     </div>
     <div class="facilities-col">
-        <img src="images/cafeteria.png" alt="">
+        <img src="assets/img/cafeteria.png" alt="">
         <h3>Beautiful Cafeteria</h3>
         <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
     </div>

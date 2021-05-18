@@ -1,6 +1,6 @@
 <header class="sub-header blog">
     <nav>
-        <a href="index.html"><img src="images/logo.png" alt=""></a>
+        <a href="index.html"><img src="assets/img/logo.png" alt=""></a>
         <div class="nav-links" id="navLinks">
             <i class="fas fa-times" onclick="hideMenu()"></i>
             <ul>
@@ -21,7 +21,7 @@
 <div class="blog-content">
     <div class="row">
         <div class="blog-left">
-            <img src="images/certificate.jpg" alt="">
+            <img src="assets/img/certificate.jpg" alt="">
             <h2>Our certificate & program for 2021</h2>
             <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
             <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
