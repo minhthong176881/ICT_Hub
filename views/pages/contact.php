@@ -1,6 +1,6 @@
 <header class="sub-header contact-header">
     <nav>
-        <a href="#"><img src="assets/img/logo.png" alt=""></a>
+        <a href="index.php"><img src="assets/img/logo.png" alt=""></a>
         <div class="nav-links" id="navLinks">
             <i class="fas fa-times" onclick="hideMenu()"></i>
             <ul>
@@ -28,15 +28,15 @@
             <div>
                 <i class="fas fa-home"></i>
                 <span>
-                    <h5>XYZ Road, ABC Building</h5>
-                    <p>Dai Co Viet, Ha Noi, Viet Nam</p>
+                    <h5>B1 Building</h5>
+                    <p>1st, Dai Co Viet, Ha Noi, Viet Nam</p>
                 </span>
             </div>
             <div>
                 <i class="fas fa-phone"></i>
                 <span>
                     <h5>+84 12345678910</h5>
-                    <p>Monday to Saturday, 10AM to 6PM</p>
+                    <p>Monday to Saturday, 9:30AM to 6:30PM</p>
                 </span>
             </div>
             <div>

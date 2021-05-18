@@ -1,6 +1,6 @@
 <header class="sub-header blog">
     <nav>
-        <a href="index.html"><img src="assets/img/logo.png" alt=""></a>
+        <a href="index.php"><img src="assets/img/logo.png" alt=""></a>
         <div class="nav-links" id="navLinks">
             <i class="fas fa-times" onclick="hideMenu()"></i>
             <ul>

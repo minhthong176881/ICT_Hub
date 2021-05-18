@@ -1,6 +1,6 @@
 <header class="sub-header">
     <nav>
-        <a href="index.html"><img src="assets/img/logo.png" alt=""></a>
+        <a href="index.php"><img src="assets/img/logo.png" alt=""></a>
         <div class="nav-links" id="navLinks">
             <i class="fas fa-times" onclick="hideMenu()"></i>
             <ul>
@@ -23,9 +23,9 @@
 
     <div class="row">
         <div class="about-col">
-            <h1>We are Viet Nam's largest university</h1>
+            <h1>We are the best university of Vietnam</h1>
             <p>Lorem ipsum dolo abcksjdfskd ksdhaf kasdhf ks aksdfh kasdhf k askdfh k asfdhk Lorem ipsum dolo abcksjdfskd ksdhaf kasdhf ks aksdfh kasdhf k askdfh k asfdhk</p>
-            <a href="" class="hero-btn red-btn">Explore now</a>
+            <a href="https://www.hust.edu.vn/" class="hero-btn red-btn">Explore now</a>
         </div>
         <div class="about-col">
             <img src="assets/img/about.jpg" alt="">

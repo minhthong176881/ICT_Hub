@@ -26,10 +26,12 @@ nav {
     padding: 2% 6%;
     justify-content: space-between;
     align-items: center;
+    /* background-color: #bab2; */
 }
 
 nav img {
-    width: 150px;
+    /* width: 150px; */
+    height: 75px;
 }
 
 .nav-links {
@@ -54,7 +56,7 @@ nav img {
     content: "";
     width: 0%;
     height: 2px;
-    background: #6AC1E6;
+    background: #1da4dd;
     display: block;
     margin: auto;
     transition: 0.5s;
@@ -97,8 +99,8 @@ nav img {
 }
 
 .hero-btn:hover {
-    border: 1px solid #6AC1E6;
-    background: #6AC1E6;
+    border: 1px solid #1da4dd;
+    background: #1da4dd;
     transition: 1s;
 }
 
@@ -311,14 +313,14 @@ footer h4 {
 }
 
 .icons .fab {
-    color: #6AC1E6;
+    color: #1da4dd;
     margin: 0px 13px;
     cursor: pointer;
     padding: 18px 0px;
 }
 
 .far {
-    color: #6AC1E6;
+    color: #1da4dd;
 }
 
 @media(max-width: 700px) {
@@ -331,7 +333,7 @@ footer h4 {
     }
     .nav-links {
         position: fixed;
-        background: #6AC1E6;
+        background: #1da4dd;
         height: 100vh;
         width: 200px;
         top: 0;
@@ -411,8 +413,8 @@ footer h4 {
 }
 
 .red-btn {
-    border: 1px solid #6AC1E6;
-    color: #6AC1E6;
+    border: 1px solid #1da4dd;
+    color: #1da4dd;
     background: transparent;
 }
 
@@ -462,7 +464,7 @@ footer h4 {
 }
 
 .blog-right h3 {
-    background: #6AC1E6;
+    background: #1da4dd;
     color: white;
     padding: 7px 0px;
     font-size: 16px;
@@ -534,7 +536,7 @@ footer h4 {
 
 .contact-col div .fas {
     font-size: 28px;
-    color: #6AC1E6;
+    color: #1da4dd;
     margin: 10px;
     margin-right: 30px;
 }
