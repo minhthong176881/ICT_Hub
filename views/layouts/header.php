@@ -11,3 +11,18 @@
     <title>ICT Hub</title>
 </head>
 <body>
+<header>
+    <nav>
+        <a href="/"><img src="assets/img/logo.png" alt=""></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fas fa-times" id="close-icon"></i>
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="?controller=pages&action=about">ABOUT</a></li>
+                <li><a href="?controller=pages&action=course">COURSES</a></li>
+                <li><a href="?controller=pages&action=blog">BLOG</a></li>
+                <li><a href="?controller=pages&action=contact">CONTACT</a></li>
+            </ul>
+        </div>
+        <i class="fas fa-bars" id="menu-icon"></i>
+    </nav>

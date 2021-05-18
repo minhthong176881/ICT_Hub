@@ -13,12 +13,8 @@ ul {
     list-style-type: none;
 }
 
-header {
-    min-height: 100vh;
-    width: 100%;
+.home-header {
     background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.4)), url("../img/background-b1.jpg");
-    background-size: cover;
-    background-position: center;
 }
 
 nav {
@@ -128,6 +124,15 @@ p {
     font-weight: 300;
     line-height: 22px;
     padding: 10px;
+}
+
+header {
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: white;
+    height: 100vh;
+    width: 100%;
 }
 
 .row {
@@ -375,12 +380,7 @@ footer h4 {
 /* about us page */
 
 .sub-header {
-    height: 50vh;
-    width: 100%;
     background-image: linear-gradient(rgba(4,9,30, 0.7), rgba(4,9,30, 0.3)), url('../img/background.jpg');
-    background-position: center;
-    background-size: cover;
-    text-align: center;
     color: white;
 }
 
@@ -427,7 +427,11 @@ footer h4 {
 
 .blog {
     background-image: linear-gradient(rgba(4,9,30, 0.7), rgba(4,9,30, 0.3)), url('../img/graduate-girl.jpg');
-    height: 40vh;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: white;
 }
 
 .blog h1 {
