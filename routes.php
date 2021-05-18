@@ -1,6 +1,6 @@
 <?php
 $controllers = array(
-    'pages' => ['home', 'error'],
+    'pages' => ['home', 'contact', 'blog', 'about', 'course', 'error'],
     'semesters' => ['index'],
     'articles' => ['index'],
     'users' => ['login', 'postLogin', 'all']
