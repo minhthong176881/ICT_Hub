@@ -1,71 +1,62 @@
-    <h1>Our Program for 2021</h1>
+    <h1>Maybe you miss this knowledge...</h1><br>
+    <h3><span><i class="fas fa-horizontal-rule"></i></span><span><i class="fas fa-horizontal-rule"></i></span> Sharing is caring <span><i class="fas fa-horizontal-rule"></i></span><span><i class="fas fa-horizontal-rule"></i></span></h3>
+    </header>
 
-</header>
+    <!-- blog page -->
+    <div class="blog-content">
+        <div class="row">
+            <div class="blog-left">
+                <img src="assets/img/certificate.jpg" alt="">
+                <h2>Recommended post</h2>
+                <?php
+                echo "<ul>";
+                foreach ($posts as $post) {
+                    echo "<li class='recommend'><a>" . $post->title . "</a></li><br/>";
+                }
+                echo "</ul>";
+                ?>
 
-<!-- blog page -->
-<div class="blog-content">
-    <div class="row">
-        <div class="blog-left">
-            <img src="assets/img/certificate.jpg" alt="">
-            <h2>Our certificate & program for 2021</h2>
-            <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
-            <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
-            <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
+                <div class="comment-box">
+                    <h3>Leave a comment</h3>
+                    <form action="submit" class="comment-form">
+                        <input type="text" style="width: 100%; border:none" name="" id="" placeholder="Enter Name">
+                        <input type="email" style="width: 100%; border:none" placeholder="Enter email">
+                        <textarea rows="5" placeholder="Your comment"></textarea>
+                        <button class="hero-btn red-btn">POST COMMENT</button>
+                    </form>
+                </div>
 
-            <div class="comment-box">
-                <h3>Leave a comment</h3>
-                <form action="submit" class="comment-form">
-                    <input type="text" name="" id="" placeholder="Enter Name">
-                    <input type="email" placeholder="Enter email">
-                    <textarea rows="5" placeholder="Your comment"></textarea>
-                    <button class="hero-btn red-btn">POST COMMENT</button>
-                </form>
             </div>
-
-        </div>
-        <div class="blog-right">
-            <h3>Post Categories</h3>
-            <div>
-                <span>Business Analytics</span>
-                <span>21</span>
-            </div>
-            <div>
-                <span>Business Analytics</span>
-                <span>21</span>
-            </div>
-            <div>
-                <span>Business Analytics</span>
-                <span>21</span>
-            </div>
-            <div>
-                <span>Business Analytics</span>
-                <span>21</span>
-            </div>
-            <div>
-                <span>Business Analytics</span>
-                <span>21</span>
-            </div>
-            <div>
-                <span>Business Analytics</span>
-                <span>21</span>
-            </div>
-
-            <div>
-                <span>Business Analytics</span>
-                <span>21</span>
-            </div>
-            <div>
-                <span>Business Analytics</span>
-                <span>21</span>
+            <div class="blog-right">
+                <h3>Post Tags</h3>
+                <div id="tags">
+                    <?php
+                    foreach ($tags as $tag) {
+                        if ($tag->count != 0) {
+                            echo "<div class='tag'><span>" . $tag->name . "</span>";
+                            echo "<span>" . $tag->count . "</span></div>";
+                        }
+                    }
+                    ?>
+                </div>
+                <br>
+                <div>
+                    <button class="button-login" onclick="createPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    window.onload = function() {
-        var el =document.getElementsByTagName('header');
-        el[0].classList.add('sub-header');
-        el[0].classList.add('blog');
-    }
-</script>
+    <script>
+        var httpObject = null;
+        var posts = null;
+        window.onload = async function() {
+            var el = document.getElementsByTagName('header');
+            el[0].classList.add('sub-header');
+            el[0].classList.add('blog');
+        }
+
+        function createPost() {
+            window.location.href = "?controller=posts&action=post";
+        }
+    </script>

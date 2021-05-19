@@ -1,1 +1,0 @@
-php ../vendor/zircote/swagger-php/bin/openapi --bootstrap ./swagger-constants.php --output ../views/swagger ./swagger-v1.php ../controllers

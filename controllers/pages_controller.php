@@ -1,5 +1,7 @@
 <?php
 require_once('controllers/base_controller.php');
+require_once('models/post.php');
+require_once('models/tag.php');
 
 class PagesController extends BaseController
 {
@@ -24,7 +26,12 @@ class PagesController extends BaseController
 
     public function blog()
     {
-        $this->render('blog');
+        $post = new Post();
+        $tag = new Tag();
+        $posts = $post->all();
+        $tags = $tag->all();
+        $data = array('posts' => $posts, 'tags' => $tags);
+        $this->render('blog', $data);
     }
 
     public function about() {

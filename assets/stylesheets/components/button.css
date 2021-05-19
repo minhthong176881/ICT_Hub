@@ -1,6 +1,6 @@
 .button-login {
-    width: 87%;
-    height: 40px;
+    width: 86%;
+    height: 45px;
     padding: 5px 15px 5px 15px;
     font-size: 15px;
     background-color: #1da4dd;
@@ -9,7 +9,51 @@
     border-radius: 4px;
 }
 
+.button-cancel {
+    width: 86%;
+    height: 45px;
+    padding: 5px 15px 5px 15px;
+    font-size: 15px;
+    /* background-color: #1da4dd; */
+    border: none;
+    /* color: white; */
+    border-radius: 4px;
+}
+
 .button-login:hover {
     cursor: pointer;
-    background-color: #34b4eb;
+    background-color: #16aae9;
+}
+
+.button-cancel:hover {
+    cursor: pointer;
+    background-color: #dedede;
+}
+
+.hero-btn {
+    display: inline-block;
+    color: white;
+    border: 1px solid white;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.hero-btn:hover {
+    border: 1px solid #1da4dd;
+    background: #1da4dd;
+    transition: 1s;
+}
+
+.red-btn {
+    border: 1px solid #1da4dd;
+    color: #1da4dd;
+    background: transparent;
+}
+
+.red-btn:hover {
+    color: white;
 }

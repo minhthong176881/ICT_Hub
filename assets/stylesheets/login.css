@@ -3,7 +3,7 @@
     height: 600px;
     background-color: white;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 40px;
     box-shadow: 5px 5px 5px #c4c4c4;
     border: 0.1px solid;
     border-color: #c4c4c4;
@@ -11,7 +11,7 @@
 
 #icon {
     width: 50%;
-    margin-left: 25%;
+    margin: auto;
     margin-top: 5%;
 }
 
@@ -27,6 +27,7 @@
     font-size: 20px;
     margin-left: 50px;
     margin-right: 50px;
+    color: black;
 }
 
 .other-login::before,
@@ -64,7 +65,7 @@
 .inner:hover {
     cursor: pointer;
     border: 0.1px solid #1da4dd;
-    color: #34b4eb;
+    color: #1da4dd;
     background-color: #edf4ff;
 }
 
@@ -77,8 +78,16 @@
     margin-right: 50px;
 }
 
+#gg {
+    margin-left: 48px;
+}
+
 a {
     font-size: 15px;
     text-decoration: none;
-    color: #34b4eb;
+    color: #1da4dd;
+}
+
+.navbar {
+    background-color: #1d232e;
 }

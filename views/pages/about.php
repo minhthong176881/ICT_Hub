@@ -22,5 +22,6 @@
     window.onload = function() {
         var el =document.getElementsByTagName('header');
         el[0].classList.add('sub-header');
+        el[0].classList.add('about-header');
     }
 </script>

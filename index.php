@@ -4,6 +4,7 @@ require("vendor/autoload.php");
 // $openapi = \OpenApi\scan('./controllers');
 // header('Content-Type: application/x-yaml');
 // echo $openapi->toYaml();
+header("Access-Control-Allow-Headers: *");
 
 if (isset($_GET['controller'])) {
     $controller = $_GET['controller'];
