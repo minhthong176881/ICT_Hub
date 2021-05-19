@@ -1,0 +1,109 @@
+<div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h2 id="Chapter-4-Working-with-Arrays" data-id="Chapter-4-Working-with-Arrays"><span>Chapter 4. Working with Arrays</span></h2><h3 id="Table-of-Contents" data-id="Table-of-Contents"><span>Table of Contents</span></h3><ol>
+<li><span>Benefits of arrays</span></li>
+<li><span>Sequential arrays</span></li>
+<li><span>Non-sequential arrays</span></li>
+<li><span>Multidimensional lists</span></li>
+</ol><h3 id="1-Benefits-of-arrays" data-id="1-Benefits-of-arrays"><span>1. Benefits of arrays</span></h3><h4 id="11-What-is-an-Array" data-id="11-What-is-an-Array"><span>1.1. What is an Array?</span></h4><ul>
+<li><span>An array is a special type of variable. – can hold multiple data values</span></li>
+<li><span>A sequential array keeps track of these data items by using sequential numbers</span></li>
+<li><span>(e.g., item 0, item 1, item 2, and so on)</span></li>
+<li><span>A nonsequential array or associative array keeps track of these data items by using character strings</span></li>
+<li><span>(e.g., item meat, item poultry, item dairy, and so on)</span></li>
+</ul><h4 id="12-Why-Use-Arrays" data-id="12-Why-Use-Arrays"><span>1.2. Why Use Arrays?</span></h4><ul>
+<li><span>Include a flexible number of list items.</span></li>
+<li><span>Examine each item more concisely.</span></li>
+<li><span>Using Loops to Repeat Statements</span></li>
+<li><span>Use special array operators and functions.</span></li>
+</ul><h3 id="2-Sequential-arrays" data-id="2-Sequential-arrays"><span>2. Sequential arrays</span></h3><h4 id="21-Creating-Sequential-Arrays" data-id="21-Creating-Sequential-Arrays"><span>2.1. Creating Sequential Arrays</span></h4><ul>
+<li>
+<p><span>Use the array() function to create an array</span><br>
+<img src="https://i.imgur.com/6yUUNBo.png" alt=""></p>
+</li>
+<li>
+<p><span>You could also create an array with numerical data</span></p>
+<ul>
+<li><code>$grades = array(66, 75, 85, 80);</code></li>
+</ul>
+</li>
+</ul><h4 id="Another-way-to-create-an-array" data-id="Another-way-to-create-an-array"><span>Another way to create an array</span></h4><ul>
+<li><span>You can also create an array by making individual value assignments into the array variable name.</span></li>
+<li><span>For example:</span></li>
+</ul><pre><code>$students[] = 'Johnson';
+$students[] = 'Jones';
+$students[] = 'Jackson';
+$students[] = 'Jefferson';
+</code></pre><h4 id="22-Referencing-Sequential-Array-Items" data-id="22-Referencing-Sequential-Array-Items"><span>2.2. Referencing Sequential Array Items</span></h4><ul>
+<li><span>To reference individual array items, use an array name and index pair</span><br>
+<img src="https://i.imgur.com/tX8UJ89.png" alt=""></li>
+<li><span>Indices are referenced sequentially:</span>
+<ul>
+<li><code>$names = array('Denise', 'Christopher', 'Matthew', 'Bryant');</code></li>
+<li><code>print ("$names[0], $names[1], $names[2], $names[3]");</code></li>
+</ul>
+</li>
+<li><span>Outputs names sequentially</span></li>
+</ul><h4 id="Warning-Indices-starts-with-0" data-id="Warning-Indices-starts-with-0"><span>Warning: Indices starts with 0</span></h4><ul>
+<li><span>You might think the arrays in the preceding code would be numbered with indices 1 through 4.</span></li>
+<li><span>By default sequential arrays start with index 0,</span></li>
+<li><span>so the indices above are numbered from 0 to 3.</span></li>
+<li><span>Avoid referencing an item past the end of your array (for example, using </span><code>$names[20]</code><span> in an array that contains only four items).</span></li>
+</ul><h4 id="More-on-Indices-…" data-id="More-on-Indices-…"><span>More on Indices …</span></h4><ul>
+<li><span>Array indices can be whole numbers or a variable.</span></li>
+</ul><pre><code>$i=3;
+$classes = array('Math', 'History', 'Science', 'Pottery');
+$oneclass = $classes[$i-1];
+print "$classes[$i] $oneclass $classes[1] $classes[0]";
+</code></pre><ul>
+<li><span>This code outputs the following: “Pottery Science History Math”</span></li>
+</ul><h4 id="23-Changing-arrays-values" data-id="23-Changing-arrays-values"><span>2.3. Changing arrays values</span></h4><ul>
+<li><span>You can change values in an array as follows:</span></li>
+</ul><pre><code>$scores = array(75, 65, 85, 90);
+$scores[3] = 95;
+$average = ($scores[0] + $scores[1] +
+$scores[2] + $scores[3]) / 4;
+print "average=$average";
+</code></pre><ul>
+<li><span>The output of the above PHP segment is “average=80”.</span></li>
+</ul><h4 id="Explicitly-Setting-Index-Values" data-id="Explicitly-Setting-Index-Values"><span>Explicitly Setting Index Values</span></h4><ul>
+<li><span>You can explicitly sign values to indices</span></li>
+</ul><pre><code>$scores = array(1=&gt;75, 2=&gt;65, 3=&gt;85);
+$scores[] = 100;
+print "$scores[1] $scores[2] $scores[3] $scores[4]";
+</code></pre><ul>
+<li><span>The above outputs “75 65 85 100”.</span></li>
+</ul><h4 id="24-Using-Loops-with-Sequential-Arrays" data-id="24-Using-Loops-with-Sequential-Arrays"><span>2.4. Using Loops with Sequential Arrays</span></h4><ul>
+<li><span>Looping statements can be used to iterate through arrays</span></li>
+</ul><pre><code>$courses = array ('Perl', 'PHP', 'C','Java', 'Pascal', 'Cobol', 'Visual Basic');
+for ($i=0; $i &lt; count($courses); $i++) {
+    print ("$courses[$i] ");
+}
+</code></pre><ul>
+<li><span>The above repeats 7 times with $i equal to 0, 1, 2, 3, 4, 5, and 6.</span></li>
+<li><span>The above outputs: “Perl PHP C Java Pascal Cobol Visual Basic”.</span></li>
+</ul><h4 id="Using-the-foreach-statement" data-id="Using-the-foreach-statement"><span>Using the foreach statement</span></h4><ul>
+<li><span>PHP supports the foreach statement as another way to iterate through arrays</span><br>
+<img src="https://i.imgur.com/RUFnXIj.png" alt=""></li>
+</ul><h4 id="foreach-statement---example" data-id="foreach-statement---example"><code>foreach</code><span> statement - example</span></h4><ul>
+<li><span>Example of foreach command</span></li>
+</ul><pre><code>$courses = array('Perl', 'PHP', 'C', 'Java’,'Pascal', 'Cobol', 'Visual Basic');
+foreach ($courses as $item) {
+    print ("$item ");   
+}
+</code></pre><ul>
+<li><span>The above outputs “Perl PHP C Java Pascal Cobol Visual Basic”.</span></li>
+</ul><h4 id="Sorting-data" data-id="Sorting-data"><span>Sorting data</span></h4><ul>
+<li><span>For example the following code segment outputs “1 11 55 91 99 119 911”</span></li>
+</ul><pre><code>$courses = array (91, 55, 11, 1, 99, 911, 119);
+sort($courses);
+foreach ($courses as $item) {
+    print "$item ";
+}
+</code></pre><h4 id="Sorting-data-functions" data-id="Sorting-data-functions"><span>Sorting data functions</span></h4><p><img src="https://i.imgur.com/qsXBy5C.png" alt=""></p><ul>
+<li><span>User-defined ordering requires that you provide a function that takes two values and returns a value that specifies the order of the two values in the sorted array.</span>
+<ul>
+<li><span>return 1 if the first value is greater than the second</span></li>
+<li><span>-1 if the first value is less than the second</span></li>
+<li><span>0 if the values are the same for the purposes of your custom sort order</span></li>
+</ul>
+</li>
+</ul></div>

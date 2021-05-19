@@ -1,0 +1,182 @@
+<div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h2 id="Chapter-3-2-Functions" data-id="Chapter-3-2-Functions"><span>Chapter 3-2. Functions</span></h2><p><strong><span>Objectives</span></strong></p><ul>
+<li><span>To learn to use several PHP functions useful for Web application development</span></li>
+<li><span>To learn to write and use your own functions</span></li>
+</ul><h3 id="Table-of-Contents" data-id="Table-of-Contents"><span>Table of Contents</span></h3><ol>
+<li><span>Basic PHP Functions</span></li>
+<li><span>Write your own functions</span></li>
+<li><span>Using External Script Files</span></li>
+</ol><h3 id="1-Basic-PHP-Functions" data-id="1-Basic-PHP-Functions"><span>1. Basic PHP Functions</span></h3><ul>
+<li><span>We previously discussed functions such as </span><code>strlen(), trim(), strtolower(), strtoupper(), and substr()</code><span>.</span></li>
+<li><span>In this section we examine several other useful functions including</span>
+<ul>
+<li><span>Some basic numeric PHP functions</span>
+<ul>
+<li><span>E.g., the absolute value[</span><code>abs()</code><span>], square root [</span><code>sqrt()</code><span>], round [</span><code>round()</code><span>], integer checker[</span><code>is_numeric()</code><span>], and random number generation [</span><code>rand()</code><span>] functions.</span></li>
+</ul>
+</li>
+<li><span>The </span><code>print()</code><span> function</span>
+<ul>
+<li><span>We will cover in more detail</span></li>
+</ul>
+</li>
+<li><span>The </span><code>date()</code><span> function</span>
+<ul>
+<li><span>We will discuss using the </span><code>date()</code><span> function to determine date and time information</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h4 id="Numberic-PHP-Functions" data-id="Numberic-PHP-Functions"><span>Numberic PHP Functions</span></h4><ul>
+<li><span>Absolute value</span></li>
+<li><span>Square root,</span></li>
+<li><span>Round,</span></li>
+<li><span>Integer checker</span></li>
+<li><span>Random number generation</span></li>
+</ul><h4 id="11-The-abs-Function" data-id="11-The-abs-Function"><span>1.1. The </span><code>abs()</code><span> Function</span></h4><ul>
+<li><span>The absolute value function takes a single numerical argument and returns its absolute value.</span></li>
+<li><span>For example, the following</span></li>
+</ul><pre><code>$x=abs(-5);
+$y=abs(42);
+print "x=$x y=$y";
+</code></pre><ul>
+<li><span>Will output: </span><code>x=5 y=42</code></li>
+</ul><h4 id="12-The-sqrt-Function" data-id="12-The-sqrt-Function"><span>1.2. The </span><code>sqrt()</code><span> Function</span></h4><ul>
+<li><span>The square root function takes a single numerical argument and returns its square root.</span></li>
+<li><span>For example, the following</span></li>
+</ul><pre><code>$x=sqrt(25);
+$y=sqrt(24);
+print "x=$x y=$y";
+</code></pre><ul>
+<li><span>Will output: </span><code>x=5 y=4.898979485566</code></li>
+</ul><h4 id="13-The-round-Function" data-id="13-The-round-Function"><span>1.3. The </span><code>round()</code><span> Function</span></h4><ul>
+<li><span>The round function takes a single numerical argument and returns the number rounded up or down to the nearest integer.</span></li>
+<li><span>For example, the following</span></li>
+</ul><pre><code>$x=round(-5.456);
+$y=round(3.7342);
+print "x=$x y=$y";
+</code></pre><ul>
+<li><span>Will output: </span><code>x=-5 y=4</code></li>
+</ul><h4 id="14-The-round-Function" data-id="14-The-round-Function"><span>1.4. The </span><code>round()</code><span> Function</span></h4><ul>
+<li><span>You can include 2nd argument to define the number of digits after the decimal point to round to.</span></li>
+<li><span>For example,</span></li>
+</ul><pre><code>$x=round(-5.456,2);
+$y=round(3.7342,3);
+print "x=$x y=$y";
+</code></pre><ul>
+<li><span>Would output: </span><code>x=-5.46 y=3.734</code></li>
+</ul><h4 id="15-The-is_numeric-Function" data-id="15-The-is_numeric-Function"><span>1.5. The </span><code>is_numeric()</code><span> Function</span></h4><ul>
+<li><code>is_numeric()</code><span> is useful for determining whether a variable is a valid number or a numeric string.</span>
+<ul>
+<li><span>It returns true or false.</span></li>
+</ul>
+</li>
+<li><span>Consider the following example…</span></li>
+</ul><pre><code>if (is_numeric($input)) {
+    print "Got Valid Number=$input";
+} else {
+    print "Not Valid Number=$input";
+}
+</code></pre><ul>
+<li><span>If </span><code>$input</code><span> was “6” then would : </span><code>Got Valid Number=6</code></li>
+<li><span>If </span><code>$input</code><span> was “Happy” then would output: </span><code>Not Valid Number=Happy</code></li>
+</ul><h4 id="16-The-rand-Function" data-id="16-The-rand-Function"><span>1.6. The </span><code>rand()</code><span> Function</span></h4><ul>
+<li><span>Use </span><code>rand()</code><span> to generate a random number.</span>
+<ul>
+<li><span>You can use random numbers to simulate a dice roll or a coin toss or to randomly select an advertisement banner to display.</span></li>
+</ul>
+</li>
+<li><code>rand()</code><span> typically uses 2 arguments to define the range of numbers it should return (min and max limits),</span>
+<ul>
+<li><span>For example the following returns a number 1 - 15</span>
+<ul>
+<li><code>$num = rand(1, 15);</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span>Use the </span><code>srand</code><span> and microtime to seed rand() and ensure it returns a random number, for example,</span></li>
+</ul><pre><code>srand ((double) microtime() * 10000000);
+$dice = rand(1, 6);
+print "Your random dice toss is $dice";
+</code></pre><ul>
+<li><span>The random number generated in this case can be a 1, 2, 3, 4, 5, or 6.</span></li>
+</ul><h4 id="17-More-information-on-the-print-Function" data-id="17-More-information-on-the-print-Function"><span>1.7. More information on the </span><code>print()</code><span> Function</span></h4><ul>
+<li><span>You don’t need to use parenthesis with </span><code>print()</code></li>
+<li><span>Double quotes means output the value of any variable:</span></li>
+</ul><pre><code>$x = 10;
+print ("Mom, please send $x dollars");
+</code></pre><ul>
+<li><span>Single quotes means output the actual variable name</span></li>
+</ul><pre><code>$x = 10;
+print ('Mom, please send $x dollars');
+</code></pre><ul>
+<li><span>To output a single variable’s value or expression, omit the quotation marks.</span></li>
+</ul><pre><code>$x=5;
+print $x*3;
+</code></pre><h4 id="Generating-HTMLTags-with-print" data-id="Generating-HTMLTags-with-print"><span>Generating HTMLTags with print()</span></h4><ul>
+<li><span>Using single or double quotation statements can be useful when generating HTML tags</span>
+<ul>
+<li><code>print '&lt;font color="blue"&gt;';</code></li>
+</ul>
+</li>
+<li><span>This above is easier to understand and actually runs slightly faster than using all double quotation marks and the backslash (\) character:</span>
+<ul>
+<li><code>print "&lt;font color=\"blue\"&gt;";</code></li>
+</ul>
+</li>
+</ul><h4 id="A-Full-Example-…" data-id="A-Full-Example-…"><span>A Full Example …</span></h4><ul>
+<li><span>Consider the following application:</span>
+<ul>
+<li><span>Uses an HTML form to ask the end-user to guess the results of a coin flip:</span></li>
+</ul>
+</li>
+</ul><pre><code>&lt;input type="radio" name="pick" value="0"&gt; Heads
+&lt;input type="radio" name="pick" value="1"&gt; Tails
+</code></pre><ul>
+<li><span>Receiving Code</span></li>
+</ul><pre><code>1. &lt;html&gt;
+2. &lt;head&gt;&lt;title&gt; Coin Flip Results &lt;/title&gt;&lt;/head&gt; &lt;body&gt; &lt;?php
+3. srand ((double) microtime() * 10000000);
+4. $flip = rand( 0, 1 );
+5. if ( $flip == 0 &amp;&amp; $pick == 0 ) {
+6.     print "The flip=$flip, which is heads! &lt;br&gt; ";
+7.     print '&lt;font color="blue"&gt; You got it right!&lt;/font&gt;';
+8. } elseif ( $flip == 0 &amp;&amp; $pick == 1 ) {
+9.     print "The flip=$flip, which is heads! &lt;br&gt; ";
+10.    print '&lt;font color="red"&gt; You got it wrong!&lt;/font&gt;';
+11. } elseif ( $flip == 1 &amp;&amp; $pick == 1 ) {
+12.    print "The flip=$flip, which is tails! &lt;br&gt;";
+13.    print '&lt;font color="blue"&gt; You got it right!&lt;/font&gt;';
+14. } elseif ( $flip == 1 &amp;&amp; $pick == 0 ) {
+15.    print "The flip=$flip, which is tails! &lt;br&gt;";
+16.    print '&lt;font color="red"&gt; You got it wrong!&lt;/font&gt;';
+17. } else {
+18.    print "&lt;br&gt;Illegal state error!";
+19. }
+20. ?&gt; &lt;/body&gt;&lt;/html&gt;
+</code></pre><ul>
+<li><span>Receiving Code With </span><code>REGISTER_GLOBALS</code><span> Off</span></li>
+</ul><pre><code>1. &lt;html&gt;
+2. &lt;head&gt;&lt;title&gt; Coin Flip Results &lt;/title&gt;&lt;/head&gt; &lt;body&gt; &lt;?php
+3. srand ((double) microtime() * 10000000);
+4. $pick = $_POST[“PICK”];
+5. $flip = rand( 0, 1 );
+6. if ( $flip == 0 &amp;&amp; $pick == 0 ) {
+7.    print "The flip=$flip, which is heads! &lt;br&gt; ";
+8.    print '&lt;font color="blue"&gt; You got it right!&lt;/font&gt;';
+9. } elseif ( $flip == 0 &amp;&amp; $pick == 1 ) {
+10.    print "The flip=$flip, which is heads! &lt;br&gt; ";
+11.    print '&lt;font color="red"&gt; You got it wrong!&lt;/font&gt;';
+12. } elseif ( $flip == 1 &amp;&amp; $pick == 1 ) {
+13.    print "The flip=$flip, which is tails! &lt;br&gt;";
+14.    print '&lt;font color="blue"&gt; You got it right!&lt;/font&gt;';
+15. } elseif ( $flip == 1 &amp;&amp; $pick == 0 ) {
+16.    print "The flip=$flip, which is tails! &lt;br&gt;";
+17.    print '&lt;font color="red"&gt; You got it wrong!&lt;/font&gt;';
+18. } else {
+19.    print "&lt;br&gt;Illegal state error!";
+20. }
+21. ?&gt; &lt;/body&gt;&lt;/html&gt;
+</code></pre><ul>
+<li><span>The previous code can be executed at </span><a href="http://webwizard.aw.com/~phppgm/C3/headsortail.html" target="_blank" rel="noopener"><span>http://webwizard.aw.com/~phppgm/C3/headsortail.html</span></a></li>
+</ul><p><img src="https://i.imgur.com/xo6aSAu.png" alt=""></p></div>

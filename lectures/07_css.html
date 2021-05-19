@@ -1,0 +1,239 @@
+<div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h2 id="Chapter-7-CSS" data-id="Chapter-7-CSS"><span>Chapter 7. CSS</span></h2><p><strong><span>Before and after using CSS</span></strong><br>
+<img src="https://i.imgur.com/ZcB61s8.png" alt=""></p><pre><code>login.html
+...
+&lt;link rel="stylesheet" type="text/css" href=“style.css"&gt;
+...
+&lt;table class="forumline" width="280" border="0" cellspacing="1" cellpadding="2"&gt;
+&lt;tr class="formstyle"&gt;&lt;td&gt;
+</code></pre><pre><code>style.css
+....
+body
+{
+    font-family: Verdana,Tahoma,Geneva,Arial,Helvetica,sans-serif;
+    font-size: 12px; ...
+}
+.formstyle
+{
+    background-color: #D7E5F5;
+    font-family: Verdana,Tahoma,Geneva,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+
+.forumline
+{
+    background-color: ...
+} ...
+
+</code></pre><h3 id="Table-of-Contents" data-id="Table-of-Contents"><span>Table of Contents</span></h3><ol>
+<li><span>Introduction to CSS</span></li>
+<li><span>Specifying and applying style rules</span></li>
+<li><span>Style class</span></li>
+<li><span>Some useful properties</span></li>
+<li><span>CSS box model</span></li>
+</ol><h3 id="1-Introduction-to-CSS" data-id="1-Introduction-to-CSS"><span>1. Introduction to CSS</span></h3><ul>
+<li><span>Cascading Style Sheet</span></li>
+<li><span>Created by Hakon Wium Lie of MIT in 1994</span></li>
+<li><span>Has become the W3C standard for controlling visual presentation of web pages</span></li>
+</ul><h4 id="11-Benefits-of-CSS" data-id="11-Benefits-of-CSS"><span>1.1. Benefits of CSS</span></h4><ul>
+<li><span>Simple syntax: easy to learn</span></li>
+<li><span>Powerful and flexible way to specify the formatting of HTML elements</span>
+<ul>
+<li><span>Can define font, size, background color, background image, margins, etc</span></li>
+</ul>
+</li>
+<li><span>Separates presentation (design elements) from content (structural logic)</span>
+<ul>
+<li><span>HTML contains content and structure of a web page.</span></li>
+<li><span>CSS defines a style of a web page – how the content is displayed</span></li>
+</ul>
+</li>
+<li><span>Share style sheets across multiple documents or entire Web site</span>
+<ul>
+<li><span>Easy to maintain consistent pages</span></li>
+<li><span>Can update a common style → Reflected in all pages that use it</span></li>
+</ul>
+</li>
+<li><span>Cost Savings</span>
+<ul>
+<li><span>Reduced Bandwidth Costs</span>
+<ul>
+<li><span>One style sheet called and cached</span></li>
+<li><span>CSS require less code</span></li>
+</ul>
+</li>
+<li><span>Higher Search Engine Rankings</span>
+<ul>
+<li><span>Cleaner code is easier for search engines to index</span></li>
+<li><span>Greater density of indexable content</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h4 id="12-CSS-Basics" data-id="12-CSS-Basics"><span>1.2. CSS Basics</span></h4><ul>
+<li><span>CSS defines the way that HTML elements should be presented:</span>
+<ul>
+<li><span>Positioning (e.g. left, right or centered)</span></li>
+<li><span>Font (size and family)</span></li>
+<li><span>Text decoration (e.g. underlined)</span></li>
+<li><span>Borders (solid, dashed, invisible)</span></li>
+<li><span>Image usage (e.g. for backgrounds and bullets)</span></li>
+</ul>
+</li>
+</ul><h4 id="13-CSS-Does-Not…" data-id="13-CSS-Does-Not…"><span>1.3. CSS Does Not…</span></h4><ul>
+<li><span>Re-order HTML</span>
+<ul>
+<li><span>E.g. won’t sort a table</span></li>
+</ul>
+</li>
+<li><span>Perform calculations</span>
+<ul>
+<li><span>Won’t sum a shopping basket</span></li>
+</ul>
+</li>
+<li><span>Filter</span>
+<ul>
+<li><span>Won’t decide what to show</span></li>
+<li><span>Though JavaScript can set display or visibility of elements in order to achieve this</span></li>
+</ul>
+</li>
+<li><span>These can all be done on the server</span>
+<ul>
+<li><span>Or using XSLT or JavaScript on the client</span></li>
+</ul>
+</li>
+</ul><h4 id="14-Types-of-CSS-Styles" data-id="14-Types-of-CSS-Styles"><span>1.4. Types of CSS Styles</span></h4><ul>
+<li><span>(Browser default)</span></li>
+<li><span>External styles</span>
+<ul>
+<li><span>written in a separate document and then attached to various Web documents</span></li>
+<li><span>External style sheets can affect any document they are attached to</span></li>
+</ul>
+</li>
+<li><span>Internal styles (embedded styles)</span>
+<ul>
+<li><span>embedded in the head of the document.</span></li>
+<li><span>embedded styles affect only the tags on the page they are embedded in</span></li>
+</ul>
+</li>
+<li><span>Inline Style</span>
+<ul>
+<li><span>written directly in the tag on the document</span></li>
+</ul>
+</li>
+</ul><h3 id="2-Specifying-and-applying-style-rules" data-id="2-Specifying-and-applying-style-rules"><span>2. Specifying and applying style rules</span></h3><h4 id="21-Specifying-Style-Rules" data-id="21-Specifying-Style-Rules"><span>2.1. Specifying Style Rules</span></h4><ul>
+<li>
+<p><span>General form of rule</span><br>
+<code>selector { property: value }</code><br>
+<span>Or</span><br>
+<code>selector { property1: value1; property2: value2; ... propertyN: valueN }</code></p>
+</li>
+<li>
+<p><span>Example</span><br>
+<code>H1 { text-align: center; color: blue }</code><br>
+<img src="https://i.imgur.com/6s9NPSx.png" alt=""></p>
+</li>
+<li>
+<p><span>The selector is the link between the HTML document and the style. It specifies what elements are affected by the declaration.</span></p>
+</li>
+<li>
+<p><span>The declaration is that part of the rule that sets forth what the effect will be</span></p>
+</li>
+</ul><p><img src="https://i.imgur.com/O8T9Hv0.png" alt=""></p><ul>
+<li><span>Grouping selectors and rules</span></li>
+</ul><pre><code>H1 { font-weight: bold }
+H2 { font-weight: bold }
+H3 { font-weight: bold }
+</code></pre><p><span>→ </span><code>H1, H2, H3 { font-weight: bold }</code><br>
+<span>→ What is different?</span><br>
+<code>b i{ background-color: yellow; }</code><br>
+<code>b, i{ color:blue; }</code></p><ul>
+<li><span>A selector may have more than one declaration</span><br>
+<code>H1 { color: green }</code><br>
+<code>H1 { text-align: center }</code></li>
+</ul><h4 id="22-Applying-styles-to-the-document" data-id="22-Applying-styles-to-the-document"><span>2.2. Applying styles to the document</span></h4><ul>
+<li><span>Inline style</span>
+<ul>
+<li><span>Apply a style sheet to an individual element using the style attribute</span></li>
+</ul>
+</li>
+<li><span>Embedded style</span>
+<ul>
+<li><span>Apply the basic, document-wide style sheet for the document by using the style element</span></li>
+</ul>
+</li>
+<li><span>External style</span>
+<ul>
+<li><span>Link an external style sheet to the document using the link element or</span></li>
+<li><span>Import a style sheet using the CSS @import notation.</span></li>
+</ul>
+</li>
+</ul><h4 id="221-Inline-style" data-id="221-Inline-style"><span>2.2.1. Inline style</span></h4><ul>
+<li><span>Using Style attribute</span></li>
+<li><span>For individual elements</span></li>
+</ul><pre><code>&lt;H1 STYLE="color: blue; font-size: 20pt;"&gt;
+    A large purple Heading
+&lt;/H1&gt;
+</code></pre><h4 id="222-Embedded-style" data-id="222-Embedded-style"><span>2.2.2. Embedded style</span></h4><ul>
+<li><span>Using Style element</span></li>
+<li><span>Putting the style sheet inside a style element at the top of your document</span></li>
+</ul><pre><code>&lt;HTML&gt;
+
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Bach's home page&lt;/TITLE&gt;
+    &lt;STYLE&gt;
+        H1,
+        H2 {
+            color: green
+        }
+    &lt;/STYLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+    &lt;H1&gt;Bach's home page&lt;/H1&gt;
+    &lt;P&gt;Johann Sebastian Bach was a prolific composer. Among his
+        works are:
+    &lt;UL&gt;
+        &lt;LI&gt;the Goldberg Variations
+        &lt;LI&gt;the Brandenburg Concertos
+        &lt;LI&gt;the Christmas Oratorio
+    &lt;/UL&gt;
+    &lt;H2&gt;Historical perspective&lt;/H2&gt;
+    &lt;P&gt;Bach composed in what has been referred to as the Baroque
+        period.
+&lt;/BODY&gt;
+
+&lt;/HTML&gt;
+</code></pre><pre><code>&lt;STYLE type=“text/css”&gt;
+&lt;!––
+H1, H2 { color: green }
+--&gt;
+&lt;/STYLE&gt;
+</code></pre><p><img src="https://i.imgur.com/F4zJb3N.png" alt=""></p><p><strong><span>Tree structures and inheritance</span></strong></p><ul>
+<li><span>Just as children inherit from their parents, HTML elements inherit stylistic properties.</span></li>
+<li><span>CSS property values set on one element will be transferred down the tree to its descendants</span></li>
+</ul><pre><code>&lt;STYLE TYPE="text/css"&gt;
+BODY { color: green }
+&lt;/STYLE&gt;
+</code></pre><p><img src="https://i.imgur.com/Kw61HJ1.png" alt=""></p><p><strong><span>Overriding inheritance</span></strong></p><ul>
+<li><span>Sometimes children don’t look like their parents.</span></li>
+<li><span>E.g.</span></li>
+</ul><pre><code>&lt;STYLE TYPE="text/css"&gt;
+    BODY { color: green }
+    H1 { color: navy }
+&lt;/STYLE&gt;
+</code></pre><h4 id="223-External-style" data-id="223-External-style"><span>2.2.3. External style</span></h4><ul>
+<li><span>Using Link element</span></li>
+<li><span>This is true “separation” of style and content.</span></li>
+<li><span>Keeping all your styles in an external document is simpler</span></li>
+</ul><pre><code>&lt;HEAD&gt;
+&lt;LINK REL="stylesheet" TYPE="text/css" HREF="styles/mystyles.css"&gt;
+&lt;/HEAD&gt;
+/* mystyles.css - a simple style sheet */
+body {
+    margin-left: 10%;
+    margin-right: 10%;
+    color: black;
+    background: white;
+}
+</code></pre></div>

@@ -1,0 +1,80 @@
+<div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h2 id="Chapter-5-OOP-in-PHP" data-id="Chapter-5-OOP-in-PHP"><span>Chapter 5. OOP in PHP</span></h2><p><strong><span>Object-Oriented Programming (OOP)</span></strong></p><ul>
+<li><span>Object: Instance (occurrance) of a class</span></li>
+<li><span>Classes/Objects encapsulates their data (called attributes) and behaviour (called methods)</span></li>
+<li><span>Inheritance: Define a new class by saying that it’s like an existing class, but with certain new or changed attributes and methods.</span>
+<ul>
+<li><span>The old class: superclass/parent/base class</span></li>
+<li><span>The new class: subclass/child/derived class</span></li>
+</ul>
+</li>
+</ul><p><strong><span>PHP 5</span></strong></p><ul>
+<li><span>Single-inheritance</span></li>
+<li><span>Access-restricted</span></li>
+<li><span>Overloadable</span></li>
+<li><span>Object ~ pass-by-reference</span></li>
+</ul><h3 id="Table-of-Contents" data-id="Table-of-Contents"><span>Table of Contents</span></h3><ol>
+<li><span>Creating an Object</span></li>
+<li><span>Accessing attributes and methods</span></li>
+<li><span>Building a class</span></li>
+<li><span>Introspection</span></li>
+</ol><h3 id="1-Creating-an-Object" data-id="1-Creating-an-Object"><span>1. Creating an Object</span></h3><ul>
+<li><span>Syntax:</span>
+<ul>
+<li><code>$object = new Class([agrs]);</code></li>
+</ul>
+</li>
+<li><span>E.g.:</span>
+<ul>
+<li><code>$obj1= new User();</code></li>
+<li><code>$obj2 = new User('Fred', "abc123"); //args</code></li>
+<li><code>$obj3 = new ‘User'; // does not work</code></li>
+<li><code>$class = ‘User'; $obj4= new $class; //ok</code></li>
+</ul>
+</li>
+</ul><p><img src="https://i.imgur.com/tcSvQxv.png" alt=""></p><h3 id="2-Accessing-Attributes-and-Methods" data-id="2-Accessing-Attributes-and-Methods"><span>2. Accessing Attributes and Methods</span></h3><ul>
+<li><span>Syntax: Using -&gt;</span>
+<ul>
+<li><code>$object-&gt;attribute_name</code></li>
+<li><code>$object-&gt;method_name([arg, ... ])</code></li>
+</ul>
+</li>
+<li><span>E.g.</span></li>
+</ul><pre><code>// attribute access
+$obj1-&gt;name = “Micheal";
+print("User name is ".$obj1-&gt;name);
+$obj1-&gt;getLastLogin(); // method call
+// method call with args
+$obj1-&gt;setPassword("Test4");
+</code></pre><h3 id="3-Building-a-class" data-id="3-Building-a-class"><span>3. Building a class</span></h3><h4 id="31-Syntax-to-declare-a-Class" data-id="31-Syntax-to-declare-a-Class"><span>3.1. Syntax to declare a Class</span></h4><pre><code>class ClassName [extends BaseClass] {
+    [[var] access $attribute [ = value ]; ... ]
+    
+    [access function method_name (args) {
+            // code
+        } ...
+    ]
+}
+</code></pre><ul>
+<li><span>Access can be: public, protected or private (default is public).</span></li>
+<li><span>ClassNames, atributes, methods are case-sensitive and conform the rules for PHP identifiers</span></li>
+<li><span>Attributes or methods can be declared as static or const</span></li>
+</ul><h4 id="Rules-for-PHP-Identifiers" data-id="Rules-for-PHP-Identifiers"><span>Rules for PHP Identifiers</span></h4><ul>
+<li><span>Must include:</span></li>
+<li><span>ASCII letter (a-zA-Z)</span></li>
+<li><span>Digits (0-9)</span></li>
+<li><span>_</span></li>
+<li><span>ASCII character between 0x7F (DEL) and 0xFF</span></li>
+<li><span>Do not start by a digit</span></li>
+</ul><p><img src="https://i.imgur.com/pDl7ZSH.png" alt=""></p><h4 id="Example-–-Define-User-class" data-id="Example-–-Define-User-class"><span>Example – Define User class</span></h4><pre><code>//define class for tracking users
+class User {
+    public $name;
+    private $password, $lastLogin;
+    public function __construct($name, $password) {
+        $this-&gt;name = $name;
+        $this-&gt;password = $password;
+        $this-&gt;lastLogin = time();
+    }
+    function getLastLogin() {
+        return(date("M d Y", $this-&gt;lastLogin));
+    }
+}
+</code></pre></div>
