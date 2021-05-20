@@ -1,0 +1,142 @@
+<div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h2 id="Chapter-1-2-Introduction-to-HTML" data-id="Chapter-1-2-Introduction-to-HTML"><span>Chapter 1-2. Introduction to HTML</span></h2><h3 id="Table-of-Contents" data-id="Table-of-Contents"><span>Table of Contents</span></h3><ol>
+<li><span>HTML Basic</span></li>
+<li><span>Structured Document</span></li>
+<li><span>DOM (Document Object Model)</span></li>
+<li><span>Common HTML Elements</span></li>
+</ol><h3 id="1-HTML-Basic" data-id="1-HTML-Basic"><span>1. HTML Basic</span></h3><h4 id="What-is-HTML-review" data-id="What-is-HTML-review"><span>What is HTML? (review)</span></h4><ul>
+<li><span>Hypertext Markup Language</span></li>
+<li><span>Markup Language for web pages</span>
+<ul>
+<li><span>Markup Language</span>
+<ul>
+<li><span>a set of annotations to text that describe how something is to be structured</span></li>
+</ul>
+</li>
+<li><span>Hypertext</span>
+<ul>
+<li><span>text with references (hyperlinks) to other text that the reader can immediately access, usually by a mouse click or key press sequence</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h4 id="HTML-Example" data-id="HTML-Example"><span>HTML Example</span></h4><pre><code>&lt;html&gt;
+&lt;head&gt;
+		&lt;title&gt;Test Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Test Page&lt;/h1&gt;
+	&lt;p&gt;This is a test page.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="Element-and-Tag" data-id="Element-and-Tag"><span>Element and Tag</span></h4><p><img src="https://i.imgur.com/7RB4aN2.png" alt=""></p><h4 id="Attribute" data-id="Attribute"><span>Attribute</span></h4><ul>
+<li><span>Most of elements can have attributes</span></li>
+<li><span>An attribute describes a property of an element</span></li>
+</ul><p><img src="https://i.imgur.com/FVN1Ee3.png" alt=""></p><h4 id="Hyperlink" data-id="Hyperlink"><span>Hyperlink</span></h4><ul>
+<li><span>A link from a document to another document</span></li>
+<li><span>Anchor element with href attribute</span>
+<ul>
+<li><code>href</code><span> has a URI, an absolute path or a relative path</span></li>
+<li><span>Example:</span><br>
+<code>&lt;a href="http://www.yahoo.com/"&gt;Yahoo!&lt;/a&gt;</code><br>
+<img src="https://i.imgur.com/lbz02Kp.png" alt=""></li>
+</ul>
+</li>
+</ul><h4 id="Images" data-id="Images"><span>Images</span></h4><ul>
+<li><span>Insert image</span>
+<ul>
+<li><code>&lt;img src= "image.ext"&gt;</code></li>
+<li><code>&lt;img src= "folder/image.ext"&gt;</code></li>
+<li><span>E.g. </span><code>&lt;p&gt;&lt;img src= "awards.jpg"&gt;</code></li>
+</ul>
+</li>
+<li><span>Add a border to the image</span>
+<ul>
+<li><span>set attribute as </span><code>&lt;img src= "imag.ext" border=n&gt;</code><span>, where </span><code>n</code><span> means the thickness of the border in pixels</span><br>
+<img src="https://i.imgur.com/1fHLT0Q.png" alt=""></li>
+</ul>
+</li>
+<li><span>Change the size of the images</span><br>
+<code>&lt;img src= "myImg.jpg" width=x height=y&gt;, where x, y is in pixel</code></li>
+<li><span>E.g. </span><code>&lt;p&gt;&lt;img src="folder1/award1.jpg" width=20 height=30&gt;</code><span> My awards here</span></li>
+<li><span>Show the words over the image</span><br>
+<code>&lt;img src=hut.jpg alt= "Hanoi University of Technology"&gt;</code><br>
+<img src="https://i.imgur.com/Ae2XJsn.png" alt=""></li>
+</ul><h3 id="2-Structured-Document" data-id="2-Structured-Document"><span>2. Structured Document</span></h3><ul>
+<li><span>Most of Documents have a structure</span>
+<ul>
+<li><span>Article</span>
+<ul>
+<li><span>Title, Part, Chapter, Section, Paragraph, …</span></li>
+</ul>
+</li>
+<li><span>CV</span>
+<ul>
+<li><span>Name,  Education, Work Experiences,  Skills, …</span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span>Markup Language is a way to express structured document</span>
+<ul>
+<li><span>Nested Elements</span></li>
+</ul>
+</li>
+</ul><h4 id="21-Nested-Elements" data-id="21-Nested-Elements"><span>2.1. Nested Elements</span></h4><ul>
+<li><span>Tree structure expressed by Markup Language</span></li>
+</ul><pre><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Test&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Test&lt;/h1&gt;
+        &lt;p&gt;Paragraph&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p><img src="https://i.imgur.com/pbhWthZ.png" alt=""></p><ul>
+<li><span>Rule of Nested Elements</span>
+<ul>
+<li><span>Opening tags must be matched to closing tags</span></li>
+<li><span>The latest opening tag must be closed before other opening tag</span>
+<ul>
+<li><span>Correct example</span><br>
+<code>&lt;head&gt;&lt;title&gt;Title&lt;/title&gt;&lt;/head&gt;</code></li>
+<li><span>Incorrect example</span><br>
+<code>&lt;head&gt;&lt;title&gt;Title&lt;/head&gt;&lt;/title&gt;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h4 id="22-Global-structure-of-HTML-Document" data-id="22-Global-structure-of-HTML-Document"><span>2.2. Global structure of HTML Document</span></h4><pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Test&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Test&lt;/h1&gt;
+    &lt;p&gt;Paragraph&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><ul>
+<li><code>&lt;html&gt;</code>
+<ul>
+<li><span>root of document</span></li>
+</ul>
+</li>
+<li><code>&lt;head&gt;</code>
+<ul>
+<li><span>meta information of document</span>
+<ul>
+<li><span>title, meta, link,…</span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>&lt;body&gt;</code>
+<ul>
+<li><span>content of document</span>
+<ul>
+<li><span>h1-h6, p, address, …</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></div>

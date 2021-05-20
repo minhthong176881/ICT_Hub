@@ -1,0 +1,120 @@
+<div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h2 id="Chapter-2-PHP-Variables-and-HTML-Input-Forms" data-id="Chapter-2-PHP-Variables-and-HTML-Input-Forms"><span>Chapter 2. PHP Variables and HTML Input Forms</span></h2><p><strong><span>Objectives</span></strong></p><ul>
+<li><span>To learn how to store and access data in PHP variables</span></li>
+<li><span>To understand how to create and manipulate numeric and string variables</span></li>
+<li><span>To review how to create HTML input forms</span></li>
+<li><span>To learn how to pass data from HTML forms to PHP scripts</span></li>
+</ul><h3 id="Table-of-Contents" data-id="Table-of-Contents"><span>Table of Contents</span></h3><ol>
+<li><span>PHP Variables</span></li>
+<li><span>Working with PHP String Variables</span></li>
+<li><span>HTML Input Forms</span></li>
+<li><span>HTML Input Forms and PHP Scripts</span></li>
+</ol><h3 id="1-PHP-Variables" data-id="1-PHP-Variables"><span>1. PHP Variables</span></h3><ul>
+<li><span>Variables are used to store and access data in computer memory.</span></li>
+<li><span>A variable name is a label used within a script to refer to the data.</span></li>
+</ul><p><img src="https://i.imgur.com/YxYNpVo.png" alt=""></p><h3 id="11-Assigning-New-Values-to-Variables" data-id="11-Assigning-New-Values-to-Variables"><span>1.1. Assigning New Values to Variables</span></h3><ul>
+<li><span>You can assign new values to variables:</span></li>
+</ul><pre><code>$days = 3;
+$newdays = 100;
+$days = $newdays;
+</code></pre><ul>
+<li><span>At the end of these three lines, $days and $newdays both have values of 100.</span></li>
+</ul><h4 id="Selecting-Variable-Names" data-id="Selecting-Variable-Names"><span>Selecting Variable Names</span></h4><ul>
+<li><span>You can select just about any set of characters for a variable name in PHP, but they must:</span></li>
+<li><span>Use  a dollar sign (</span><code>$</code><span>) as the first character</span></li>
+<li><span>Use a letter or an underscore character (</span><code>_</code><span>) as the second character.</span><br>
+<code>$_abc</code><span>, </span><code>$abc</code><span>, </span><code>$ab1</code><span>, </span><code>$1ab</code><span> → not correct</span></li>
+</ul><blockquote>
+<p><span>Note: Try to select variable names that help describe their function. For example </span><code>$counter</code><span> is more descriptive than </span><code>$c</code><span> or </span><code>$ctr</code><span>.</span></p>
+</blockquote><h4 id="Combining-Variables-and-the-print-Statement" data-id="Combining-Variables-and-the-print-Statement"><span>Combining Variables and the print Statement</span></h4><ul>
+<li><span>That is, to print out the value of $x, write the following PHP statement:</span>
+<ul>
+<li><span>print ("$x");</span></li>
+</ul>
+</li>
+<li><span>The following code will output “Bryant is 6 years old”.</span></li>
+</ul><pre><code>$age=6;
+print ("Bryant is $age years old.");
+</code></pre><h4 id="A-Full-Example-…" data-id="A-Full-Example-…"><span>A Full Example …</span></h4><pre><code>1. &lt;html&gt;
+2. 	&lt;head&gt; &lt;title&gt;Variable Example &lt;/title&gt; &lt;/head&gt;
+3.		&lt;body&gt;
+4. 	  &lt;?php
+5. 		$first_num = 12;
+6. 		$second_num = 356;
+7. 		$temp = $first_num;
+8. 		$first_num = $second_num;
+9. 		$second_num = $temp;
+10. 		print ("first_num= $first_num &lt;br&gt; second_num=$second_num");
+11.      ?&gt; &lt;/body&gt; &lt;/html&gt;
+</code></pre><ul>
+<li><span>The previous code can be executed at </span><a href="http://webwizard.aw.com/~phppgm/C2/firstnum.php" target="_blank" rel="noopener"><span>http://webwizard.aw.com/~phppgm/C2/firstnum.php</span></a></li>
+</ul><p><img src="https://i.imgur.com/23gOz6c.png" alt=""></p><h4 id="12-Using-Arithmetic-Operators" data-id="12-Using-Arithmetic-Operators"><span>1.2. Using Arithmetic Operators</span></h4><ul>
+<li><span>You can use operators such as a plus sign (+) for addition and a minus sign (–) for subtraction to build mathematical expressions.</span></li>
+<li><span>For example:</span></li>
+</ul><pre><code>&lt;?php
+$apples = 12;
+$oranges = 14;
+$total_fruit = $apples + $oranges;
+print ("The total number of fruit is $total_fruit");
+?&gt;
+</code></pre><ul>
+<li><span>These PHP statements would output “The total number of fruit is 26.”</span></li>
+</ul><h4 id="Common-PHP-Numeric-Operators" data-id="Common-PHP-Numeric-Operators"><span>Common PHP Numeric Operators</span></h4><p><img src="https://i.imgur.com/MBkoXJo.png" alt=""></p><h3 id="A-Full-Example…" data-id="A-Full-Example…"><span>A Full Example…</span></h3><pre><code>1. &lt;html&gt;
+2. &lt;head&gt; &lt;title&gt;Variable Example &lt;/title&gt; &lt;/head&gt;
+3. &lt;body&gt;
+4. &lt;?php
+5. $columns = 20;
+6. $rows = 12;
+7. $total_seats = $rows * $columns;
+8.
+9. $ticket_cost = 3.75;
+10. $total_revenue = $total_seats * $ticket_cost;
+11.
+12. $building_cost = 300;
+13. $profit = $total_revenue - $building_cost;
+14.
+15. print ("Total Seats are $total_seats &lt;br&gt;");
+16. print ("Total Revenue is $total_revenue &lt;br&gt;");
+17. print ("Total Profit is $profit");
+18. ?&gt; &lt;/body&gt; &lt;/html&gt;
+</code></pre><ul>
+<li><span>The previous code can be executed at </span><a href="http://webwizard.aw.com/~phppgm/C2/numops.php" target="_blank" rel="noopener"><span>http://webwizard.aw.com/~phppgm/C2/numops.php</span></a></li>
+</ul><p><img src="https://i.imgur.com/XTSvl4Y.png" alt=""></p><h4 id="WARNING-Using-Variables-with-Undefined-Values" data-id="WARNING-Using-Variables-with-Undefined-Values"><span>WARNING: Using Variables with Undefined Values</span></h4><ul>
+<li><span>A variable that does not have a value assigned to it will have no value (called a null value).</span></li>
+<li><span>When a variable with a null value is used in an expression PHP, PHP may not generate an error and may complete the expression evaluation.</span></li>
+</ul><pre><code>&lt;?php
+$y = 3;
+$y=$y + $x + 1; // $x has a null value
+print ("x=$x y=$y");
+?&gt;
+</code></pre><p><span>→ Output: </span><code>x= y=4</code></p><h3 id="13-Writing-Complex-Expressions" data-id="13-Writing-Complex-Expressions"><span>1.3. Writing Complex Expressions</span></h3><ul>
+<li><span>Operator precedence rules define the order in which the operators are evaluated. For example, </span><code>$x = 5 + 2 * 6;</code></li>
+<li><span>The value of $x is either 42 or 17 depending on order of evaluation.</span></li>
+<li><span>Since multiplication evaluated before addition operations, this expression evaluates to 17.</span></li>
+</ul><h3 id="PHP-Precedence-Rules" data-id="PHP-Precedence-Rules"><span>PHP Precedence Rules</span></h3><ul>
+<li>
+<p><span>PHP follows the precedence rules listed below.</span></p>
+<ul>
+<li><span>First it evaluates operators within parentheses.</span></li>
+<li><span>Next it evaluates multiplication and division operators.</span></li>
+<li><span>Finally it evaluates addition and subtraction operators.</span></li>
+</ul>
+</li>
+<li>
+<p><span>For example, the first 2 statements evaluate to 80 while the last to 180.</span></p>
+</li>
+</ul><pre><code>$x = 100 - 10 * 2;
+$y = 100 - (10 * 2);
+$z = (100 - 10) * 2;
+</code></pre><h4 id="A-Full-Example" data-id="A-Full-Example"><span>A Full Example</span></h4><pre><code>1. &lt;html&gt;
+2. &lt;head&gt; &lt;title&gt;Expression Example &lt;/title&gt; &lt;/head&gt;
+3. &lt;body&gt;
+4. &lt;?php
+5. $grade1 = 50;
+6. $grade2 = 100;
+7. $grade3 = 75;
+8. $average = ($grade1 + $grade2 + $grade3) / 3;
+9. print ("The average is $average");
+10. ?&gt; &lt;/body&gt; &lt;/html&gt;
+</code></pre><ul>
+<li><span>The previous code can be executed at </span><a href="http://webwizard.aw.com/~phppgm/C2/complex1.php" target="_blank" rel="noopener"><span>http://webwizard.aw.com/~phppgm/C2/complex1.php</span></a></li>
+</ul><p><img src="https://i.imgur.com/9Tl3Hau.png" alt=""></p></div>

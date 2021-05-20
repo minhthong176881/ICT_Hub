@@ -1,0 +1,170 @@
+<div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h2 id="Chapter-3-1-Conditional-Statements" data-id="Chapter-3-1-Conditional-Statements"><span>Chapter 3-1. Conditional Statements</span></h2><p><strong><span>Objectives</span></strong></p><ul>
+<li><span>To learn to use conditional test statements to compare numerical and string data values</span></li>
+<li><span>To learn to use looping statements to repeat statements</span></li>
+<li><span>To learn to use logical test operators to create com-pound conditional test statements</span></li>
+</ul><h3 id="Table-of-Contents" data-id="Table-of-Contents"><span>Table of Contents</span></h3><ol>
+<li><span>Using Conditional Test Statements</span></li>
+<li><span>Using Loops to Repeat Statements</span></li>
+</ol><h3 id="1-Using-Conditional-Test-Statements" data-id="1-Using-Conditional-Test-Statements"><span>1. Using Conditional Test Statements</span></h3><ul>
+<li><span>Conditional statements provide a way for scripts to test for certain data values and then to react differently depending on the value found.</span></li>
+<li><span>Will examine</span>
+<ul>
+<li><span>the if statement,</span></li>
+<li><span>the elseif clause,</span></li>
+<li><span>the else clause,</span></li>
+<li><span>and the switch statement.</span></li>
+</ul>
+</li>
+</ul><h4 id="11-Using-the-if-Statement" data-id="11-Using-the-if-Statement"><span>1.1. Using the if Statement</span></h4><ul>
+<li><span>Use an </span><code>if</code><span> statement to specify a test condition and a set of statements to run when a test condition is </span><code>true</code><span>.</span></li>
+</ul><pre><code>if ($average &gt; 69) {
+    $Grade="Pass";
+    print "Grade=$Grade ";
+}
+print "Your average was $average";
+</code></pre><ul>
+<li><span>If </span><code>$average</code><span> was equal to 70 then the above would output: </span><code>Your average was 70</code></li>
+</ul><h4 id="111-Test-Expressions" data-id="111-Test-Expressions"><span>1.1.1. Test Expressions</span></h4><ul>
+<li><span>Test expressions use test operators within their expressions.</span>
+<ul>
+<li><span>Test operators work much like the expression operators.</span></li>
+<li><span>The if statement above uses the greater than (</span><code>&gt;</code><span>) operator to test whether </span><code>$average</code><span> is greater than 69.</span></li>
+<li><span>Test operators evaluate to </span><code>true</code><span> or </span><code>false</code></li>
+</ul>
+</li>
+</ul><h4 id="PHP-Test-Operators" data-id="PHP-Test-Operators"><span>PHP Test Operators</span></h4><p><img src="https://i.imgur.com/7UpVJdb.png" alt=""></p><h4 id="A-Full-Example…" data-id="A-Full-Example…"><span>A Full Example…</span></h4><ul>
+<li><span>Consider the following application:</span></li>
+<li><span>Receives two grades as input and determines whether their average is above 89.</span></li>
+<li><span>It uses an HTML form for input grades:</span></li>
+</ul><pre><code>Enter First Score &lt;input type="text" size="4" maxlength="7" name="grade1"&gt;
+Enter Second Score &lt;input type="text" size="4" maxlength="7" name="grade2"&gt;
+</code></pre><ul>
+<li><span>Receiving Code</span></li>
+</ul><pre><code>1. &lt;html&gt;
+2. &lt;head&gt;&lt;title&gt;Decisions&lt;/title&gt;&lt;/head&gt;
+3. &lt;body&gt;
+4. &lt;?php
+5.     $average = ($grade1 + $grade2) / 2;
+6.     if ( $average &gt; 89 ) {
+7.        print "Average score: $average You got an A! &lt;br&gt;";
+8.     }
+9.     $max=$grade1;
+10.    if ($grade1 &lt; $grade2) {
+11.       $max = $grade2;
+12.     }
+13.    print ("Your max score was $max");
+14. ?&gt;
+15. &lt;/body&gt;&lt;/html&gt;
+</code></pre><ul>
+<li><span>Receiving Code With REGISTER_GLOBALS off</span></li>
+</ul><pre><code>1. &lt;html&gt;
+2. &lt;head&gt;&lt;title&gt;Decisions&lt;/title&gt;&lt;/head&gt;
+3. &lt;body&gt;
+4. &lt;?php
+5.     $grade1= $_POST[“grade1”];
+6.     $grade2= $_POST[“grade2”];
+5.     $average = ($grade1 + $grade2) / 2;
+6.     if ( $average &gt; 89 ) {
+7.        print "Average score: $average You got an A! &lt;br&gt;";
+8.     }
+9.     $max=$grade1;
+10.    if ($grade1 &lt; $grade2) {
+11.       $max = $grade2;
+12.     }
+13.    print ("Your max score was $max");
+14. ?&gt;
+15. &lt;/body&gt;&lt;/html&gt;
+</code></pre><ul>
+<li><span>The previous code can be executed at </span><a href="http://webwizard.aw.com/~phppgm/C3/decision.html" target="_blank" rel="noopener"><span>http://webwizard.aw.com/~phppgm/C3/decision.html</span></a></li>
+</ul><p><img src="https://i.imgur.com/efNx3to.png" alt=""></p><h4 id="112-Comparing-Strings" data-id="112-Comparing-Strings"><span>1.1.2. Comparing Strings</span></h4><ul>
+<li>
+<p><span>PHP represents strings using the ASCII code values (American Standard Code for Information Interchange).</span></p>
+<ul>
+<li><span>ASCII provides a standard, numerical way to represent characters on a computer.</span></li>
+<li><span>Every letter, number, and symbol is translated into a code number.</span>
+<ul>
+<li><span>“A” is ASCII code 65, “B” is 66, “C” is 67, and so on.</span></li>
+<li><span>Lowercase “a” is ASCII code 97, “b” is 98, “c” is 99, and s</span></li>
+<li><span>ASCII “A” is less than ASCII “a,” “B” is less than “b,” and “c” is less than “d”.</span></li>
+<li><span>ASCII characters have ASCII code values lower than letters. So ASCII character “1” is less than “a” or “A”</span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><span>You can use == operator to check if one string is equal to another. For example,</span></p>
+</li>
+</ul><pre><code>$name1 = "George"; $name2 = "Martha";
+if ($name1 == $name2) {
+    print ("$name1 is equal to $name2" );
+} else {
+    print ("$name1 is not equal to $name2");
+}
+</code></pre><ul>
+<li>
+<p><span>Would output: “George is not equal to Martha”.</span></p>
+</li>
+<li>
+<p><span>Also can use </span><code>&lt;</code><span>, </span><code>&gt;</code><span>, </span><code>&lt;=</code><span>, and </span><code>&gt;=</code><span> operators to compare string values using ASCII code values.</span></p>
+</li>
+<li>
+<p><span>For Example</span></p>
+</li>
+</ul><pre><code>$name1 = "George"; $name2 = "Martha";
+if ($name1 &lt; $name2) {
+     print ("$name1 is less than $name2");
+} else {
+     print ("$name1 is not less than $name2");
+}
+</code></pre><ul>
+<li>
+<p><span>It would output “George is less than Martha”.</span></p>
+</li>
+<li>
+<p><span>Consider  the following application:</span></p>
+<ul>
+<li><span>Compares two input strings.</span></li>
+<li><span>It uses the HTML form element that sets the variables $first and $second.</span></li>
+</ul>
+</li>
+</ul><pre><code>First Name: &lt;input type="text" size="10" maxlength="15" name="first"&gt;
+Second Name: &lt;input type="text" size="10" maxlength="15" name="second"&gt;
+</code></pre><ul>
+<li><span>Receiving Code</span></li>
+</ul><pre><code>1. &lt;html&gt;
+2. &lt;head&gt;&lt;title&gt;String Comparison Results&lt;/title&gt;&lt;/head&gt;
+3. &lt;body&gt;
+4. &lt;?php
+5. print ("First=$first Second=$second&lt;br&gt;");
+6. if ($first == $second) {
+7.   print ("$first and $second are equal");
+8. }
+9. if ($first &lt; $second) {
+10.   print ("$first is less than $second");
+11. }
+12. if ($first &gt; $second) {
+13.    print ("$first is greater than $second");
+14. }
+15. ?&gt;&lt;/body&gt;&lt;/html&gt;
+</code></pre><ul>
+<li><span>Receiving Code With REGISTER_GLOBALS OFF</span></li>
+</ul><pre><code>1. &lt;html&gt;
+2. &lt;head&gt;&lt;title&gt;String Comparison Results&lt;/title&gt;&lt;/head&gt;
+3. &lt;body&gt;
+4. &lt;?php
+5. $first = $_POST[“first”];
+6. $second = $_POST[“second”];
+7. print ("First=$first Second=$second&lt;br&gt;");
+8. if ($first == $second) {
+9.   print ("$first and $second are equal");
+10. }
+11. if ($first &lt; $second) {
+12.   print ("$first is less than $second");
+13. }
+14. if ($first &gt; $second) {
+15.    print ("$first is greater than $second");
+16. }
+17. ?&gt;&lt;/body&gt;&lt;/html&gt;
+</code></pre><ul>
+<li><span>The previous code can be executed at </span><a href="http://webwizard.aw.com/~phppgm/C3/comparenames.html" target="_blank" rel="noopener"><span>http://webwizard.aw.com/~phppgm/C3/comparenames.html</span></a></li>
+</ul><p><img src="https://i.imgur.com/EijRvgG.png" alt=""></p></div>
