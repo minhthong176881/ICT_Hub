@@ -8,7 +8,7 @@ class SemestersController extends BaseController {
     function __construct()
     {
         $this->semester = new Semester();
-        $this->folder = 'semesters';
+        
     }
 
     /**

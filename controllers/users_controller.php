@@ -9,7 +9,7 @@ class UsersController extends BaseController
    public function __construct()
    {
       $this->user = new User();
-      $this->folder = 'users';
+      
    }
 
    public function postLogin()

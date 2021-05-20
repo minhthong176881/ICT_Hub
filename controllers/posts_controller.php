@@ -7,7 +7,7 @@ class PostsController extends BaseController {
     function __construct()
     {
         $this->post = new Post();
-        $this->folder = 'posts';
+        
     }
 
     function post() {

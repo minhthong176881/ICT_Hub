@@ -8,7 +8,7 @@ class ArticlesController extends BaseController {
     function __construct()
     {
         $this->article = new Article();
-        $this->folder = 'articles';
+       
     }
 
     /**

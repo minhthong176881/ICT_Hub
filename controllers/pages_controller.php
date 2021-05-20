@@ -6,10 +6,7 @@ require_once('models/subject.php');
 
 class PagesController extends BaseController
 {
-    function __construct()
-    {
-        $this->folder = 'pages';
-    }
+    
 
     public function home()
     {
