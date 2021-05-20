@@ -1,4 +1,4 @@
-    <h1>Our course</h1>
+    <h1>Our courses</h1>
 
 </header>
 
@@ -6,50 +6,24 @@
 <!-- course -->
 
 <div class="course">
-    <h1>Course We Offer</h1>
+    <h1>Courses We Offer</h1>
     <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
     <div class="row">
-        <div class="course-col">
-            <h3>Intermediate</h3>
-            <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
-        </div>
-        <div class="course-col">
-            <h3>Intermediate</h3>
-            <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
-        </div>
-        <div class="course-col">
-            <h3>Intermediate</h3>
-            <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
-        </div>
-        <div class="course-col">
-            <h3>Intermediate</h3>
-            <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
-        </div>
+        <?php
+            $appeared = [];
+            for ($i = 1; $i <= 4; $i++) {
+                $index = rand(0, count($subjects) - 1);
+                echo "<div class='course-col'>";
+                echo "<h3>".$subjects[$index]->name."</h3>";
+                echo "<p>".$subjects[$index]->description."</p>";
+                echo "</div>";
+            }
+        ?>
     </div>
 </div>
 
-<!-- facilities -->
-<div class="facilities">
-    <h1>Our facilities</h1>
-    <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
-</div>
-
-<div class="row">
-    <div class="facilities-col">
-        <img src="assets/img/library.png" alt="">
-        <h3>World Class Librabry</h3>
-        <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
-    </div>
-    <div class="facilities-col">
-        <img src="assets/img/basketball.png" alt="">
-        <h3>Largest Stadium</h3>
-        <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
-    </div>
-    <div class="facilities-col">
-        <img src="assets/img/cafeteria.png" alt="">
-        <h3>Beautiful Cafeteria</h3>
-        <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
-    </div>
+<div class="semester">
+        
 </div>
 
 <script>

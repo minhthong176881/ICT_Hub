@@ -4,7 +4,8 @@ $controllers = array(
     'semesters' => ['index'],
     'articles' => ['index'],
     'users' => ['login', 'postLogin', 'all'],
-    'posts' => ['post']
+    'posts' => ['post'],
+    'admin' => ['index']
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {

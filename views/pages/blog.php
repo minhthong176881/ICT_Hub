@@ -11,7 +11,11 @@
                 <?php
                 echo "<ul>";
                 foreach ($posts as $post) {
-                    echo "<li class='recommend'><a>" . $post->title . "</a></li><br/>";
+                    echo "<li class='recommend'><a style='font-size: 21px'>" . $post->title . "</a><br/>Author: ".$post->user->username."<br/>Tags: ";
+                    foreach($post->tags as $tag) {
+                        echo $tag->name."/ ";
+                    }
+                    echo "</li><br/>";
                 }
                 echo "</ul>";
                 ?>

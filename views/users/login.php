@@ -1,3 +1,4 @@
+</header>
 <div class="container">
     <div class="icon">
         <img id="icon" src="assets/img/logo.png" alt="">
@@ -27,10 +28,11 @@
         <button class="inner" id="outlook">Outlook</button>
     </div>
 </div>
-</header>
 <script>
     window.onload = function() {
         el = document.getElementsByTagName('nav');
+        head = document.getElementsByTagName('header');
         el[0].classList.add('navbar');
+        head[0].classList.add('login');
     }
 </script>

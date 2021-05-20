@@ -13,10 +13,10 @@ textarea {
     padding: 15px;
     width: 90%;
 }
-/* 
+
 input:focus {
     border: 0.1px solid #34b4eb;
-} */
+}
 
 input:hover {
     border: 0.1px solid #34b4eb;

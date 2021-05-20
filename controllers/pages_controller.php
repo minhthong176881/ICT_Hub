@@ -2,6 +2,7 @@
 require_once('controllers/base_controller.php');
 require_once('models/post.php');
 require_once('models/tag.php');
+require_once('models/subject.php');
 
 class PagesController extends BaseController
 {
@@ -39,7 +40,10 @@ class PagesController extends BaseController
     }
 
     public function course() {
-        $this->render('course');
+        $subject = new Subject();
+        $subjects = $subject->all();
+        $data = array('subjects' => $subjects);
+        $this->render('course', $data);
     }
 
     public function error()
