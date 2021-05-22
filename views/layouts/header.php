@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/stylesheets/style.css">
     <link rel="stylesheet" href="assets/stylesheets/login.css">
     <link rel="stylesheet" href="assets/stylesheets/post.css">
+    <link rel="stylesheet" href="assets/stylesheets/common.css">
     <link rel="stylesheet" href="assets/stylesheets/pages/blog.css">
     <link rel="stylesheet" href="assets/stylesheets/pages/contact.css">
     <link rel="stylesheet" href="assets/stylesheets/pages/about.css">
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script src="assets/js/ckeditor/ckeditor.js"></script>
     <title>ICT Hub</title>
+    <?php session_start(); ?>
 </head>
 <body>
 <header>
@@ -30,7 +32,23 @@
                 <li><a href="?controller=pages&action=blog">BLOG</a></li>
                 <li><a href="?controller=pages&action=about">ABOUT</a></li>
                 <li><a href="?controller=pages&action=contact">CONTACT</a></li>
-                <li><a href="?controller=users&action=login">LOGIN <span><i class="fas fa-sign-in-alt"></i></span></a></li>
+                <?php
+                    if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
+                        if (!empty($_SESSION['username'])) {
+                            print '<div class="dropdown">';
+                            print '<li><a href="#">HI, '.$_SESSION['username'].'</a></li>';
+                            print '<div class="dropdown-content">';
+                            print '<li><a href="?controller=users&action=logout">Logout</a></li>';
+                            print '</div>';
+                            print '</div>';
+                        } else {
+                            unset($_SESSION['username']);
+                            header('Refresh: 0');
+                        }
+                    } else {
+                        print '<li><a href="?controller=users&action=login">LOGIN <span><i class="fas fa-sign-in-alt"></i></span></a></li>';
+                    }
+                ?>
             </ul>
         </div>
         <i class="fas fa-bars" id="menu-icon"></i>
