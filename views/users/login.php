@@ -29,7 +29,7 @@
             ?>
             <br><br>
             <a href="#" style="float: left; margin-left: 30px">Forgot your password?</a>
-            <a href="#" style="float: right; margin-right: 30px">Create account</a><br>
+            <a href="#" onclick="register()" style="float: right; margin-right: 30px">Create account</a><br>
         </form>
     </div>
     <div class="other-login">
@@ -51,5 +51,9 @@
         head = document.getElementsByTagName('header');
         el[0].classList.add('navbar');
         head[0].classList.add('login');
+    }
+
+    function register() {
+        window.location.href = "?controller=users&action=register";
     }
 </script>

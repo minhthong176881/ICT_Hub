@@ -1,5 +1,5 @@
 </header>
-<div class="container">
+<div class="container" style="height: 650px;">
     <div class="icon">
         <img id="icon" src="assets/img/logo.png" alt="">
     </div>
@@ -39,6 +39,7 @@
     <div class="outter">
         <button class="inner" id="fb">Facebook</button>
         <button class="inner" id="gg">Google</button>
+        <button class="inner" id="outlook">Outlook</button>
     </div>
 </div>
 <script>
