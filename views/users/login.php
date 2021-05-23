@@ -34,7 +34,7 @@
             ?>
             <br><br>
             <a href="#" style="float: left; margin-left: 30px">Forgot your password?</a>
-            <a href="?controller=users&action=register" style="float: right; margin-right: 30px">Create account</a><br>
+            <a href="#" onclick="register()" style="float: right; margin-right: 30px">Create account</a><br>
         </form>
     </div>
     <div class="other-login">
