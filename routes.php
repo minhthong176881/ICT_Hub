@@ -3,7 +3,7 @@ $controllers = array(
     'pages' => ['home', 'contact', 'blog', 'about', 'course', 'error'],
     'semesters' => ['index'],
     'articles' => ['index'],
-    'users' => ['login', 'postLogin', 'all', 'register', 'postRegister', 'logout'],
+    'users' => ['login', 'postLogin', 'all', 'register', 'postRegister', 'logout', 'externalLogin', 'externalRegister'],
     'posts' => ['post'],
     'admin' => ['index']
 );

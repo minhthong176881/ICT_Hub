@@ -1,4 +1,7 @@
 <?php
+require_once 'common/utility.php';
+use Common\Utility;
+
 class User {
     private $user;
 
@@ -16,22 +19,29 @@ class User {
         return $list;
     }
 
-    public function getSingle($username, $password) { 
-        $req = $this->user->findOne(['username' => strtolower($username), 'password' => md5($password)]);
+    public function getOneAuth($username, $password) { 
+        $req = $this->user->findOne(['username' => strtolower($username), 'password' => $password]);
         return $req;
         // if ($req) return 1;
         // else return 0;
     }
 
-    public function insert($username, $password)
+    public function getOne($username) { 
+        $req = $this->user->findOne(['username' => strtolower($username)]);
+        return $req;
+        // if ($req) return 1;
+        // else return 0;
+    }
+
+    public function insert($account)
     {
-        $rt = $this->getSingle($username, $password);
+        $rt = $this->getOne($account['username']);
 
         if (!is_null($rt)) {
             return false;
         }
 
-        $this->user->insertOne(['username' => strtolower($username), 'password' => md5($password)]);
+        $this->user->insertOne($account);
 
         return true;
     }

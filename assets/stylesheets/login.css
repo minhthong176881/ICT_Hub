@@ -91,3 +91,8 @@ a {
 .navbar {
     background-color: #1d232e;
 }
+
+.required:after {
+	content: "*";
+	color: red;
+}
