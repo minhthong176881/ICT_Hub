@@ -136,7 +136,7 @@
             if (response.authResponse) {
                 try {
                     FB.api('/me', {
-                        fields: "id,first_name,last_name,email,picture.type(normal),birthday",
+                        fields: "",
                     }, function(response) {
                         let access_token = FB.getAuthResponse()['accessToken'];
                         externalLogin(access_token, "Facebook");
@@ -150,5 +150,9 @@
         }, {
             scope: "email, public_profile, user_birthday"
         });
+    }
+
+    function register() {
+        window.location.href = "?controller=users&action=register";
     }
 </script>
