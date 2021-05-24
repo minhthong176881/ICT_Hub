@@ -2,24 +2,24 @@
 require_once 'vendor/autoload.php';
 
 class Subject {
-    private $post;
+    private $subject;
     
     public function __construct()
     {
-        $this->post = DB::getInstance()->selectCollection('subjects');
+        $this->subject = DB::getInstance()->selectCollection('subjects');
     }
 
     public function all() {
         $list = [];
-        $req = $this->post->find();
+        $req = $this->subject->find();
         foreach ($req as $item) {
             array_push($list, $item);
         }
         return $list;
     }
 
-    // public function getById($id) {
-    //     $post = $this->post->findOne(['_id' => new ObjectId("$id")]);
-    //     return $post;
-    // }
+    public function getById($id) {
+        $subject = $this->subject->findOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
+        return $subject;
+    }
 }

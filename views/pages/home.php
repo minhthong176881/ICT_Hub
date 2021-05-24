@@ -5,9 +5,40 @@
     </div>
 
     </header>
-    <div class="content" style="height: 30%">
-        <h3>Select courses and learn</h3>
-        
+    <div class="content">
+        <h1>Select courses and learn</h1>
+        <div class="semester" style="display: flex">
+            <div class="left" style="margin-left: 150px">
+                <?php for ($i = 0; $i < 5; $i++) {
+                    echo '<div class="dropdown">';
+                    echo '<a href="?controller=pages&action=semester&id=' . $semesters[$i]->_id . '"><h3>' . $semesters[$i]->name . '</h3></a>';
+                    echo '<div class="dropdown-content dropdown-bg">';
+                    if (property_exists($semesters[$i], 'subjects')) {
+                        if (count($semesters[$i]->subjects) > 0) {
+                            for ($j = 0; $j < count($semesters[$i]->subjects); $j++) {
+                                echo '<p class="subject"><a href="?controller=&action=">' . $semesters[$i]->subjects[$j]->name . '</a></p>';
+                            }
+                        }
+                    }
+                    echo '</div></div><br>';
+                } ?>
+            </div>
+            <div class="right" style="margin-left: auto; margin-right: 150px">
+                <?php for ($i = 5; $i < count($semesters); $i++) {
+                    echo '<div class="dropdown">';
+                    echo '<a href="?controller=pages&action=semester&id=' . $semesters[$i]->_id . '"><h3>' . $semesters[$i]->name . '</h3></a>';
+                    echo '<div class="dropdown-content dropdown-bg">';
+                    if (property_exists($semesters[$i], 'subjects')) {
+                        if (count($semesters[$i]->subjects) > 0) {
+                            for ($j = 0; $j < count($semesters[$i]->subjects); $j++) {
+                                echo '<p class="subject"><a href="?controller=&action=">' . $semesters[$i]->subjects[$j]->name . '</a></p>';
+                            }
+                        }
+                    }
+                    echo '</div></div><br>';
+                } ?>
+            </div>
+        </div>
     </div>
     <script type="text/javascript">
         window.onload = function() {

@@ -142,7 +142,7 @@ header {
   transition: 1s;
 }
 
-h3 {
+h3, h2, h1 {
   text-align: center;
   font-weight: 600;
   margin: 10px 0px;
@@ -368,3 +368,25 @@ footer h4 {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.dropdown-bg {
+  background-color: white;
+  width: 250px;
+  padding: 10px;
+}
+
+.content {
+  height: 30%;
+  padding: 10px 50px 10px 50px;
+}
+
+.subject {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.subject:hover {
+  cursor: pointer;
+  border: 1px #1da4dd solid;
+}
+

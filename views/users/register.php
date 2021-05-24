@@ -67,8 +67,8 @@
         Or register with <br><br>
     </div>
     <div class="outter">
-        <button class="inner" id="fb" onclick="registerFB()">Facebook</button>
-        <button class="inner" id="gg">Google</button>
+        <button class="inner" id="fb" onclick="registerFB()"><span><i style="color: blue" class="fab fa-facebook-f"></i></span> Facebook</button>
+        <button class="inner" id="gg"><span><i style="color: red" class="fab fa-google"></i></span> Google</button>
         <button class="inner" id="outlook">Outlook</button>
     </div>
 </div>

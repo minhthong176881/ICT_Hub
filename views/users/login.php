@@ -16,7 +16,7 @@
         <form method="POST" action="?controller=users&action=postLogin">
             <p>
                 <input type="text" id="username" name="username" placeholder="Username" <?php if (!empty($username)) print "value=\"$username\""; ?> required>
-                <br>
+                <!-- <br> -->
             </p>
             <p>
                 <input type="password" id="password" name="password" placeholder="Password" required>
@@ -41,8 +41,8 @@
         Or login with <br><br>
     </div>
     <div class="outter">
-        <button class="inner" id="fb" onclick="loginFB()">Facebook</button>
-        <button class="inner" id="gg">Google</button>
+        <button class="inner" id="fb" onclick="loginFB()"><span><i style="color: blue" class="fab fa-facebook-f"></i></span> Facebook</button>
+        <button class="inner" id="gg"><span><i style="color: red" class="fab fa-google"></i></span> Google</button>
         <button class="inner" id="outlook">Outlook</button>
     </div>
 </div>

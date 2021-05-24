@@ -15,4 +15,9 @@ class Semester {
         }
         return $list;
     }
+
+    public function getOne($id) { 
+        $req = $this->semester->findOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
+        return $req;
+    }
 }
