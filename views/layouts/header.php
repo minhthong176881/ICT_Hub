@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script src="assets/js/ckeditor/ckeditor.js"></script>
+    <script src="assets/js/common.js"></script>
     <title>ICT Hub</title>
     <?php session_start(); ?>
 </head>
@@ -33,16 +34,16 @@
                 <li><a href="?controller=pages&action=about">ABOUT</a></li>
                 <li><a href="?controller=pages&action=contact">CONTACT</a></li>
                 <?php
-                    if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
-                        if (!empty($_SESSION['username'])) {
+                    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+                        if (!empty($_SESSION['given_name'])) {
                             print '<div class="dropdown">';
-                            print '<li><a href="#">HI, '.$_SESSION['username'].'</a></li>';
+                            print '<li><a href="#">HI, '.$_SESSION['given_name'].'</a></li>';
                             print '<div class="dropdown-content">';
                             print '<li><a href="?controller=users&action=logout">Logout</a></li>';
                             print '</div>';
                             print '</div>';
                         } else {
-                            unset($_SESSION['username']);
+                            unset($_SESSION['logged_in']);
                             header('Refresh: 0');
                         }
                     } else {

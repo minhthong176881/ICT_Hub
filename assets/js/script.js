@@ -16,3 +16,14 @@ function showMenu() {
 function hideMenu() {
     navLinks.style.right = "-200px";
 }
+
+function objToUrlEncoded (obj) {
+    var str = [];
+    for (var key in obj) {
+         if (obj.hasOwnProperty(key)) {
+               str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]))                  
+               console.log(key + " -> " + obj[key]);
+         }
+    }
+    return str.join("&");
+}

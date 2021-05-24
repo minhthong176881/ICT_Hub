@@ -7,10 +7,10 @@ class Utility {
     }
 
     static function debug($data) {
-        $output = $data;
-        if (is_array($output))
-            $output = implode(',', $output);
+        ob_start();
+        var_dump($data);
+        $result = ob_get_clean();
     
-        file_put_contents('.debug', "Debug Objects: '" . $output . "'\n", FILE_APPEND);
+        file_put_contents('.debug', "Debug Objects: '" . $result . "'\n", FILE_APPEND);
     }
 }
