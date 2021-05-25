@@ -14,4 +14,9 @@ class Article {
         }
         return $list;
     }
+
+    public function getById($id) {
+        $article = $this->article->findOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
+        return $article;
+    }
 }

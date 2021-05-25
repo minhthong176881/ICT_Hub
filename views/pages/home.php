@@ -16,7 +16,7 @@
                     if (property_exists($semesters[$i], 'subjects')) {
                         if (count($semesters[$i]->subjects) > 0) {
                             for ($j = 0; $j < count($semesters[$i]->subjects); $j++) {
-                                echo '<p class="subject"><a href="?controller=&action=">' . $semesters[$i]->subjects[$j]->name . '</a></p>';
+                                echo '<p class="subject"><a href="?controller=pages&action=subject&id='.$semesters[$i]->subjects[$j]->_id.'">' . $semesters[$i]->subjects[$j]->name . '</a></p>';
                             }
                         }
                     }
@@ -31,7 +31,7 @@
                     if (property_exists($semesters[$i], 'subjects')) {
                         if (count($semesters[$i]->subjects) > 0) {
                             for ($j = 0; $j < count($semesters[$i]->subjects); $j++) {
-                                echo '<p class="subject"><a href="?controller=&action=">' . $semesters[$i]->subjects[$j]->name . '</a></p>';
+                                echo '<p class="subject"><a href="?controller=pages&action=subject&id='.$semesters[$i]->subjects[$j]->_id.'">' . $semesters[$i]->subjects[$j]->name . '</a></p>';
                             }
                         }
                     }

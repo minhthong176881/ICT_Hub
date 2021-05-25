@@ -3,7 +3,7 @@
     <div class="semester-content">
         <?php 
             foreach($subjects as $subject) {
-                echo '<div class="subject-list"><a href=#>'.$subject->name.'</a></div><br>';
+                echo '<div class="subject-list"><a href="?controller=pages&action=subject&id='.$subject->_id.'">'.$subject->name.'</a></div><br>';
             }
         ?>
     </div>

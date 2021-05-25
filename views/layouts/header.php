@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/stylesheets/pages/contact.css">
     <link rel="stylesheet" href="assets/stylesheets/pages/about.css">
     <link rel="stylesheet" href="assets/stylesheets/pages/semester.css">
+    <link rel="stylesheet" href="assets/stylesheets/pages/subject.css">
     <link rel="stylesheet" href="assets/stylesheets/components/input.css">
     <link rel="stylesheet" href="assets/stylesheets/components/button.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">

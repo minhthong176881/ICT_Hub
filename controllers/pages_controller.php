@@ -1,9 +1,13 @@
 <?php
+
+use function MongoDB\select_server;
+
 require_once('controllers/base_controller.php');
 require_once('models/post.php');
 require_once('models/tag.php');
 require_once('models/subject.php');
 require_once('models/semester.php');
+require_once('models/article.php');
 
 class PagesController extends BaseController
 {
@@ -29,6 +33,23 @@ class PagesController extends BaseController
             $this->render('semester', $data);
         }
         else $this->render('error');
+    }
+
+    public function subject() {
+        if (isset($_GET['id'])) {
+            $subject = new Subject();
+            $article = new Article();
+            if (!isset($_GET['articleId'])) $selectedArticle = null;
+            else $selectedArticle = $article->getById($_GET['articleId']);
+            $articles = [];
+            $selectedSubject = $subject->getById($_GET['id']);
+            foreach($selectedSubject->articles as $item) {
+                $a = $article ->getById($item->_id);
+                array_push($articles, $a);
+            }
+            $data = array('subject' => $selectedSubject, 'articles' => $articles, 'selectedArticle' => $selectedArticle);
+            $this->render('subject', $data);
+        }
     }
 
     public function contact()
