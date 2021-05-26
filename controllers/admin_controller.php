@@ -31,20 +31,27 @@ class AdminController extends BaseController {
     }
 
     public function index() {
-        $user = new User();
-        $userCount = count($user->all());
+        $users = new User();
+        $users = $users->all();
+        $userCount = count($users);
 
         $article = new Article();
         $artileCount = count($article->all());
 
         $subjectCount = count((new Subject())->all());
-        $postCount = count((new Post())->all());
+        
+
+        $posts = new Post();
+        $posts = $posts->all();
+        $postCount = count($posts);
 
         $data = [
+            "users" => $users,
             "userCount" => $userCount,
             "artileCount" => $artileCount,
             "subjectCount" => $subjectCount,
-            "postCount" => $postCount
+            "postCount" => $postCount,
+            "posts" => $posts
         ];
 
     
