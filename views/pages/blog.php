@@ -11,7 +11,7 @@
                 <?php
                 echo "<ul>";
                 foreach ($posts as $post) {
-                    echo "<li class='recommend'><a style='font-size: 21px'>" . $post->title . "</a><br/>Author: ".$post->user->username."<br/>Tags: ";
+                    echo "<li class='recommend'><a style='font-size: 21px' href='?controller=posts&action=detail&id=".$post->_id."'>" . $post->title . "</a><br/>Author: ".$post->author->username."<br/>Tags: ";
                     foreach($post->tags as $tag) {
                         echo $tag->name."/ ";
                     }

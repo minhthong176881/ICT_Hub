@@ -29,8 +29,8 @@ class Post {
         printf("Inserted %d document(s)\n", $insertResult->getInsertedCount());
     }
 
-    // public function getById($id) {
-    //     $post = $this->post->findOne(['_id' => new ObjectId("$id")]);
-    //     return $post;
-    // }
+    public function getById($id) {
+        $post = $this->post->findOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
+        return $post;
+    }
 }

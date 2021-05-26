@@ -1,7 +1,5 @@
 <?php
 
-use function MongoDB\select_server;
-
 require_once('controllers/base_controller.php');
 require_once('models/post.php');
 require_once('models/tag.php');
@@ -39,7 +37,7 @@ class PagesController extends BaseController
         if (isset($_GET['id'])) {
             $subject = new Subject();
             $article = new Article();
-            if (!isset($_GET['articleId'])) $selectedArticle = null;
+            if (!isset($_GET['articleId'])) $selectedArticle = $article->all()[0];
             else $selectedArticle = $article->getById($_GET['articleId']);
             $articles = [];
             $selectedSubject = $subject->getById($_GET['id']);

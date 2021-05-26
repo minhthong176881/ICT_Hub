@@ -11,7 +11,7 @@ require_once('models/post.php');
 class AdminController extends BaseController {
     function __construct()
     {
-        $this->folder = 'admin';
+        parent::__construct();
     }
 
     public function render($file, $data = null) {
