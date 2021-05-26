@@ -14,7 +14,7 @@
             <div class="user-wrapper">
                 <img src="assets/img/dominhthong.jpg" width="30px" height="30px" alt="">
                 <div>
-                    <h4>Do Minh Thong</h4>
+                    <h4>NhonDz</h4>
                     <p>Super admin</p>
                 </div>
             </div>
@@ -23,8 +23,8 @@
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1>54</h1>
-                        <span>Customer</span>
+                        <h1><?=$userCount?></h1>
+                        <span>Users</span>
                     </div>
                     <div>
                         <span class="fas fa-users"></span>
@@ -32,8 +32,8 @@
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>79</h1>
-                        <span>Projects</span>
+                        <h1><?=$artileCount?></h1>
+                        <span>Articles</span>
                     </div>
                     <div>
                         <span class="fas fa-project-diagram"></span>
@@ -41,8 +41,8 @@
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>124</h1>
-                        <span>Orders</span>
+                        <h1><?=$subjectCount?></h1>
+                        <span>Subjects</span>
                     </div>
                     <div>
                         <span class="fab fa-first-order"></span>
@@ -50,11 +50,11 @@
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$6k</h1>
-                        <span>Income</span>
+                        <h1><?=$postCount?></h1>
+                        <span>Posts</span>
                     </div>
                     <div>
-                        <span class="fas fa-money-bill-wave-alt"></span>
+                        <span class="fas fa-mail-bulk"></span>
                     </div>
                 </div>
             </div>
@@ -158,8 +158,8 @@
                 <div class="customers">
                     <div class="card">
                         <div class="card-header">
-                            <h3>New customer</h3>
-                            <button>See all <span class="fas fa-arrow-right"></span></button>
+                            <h3>New users</h3>
+                            <button>See all<span class="fas fa-arrow-right"></span></button>
                         </div>
 
                         <div class="card-body">

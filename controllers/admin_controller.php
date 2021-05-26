@@ -1,5 +1,12 @@
 <?php
+use ICT_Hub\models;
+
 require_once 'controllers/base_controller.php';
+require_once('models/user.php');
+require_once('models/article.php');
+require_once('models/subject.php');
+require_once('models/post.php');
+
 
 class AdminController extends BaseController {
     function __construct()
@@ -24,6 +31,24 @@ class AdminController extends BaseController {
     }
 
     public function index() {
-        $this->render('dashboard');
+        $user = new User();
+        $userCount = count($user->all());
+
+        $article = new Article();
+        $artileCount = count($article->all());
+
+        $subjectCount = count((new Subject())->all());
+        $postCount = count((new Post())->all());
+
+        $data = [
+            "userCount" => $userCount,
+            "artileCount" => $artileCount,
+            "subjectCount" => $subjectCount,
+            "postCount" => $postCount
+        ];
+
+    
+        $this->render('dashboard', $data);
     }
 }
+// }

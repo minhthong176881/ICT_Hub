@@ -1,10 +1,15 @@
+
 <?php
+define('NHONLV_CER', 'abcxyz');
+define('DS', DIRECTORY_SEPARATOR);
+define('ROOT', dirname(dirname(__FILE__)));
 require_once('connection.php');
 require("vendor/autoload.php");
 // $openapi = \OpenApi\scan('./controllers');
 // header('Content-Type: application/x-yaml');
 // echo $openapi->toYaml();
 header("Access-Control-Allow-Headers: *");
+
 
 if (isset($_GET['controller'])) {
     $controller = $_GET['controller'];
