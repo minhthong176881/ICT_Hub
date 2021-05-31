@@ -78,6 +78,23 @@ class PagesController extends BaseController
         $this->render('course', $data);
     }
 
+    function send_mail(){
+		if(isset($_POST['send']))
+        {
+		$to_email=$_POST['to'];
+		$subject=$_POST['subject'];
+		$message=$_POST['message'];
+			
+		$to = $to_email;
+        $subject = $subject;
+        $txt = $message;
+        $headers = "From: admin@gmail.com" . "\r\n" .
+        "CC: anymail@example.com";
+		mail($to,$subject,$txt,$headers);
+		}
+        $this->view->render('hello/send_mail');
+	}
+
     public function error()
     {
         $this->render('error');
