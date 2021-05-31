@@ -1,7 +1,11 @@
-<h1 style="text-align: left; margin-left: 6%"><?php echo $subject->name; ?></h1><br>
+<h1 style="text-align: left; margin-left: 6%">
+    <?php
+    echo "<a style='font-size: 36px; color: white; font-weight: 600' href='?controller=pages&action=semester&id=" . $semester->_id . "'>" . $semester->name . "</a> <span><i class='fad fa-chevron-double-right'></i></span> ";
+    echo $subject->name;
+    ?></h1><br>
 </header>
 <div style="display: flex">
-    <div class="subject-content" style="width: 20%; margin-left: 2%; margin-top: 2%; padding: 10px; border-right: 1px #777777 solid">
+    <div class="subject-content">
         <?php
         if (count($articles) >= 1) {
             $index = 1;
@@ -14,13 +18,13 @@
         }
         ?>
     </div>
-    <div class="article-content" style="max-width: 74%; margin-left: 2%; margin-top: 2%; padding: 20px">
+    <div class="article-content">
         <?php
         if (count($articles) >= 1) {
             if (is_null($selectedArticle))
                 echo $articles[0]->html;
             else echo $selectedArticle->html;
-        }
+        } else echo '<h1>No content.</h1>';
         ?>
     </div>
 </div>

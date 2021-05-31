@@ -16,8 +16,19 @@ class Semester {
         return $list;
     }
 
-    public function getOne($id) { 
+    public function getById($id) { 
         $req = $this->semester->findOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
         return $req;
+    }
+
+    public function getBySubjectId($id) {
+        $list = $this->all();
+        $selectedSemester = null;
+        foreach ($list as $item) {
+            foreach($item->subjects as $subject) {
+                if ($subject->_id == $id) $selectedSemester = $item;
+            }
+        }
+        return $selectedSemester;
     }
 }

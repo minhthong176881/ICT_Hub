@@ -54,7 +54,7 @@ class UsersController extends BaseController
    {
       if (isset($_POST['username']) && isset($_POST['password'])) {
          $username = strtolower($_POST['username']);
-         $result = $this->user->getOne($username);
+         $result = $this->user->getByUsername($username);
          if (!is_null($result) && password_verify($_POST['password'], $result['password'])) {
             // login success
             $this->sessionLogin($result);
@@ -74,6 +74,7 @@ class UsersController extends BaseController
       $_SESSION['logged_in'] = true;
       $_SESSION['username'] = $account['username'];
       $_SESSION['given_name'] = $account['given_name'];
+      $_SESSION['userId'] = $account['_id'];
    }
 
    private function sessionLogout()
@@ -82,6 +83,7 @@ class UsersController extends BaseController
       unset($_SESSION['logged_in']);
       unset($_SESSION['username']);
       unset($_SESSION['given_name']);
+      unset($_SESSION['userId']);
    }
  
    public function logout()
@@ -136,11 +138,11 @@ class UsersController extends BaseController
                return;
             }
             Utility::debug($account);
-            $result = $this->user->getOne($account['email']);
+            $result = $this->user->getByUsername($account['email']);
             if (!is_null($result)) {
                if (isset($result['external']) && $result['external'] == true) {
                   // login success
-                  $this->sessionLogin(['username' => $account['email'], 'given_name' => $account['given_name']]);
+                  $this->sessionLogin(['username' => $account['email'], 'given_name' => $account['given_name'],  '_id' => $result->_id]);
                   header('Location: index.php');
                } else {
                   $this->render('login', ['loginSuccess' => false, 'external' => true]);

@@ -15,9 +15,10 @@
                 do {
                     $index = rand(0, count($subjects) - 1);
                 } while (in_array($index, $appeared));
+                echo "";
                 echo "<div class='course-col'>";
-                echo "<h3>" . $subjects[$index]->name . "</h3>";
-                echo "<p>" . $subjects[$index]->description . "</p>";
+                echo "<a style='color:black;' href='?controller=pages&action=subject&id=".$subjects[$index]->_id."'><h3>" . $subjects[$index]->name . "</h3>";
+                echo "<p>" . $subjects[$index]->description . "</p></a>";
                 echo "</div>";
                 array_push($appeared, $index);
             }
@@ -36,29 +37,7 @@
             el[0].classList.add('course-header');
         }
 
-        // Validate external login on server
-        // xhrPost(
-        //     url = '?controller=users&action=externalLogin',
-        //     data = data,
-        //     success = function (responseTxt) {
-        //         response = JSON.parse(responseTxt);
-        //         window.location.href = '?controller=pages&action=home';
-        //     },
-        //     error = function (status, responseTxt) {
-        //         alert('Authenticate error!');
-        //         window.location.reload();
-        //     }
-        // )
-
-        xhrGet(
-            url = '?controller=courses&action=detail',
-            data = 'id',
-            success = function(responseTxt) {
-                response = JSON.parse(responseTxt);
-                console.log(response);
-            },
-            error = function (status, responseTxt) {
-               console.log('Error!');
-            }
-        )
+        function select(id) {
+            window.location.href = "?controller=pages&action=subject&id=" + id;
+        }
     </script>

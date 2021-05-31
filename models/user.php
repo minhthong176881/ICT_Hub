@@ -1,6 +1,5 @@
 <?php
 require_once 'common/utility.php';
-use Common\Utility;
 
 class User {
     private $user;
@@ -22,20 +21,21 @@ class User {
     public function getOneAuth($username, $password) { 
         $req = $this->user->findOne(['username' => strtolower($username), 'password' => $password]);
         return $req;
-        // if ($req) return 1;
-        // else return 0;
     }
 
-    public function getOne($username) { 
+    public function getByUsername($username) { 
         $req = $this->user->findOne(['username' => strtolower($username)]);
         return $req;
-        // if ($req) return 1;
-        // else return 0;
+    }
+
+    public function getById($id) {
+        $req = $this->user->findOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
+        return $req;
     }
 
     public function insert($account)
     {
-        $rt = $this->getOne($account['username']);
+        $rt = $this->getByUsername($account['username']);
 
         if (!is_null($rt)) {
             return false;

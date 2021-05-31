@@ -1,8 +1,21 @@
-<form action="?controller=posts&action=savePost" method="POST">
+<?php session_start(); 
+    if (isset($result)) echo "<p style='color:black'>".$result."</p>";
+?>
+<form action="?controller=posts&action=save&userId=<?php echo $_SESSION['userId'] ?>" method="POST">
     <input class="title" type="text" name="title" placeholder="Title">
     <br>
-    <input class="tag-input" type="text" name="tag" placeholder="Tag your post. Maximum 5 tags. At least 1 tag."><br>
-    <Textarea class="content" rows="10" name="content" placeholder="Your post's content." id="post-content"></Textarea>
+    <div class="dropdown dropdown-tags tag-input">
+        <input type="text" id="inputTags" name="tags" placeholder="Tag your post. Maximum 5 tags. At least 1 tag.">
+        <div class="dropdown-content dropdown-bg" style="margin-left: 5%">
+            <?php
+            foreach ($tags as $tag) {
+                echo "<div class='checkbox-tags'><input class='tag' type='checkbox' name='" . $tag->name . "' value='" . $tag->_id . "' onclick='check()'/>";
+                echo "<label style='margin-left: 10px' for='" . $tag->name . "'>" . $tag->name . "</label></div><br>";
+            }
+            ?>
+        </div>
+    </div>
+    <Textarea class="content" rows="50" name="content" placeholder="Your post's content." id="post-content"></Textarea>
     <br>
     <div class="btn-group" style="display: flex; margin-top: 20px;">
         <div style="margin-left: auto; margin-right: 95px">
@@ -21,5 +34,21 @@
 
     function cancel() {
         window.location.href = "?controller=pages&action=blog";
+    }
+
+    function check() {
+        var tags = document.querySelectorAll('.tag');
+        var inputTags = document.querySelector('#inputTags');
+        var selectedTags = [];
+        for (let i = 0; i < tags.length; i++) {
+            if (tags[i].checked) selectedTags.push(tags[i].name);
+            if (!tags[i].checked && inputTags.value.includes(tags[i].name)) inputTags.value = inputTags.value.replace(tags[i].name, '');
+        }
+        for (let i = 0; i < selectedTags.length; i++) {
+            if (!inputTags.value.includes(selectedTags[i])) {
+                inputTags.value += ' ' + selectedTags[i];
+            }
+        }
+        inputTags.value = inputTags.value.trim();
     }
 </script>

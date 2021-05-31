@@ -22,7 +22,7 @@ class PagesController extends BaseController
             $semester = new Semester();
             $subject = new Subject();
             $subjects = [];
-            $selectedSemester = $semester->getOne($_GET['id']);
+            $selectedSemester = $semester->getById($_GET['id']);
             foreach($selectedSemester->subjects as $item) {
                 $sub = $subject->getById($item->_id);
                 array_push($subjects, $sub);
@@ -37,15 +37,17 @@ class PagesController extends BaseController
         if (isset($_GET['id'])) {
             $subject = new Subject();
             $article = new Article();
+            $semester = new Semester();
             if (!isset($_GET['articleId'])) $selectedArticle = $article->all()[0];
             else $selectedArticle = $article->getById($_GET['articleId']);
             $articles = [];
             $selectedSubject = $subject->getById($_GET['id']);
+            $selectedSemester = $semester->getBySubjectId($_GET['id']);
             foreach($selectedSubject->articles as $item) {
                 $a = $article ->getById($item->_id);
                 array_push($articles, $a);
             }
-            $data = array('subject' => $selectedSubject, 'articles' => $articles, 'selectedArticle' => $selectedArticle);
+            $data = array('semester' => $selectedSemester, 'subject' => $selectedSubject, 'articles' => $articles, 'selectedArticle' => $selectedArticle);
             $this->render('subject', $data);
         }
     }

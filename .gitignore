@@ -6,3 +6,4 @@ composer.lock
 .debug
 .vscode
 composer-setup.php
+composer.phar

@@ -4,14 +4,19 @@
     <div class="icon">
         <img id="icon" src="assets/img/logo.png" alt="">
     </div>
+    <?php
+    session_start();
+    if (isset($_SESSION['userId'])) echo "<h3>You are logged in!</h3><div class='hiddenForm'>";
+    else echo "<div>";
+    ?>
     <div class="form-input">
         <h3>
-        <?php
+            <?php
             if (isset($fromRegister) && $fromRegister == true)
                 print 'Registered successfully, now login to ICT Hub';
             else
                 print 'Login to ICT Hub';
-        ?>
+            ?>
         </h3>
         <form method="POST" action="?controller=users&action=postLogin">
             <p>
@@ -24,13 +29,13 @@
             </p>
             <button class="button-login" type="submit">Login</button>
             <?php
-                if (isset($loginSuccess) && $loginSuccess == false) {
-                    if (isset($external) && $external == true) {
-                        print '<div class="invalid-feedback">Account is registered with a third-party application</div>';
-                    } else {
-                        print '<div class="invalid-feedback">You have entered wrong identity or unregistered account</div>';
-                    }
+            if (isset($loginSuccess) && $loginSuccess == false) {
+                if (isset($external) && $external == true) {
+                    print '<div class="invalid-feedback">Account is registered with a third-party application</div>';
+                } else {
+                    print '<div class="invalid-feedback">You have entered wrong identity or unregistered account</div>';
                 }
+            }
             ?>
             <br><br>
             <a href="#" style="float: left; margin-left: 30px">Forgot your password?</a>
@@ -46,10 +51,11 @@
         <button class="inner" id="outlook">Outlook</button>
     </div>
 </div>
+</div>
 <script>
     <?php
-        if (isset($fromRegister) && $fromRegister == true)
-            print 'window.history.pushState({}, null, "?controller=users&action=login");';
+    if (isset($fromRegister) && $fromRegister == true)
+        print 'window.history.pushState({}, null, "?controller=users&action=login");';
     ?>
     window.onload = function() {
         el = document.getElementsByTagName('nav');
@@ -66,44 +72,30 @@
         };
 
         virtualFormSubmit('?controller=users&action=externalLogin', data, 'post');
-
-        // Validate external login on server
-        // xhrPost(
-        //     url = '?controller=users&action=externalLogin',
-        //     data = data,
-        //     success = function (responseTxt) {
-        //         response = JSON.parse(responseTxt);
-        //         window.location.href = '?controller=pages&action=home';
-        //     },
-        //     error = function (status, responseTxt) {
-        //         alert('Authenticate error!');
-        //         window.location.reload();
-        //     }
-        // )
     }
-  
+
     // Login Google
-    function loginGoogle  () {
+    function loginGoogle() {
         if (typeof gapi !== 'undefined') {
             try {
-                gapi.load('auth2', function () {
+                gapi.load('auth2', function() {
                     auth2 = gapi.auth2.init({
                         client_id: '764151411721-2l3pha8qtpb2jt5rm2smkpp2ucpronj2.apps.googleusercontent.com'
                     });
 
                     var loginButton = document.getElementById('gg');
                     auth2.attachClickHandler(loginButton, {},
-                        function (googleUser) {         // on success
+                        function(googleUser) { // on success
                             if (googleUser.getAuthResponse()) {
                                 var access_token = googleUser.getAuthResponse().id_token;
                                 externalLogin(access_token, "Google");
                             }
                         },
-                        function (error) {
+                        function(error) {
                             alert("Sign in Google error!");
                         });
                 });
-               
+
             } catch (err) {
                 console.log(err);
             }
@@ -115,17 +107,20 @@
     // Initial FB
     window.fbAsyncInit = function() {
         FB.init({
-            appId      : '799342317388985',
-            cookie     : true,
-            xfbml      : true,
-            version    : 'v10.0'
-        });        
+            appId: '799342317388985',
+            cookie: true,
+            xfbml: true,
+            version: 'v10.0'
+        });
     };
 
-    (function(d, s, id){
+    (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
         js.src = "https://connect.facebook.net/vi_VN/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));

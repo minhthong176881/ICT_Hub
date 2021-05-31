@@ -10,11 +10,18 @@
                 <h2>Recommended post</h2>
                 <?php
                 echo "<ul>";
-                foreach ($posts as $post) {
-                    echo "<li class='recommend'><a style='font-size: 21px' href='?controller=posts&action=detail&id=".$post->_id."'>" . $post->title . "</a><br/>Author: ".$post->author->username."<br/>Tags: ";
-                    foreach($post->tags as $tag) {
-                        echo $tag->name."/ ";
+                $appeared = [];
+                for ($i = 1; $i <= 5; $i++) {
+                    do {
+                        $index = rand(0, count($posts) - 1);
+                    } while (in_array($index, $appeared));
+                    echo "<li class='recommend'><a style='font-size: 21px' href='?controller=posts&action=detail&id=" . $posts[$index]->_id . "'>" . $posts[$index]->title . "</a><br/>Author: " . $posts[$index]->author->given_name . "<br/>Tags: ";
+                    for ($j = 0; $j < count($posts[$index]->tags); $j++) {
+                        if ($j != count($posts[$index]->tags) - 1)
+                            echo "<a href='?controller=posts&action=tag&tag=" . $posts[$index]->tags[$j]->name . "'>" . $posts[$index]->tags[$j]->name . "</a>| ";
+                        else echo "<a href='?controller=posts&action=tag&tag=" . $posts[$index]->tags[$j]->name . "'>" . $posts[$index]->tags[$j]->name . "</a>";
                     }
+                    array_push($appeared, $index);
                     echo "</li><br/>";
                 }
                 echo "</ul>";
@@ -36,24 +43,28 @@
                 <div id="tags">
                     <?php
                     foreach ($tags as $tag) {
-                        if ($tag->count != 0) {
-                            echo "<div class='tag'><span>" . $tag->name . "</span>";
-                            echo "<span>" . $tag->count . "</span></div>";
-                        }
+                        if ($tag->count != 0) { ?>
+                            <div class='tag' onclick="window.location.href='?controller=posts&action=tag&tag=<?php echo $tag->name ?>'"><span><?php echo $tag->name ?></span>
+                                <span><?php echo $tag->count ?></span>
+                            </div>
+                    <?php }
                     }
                     ?>
                 </div>
                 <br>
                 <div>
-                    <button class="button-login" onclick="createPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>
+                    <?php
+                    session_start();
+                    if (isset($_SESSION['userId']))
+                        echo '<button class="button-login" onclick="createPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
+                    else echo '<button class="button-login" onclick="loginToPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
+                    ?>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        var httpObject = null;
-        var posts = null;
         window.onload = async function() {
             var el = document.getElementsByTagName('header');
             el[0].classList.add('sub-header');
@@ -62,5 +73,9 @@
 
         function createPost() {
             window.location.href = "?controller=posts&action=post";
+        }
+
+        function loginToPost() {
+            window.location.href = "?controller=users&action=login";
         }
     </script>
