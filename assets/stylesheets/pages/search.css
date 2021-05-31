@@ -1,0 +1,57 @@
+.search-header {
+    height: 50vh;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.3)), url('../../img/search.jpg');
+}
+
+.search-content {
+    width: 80%;
+    margin: auto;
+    padding: 30px 50px 10px 50px;
+    display: flex;
+}
+
+.post-section {
+    margin-bottom: 20px;
+}
+
+.tag-section {
+    margin-bottom: 20px;
+}
+
+.subject-section {
+    margin-bottom: 20px;
+}
+
+.article-section {
+    margin-bottom: 20px;
+}
+
+.user-section {
+    margin-bottom: 20px;
+}
+
+.semester-section {
+    margin-bottom: 20px;
+}
+
+.left {
+    width: 25%;
+}
+
+.mid {
+    width: 25%;
+    margin-left: 12%;
+}
+
+.right {
+    width: 25%;
+    margin-left: auto;
+}
+
+.section {
+    padding: 5px;
+    background-color: #16aae9;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}

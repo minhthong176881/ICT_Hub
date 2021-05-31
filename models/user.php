@@ -1,7 +1,8 @@
 <?php
 require_once 'common/utility.php';
 
-class User {
+class User
+{
     private $user;
 
     public function __construct()
@@ -9,7 +10,8 @@ class User {
         $this->user = DB::getInstance()->selectCollection('users');
     }
 
-    public function all() {
+    public function all()
+    {
         $list = [];
         $req = $this->user->find();
         foreach ($req as $item) {
@@ -18,17 +20,20 @@ class User {
         return $list;
     }
 
-    public function getOneAuth($username, $password) { 
+    public function getOneAuth($username, $password)
+    {
         $req = $this->user->findOne(['username' => strtolower($username), 'password' => $password]);
         return $req;
     }
 
-    public function getByUsername($username) { 
+    public function getByUsername($username)
+    {
         $req = $this->user->findOne(['username' => strtolower($username)]);
         return $req;
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
         $req = $this->user->findOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
         return $req;
     }
@@ -44,5 +49,15 @@ class User {
         $this->user->insertOne($account);
 
         return true;
+    }
+
+    public function search($query)
+    {
+        $users = $this->all();
+        $list = [];
+        foreach ($users as $user) {
+            if (str_contains(strtolower($user->username), $query) || strpos(strtolower($user->given_name), $query) || strpos(strtolower($user->family_name), $query)) array_push($list, $user);
+        }
+        return $list;
     }
 }

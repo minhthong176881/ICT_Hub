@@ -31,4 +31,13 @@ class Semester {
         }
         return $selectedSemester;
     }
+
+    public function search($query) {
+        $semesters = $this->all();
+        $list = [];
+        foreach ($semesters as $semester) {
+            if (str_contains(strtolower($semester->name), $query)) array_push($list, $semester);
+        }
+        return $list;
+    }
 }

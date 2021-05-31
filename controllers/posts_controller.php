@@ -62,7 +62,8 @@ class PostsController extends BaseController
                     'title' => $_POST['title'],
                     'tags' => $tagList,
                     'content' => $_POST['content'],
-                    'author' => $author
+                    'author' => $author,
+                    'created_at' => new MongoDB\BSON\UTCDateTime()
                 ];
                 $result = $this->post->insert($post);
                 if ($result > 0) header('Location: index.php?controller=pages&action=blog');

@@ -2,10 +2,10 @@
     if (isset($result)) echo "<p style='color:black'>".$result."</p>";
 ?>
 <form action="?controller=posts&action=save&userId=<?php echo $_SESSION['userId'] ?>" method="POST">
-    <input class="title" type="text" name="title" placeholder="Title">
+    <input class="title" type="text" name="title" placeholder="Title" required>
     <br>
     <div class="dropdown dropdown-tags tag-input">
-        <input type="text" id="inputTags" name="tags" placeholder="Tag your post. Maximum 5 tags. At least 1 tag.">
+        <input type="text" id="inputTags" name="tags" placeholder="Tag your post. Maximum 5 tags. At least 1 tag." required>
         <div class="dropdown-content dropdown-bg" style="margin-left: 5%">
             <?php
             foreach ($tags as $tag) {
@@ -15,7 +15,7 @@
             ?>
         </div>
     </div>
-    <Textarea class="content" rows="50" name="content" placeholder="Your post's content." id="post-content"></Textarea>
+    <Textarea class="content" rows="50" name="content" placeholder="Your post's content." id="post-content" required></Textarea>
     <br>
     <div class="btn-group" style="display: flex; margin-top: 20px;">
         <div style="margin-left: auto; margin-right: 95px">

@@ -1,4 +1,4 @@
-input[type=text], input[type=password], input[type=email], select {
+input[type=text], input[type=password], input[type=email], input[type=search], select {
     width: 90%;
     height: 45px;
     border: 0.1px solid;

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="assets/stylesheets/pages/about.css">
     <link rel="stylesheet" href="assets/stylesheets/pages/semester.css">
     <link rel="stylesheet" href="assets/stylesheets/pages/subject.css">
+    <link rel="stylesheet" href="assets/stylesheets/pages/search.css">
     <link rel="stylesheet" href="assets/stylesheets/components/input.css">
     <link rel="stylesheet" href="assets/stylesheets/components/button.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -32,6 +33,7 @@
             <div class="nav-links" id="navLinks">
                 <i class="fas fa-times" id="close-icon"></i>
                 <ul>
+                    <li><input type="search" id="search" name="search" style="height: 30px; width: 200px" placeholder="Search anything"></li>
                     <li><a href="/">HOME</a></li>
                     <li><a href="?controller=pages&action=course">COURSES</a></li>
                     <li><a href="?controller=pages&action=blog">BLOG</a></li>
@@ -58,3 +60,10 @@
             </div>
             <i class="fas fa-bars" id="menu-icon"></i>
         </nav>
+        <script>
+            var search = document.getElementById('search');
+            search.addEventListener('change', () => {
+                if (search.value.trim() != "")
+                    window.location.href = "?controller=pages&action=search&search=" + search.value;
+            });
+        </script>

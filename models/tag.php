@@ -31,4 +31,13 @@ class Tag {
         $req = $this->tag->updateOne(['_id' => new MongoDB\BSON\ObjectID($id)], ['$set' => ['count' => $inc + $count]]);
         return $req;
     }
+
+    public function search($query) {
+        $tags = $this->all();
+        $list = [];
+        foreach ($tags as $tag) {
+            if (str_contains(strtolower($tag->name), $query)) array_push($list, $tag);
+        }
+        return $list;
+    }
 }

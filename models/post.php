@@ -57,4 +57,13 @@ class Post
         }
         return $list;
     }
+
+    public function search($query) {
+        $posts = $this->all();
+        $list = [];
+        foreach ($posts as $post) {
+            if (str_contains(strtolower($post->title), $query)) array_push($list, $post);
+        }
+        return $list;
+    }
 }

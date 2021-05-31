@@ -12,25 +12,25 @@
                 </li>
                 <li>
                     <a href="#"><span class="fas fa-user"></span>
-                    <span>Customers</span>
+                    <span>Users</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"><span class="fas fa-project-diagram"></span>
-                    <span>Projects</span>
+                    <a href="#"><span class="far fa-books"></span>
+                    <span>Subjects</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"><span class="fab fa-first-order"></span>
-                    <span>Orders</span>
+                    <a href="#"><span class="fal fa-book"></span>
+                    <span>Articles</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"><span class="fas fa-boxes"></span>
-                    <span>Inventory</span>
+                    <a href="#"><span class="fas fa-mail-bulk"></span>
+                    <span>Posts</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#"><span class="fas fa-user-circle"></span>
                     <span>Accounts</span>
                     </a>
@@ -39,7 +39,7 @@
                     <a href="#"><span class="fas fa-tasks"></span>
                     <span>Tasks</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

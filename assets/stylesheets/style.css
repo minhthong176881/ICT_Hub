@@ -143,7 +143,7 @@ header {
 }
 
 h3, h2, h1 {
-  text-align: center;
+  /* text-align: center; */
   font-weight: 600;
   margin: 10px 0px;
 }
@@ -379,6 +379,7 @@ footer h4 {
 .content {
   height: 30%;
   padding: 10px 50px 10px 50px;
+  text-align: center;
 }
 
 .subject {

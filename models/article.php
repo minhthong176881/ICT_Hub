@@ -19,4 +19,13 @@ class Article {
         $article = $this->article->findOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
         return $article;
     }
+
+    public function search($query) {
+        $articles = $this->all();
+        $list = [];
+        foreach ($articles as $article) {
+            if (str_contains(strtolower($article->title), $query)) array_push($list, $article);
+        }
+        return $list;
+    }
 }
