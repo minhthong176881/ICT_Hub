@@ -74,6 +74,9 @@
                         <br>
                         <div>
                             <?php
+                            if (session_status() === PHP_SESSION_NONE) {
+                                session_start();
+                            }
                             if (isset($_SESSION['userId']))
                                 echo '<button class="button-login" onclick="createPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
                             else echo '<button class="button-login" onclick="loginToPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';

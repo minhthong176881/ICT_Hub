@@ -257,10 +257,35 @@ class UsersController extends BaseController
       }
    }
 
-   public function edit() {
-      if (isset($_GET['id'])) {
+   public function edit()
+   {
+      session_start();
+      if (isset($_GET['id']) && $_SESSION['userId'] == $_GET['id']) {
          $profile = $this->user->getById($_GET['id']);
          $this->render('edit_profile', ['user' => $profile]);
-      }
+      } else header('Location: index.php?controller=pages&action=error');
+   }
+
+   public function editInfo()
+   {
+      session_start();
+      if (isset($_GET['id']) && $_GET['id'] == $_SESSION['userId']) {
+         if (isset($_POST['given_name']) && isset($_POST['family_name'])) {
+            $email = isset($_POST['email']) ? $_POST['email'] : "";
+            $class = isset($_POST['class']) ? $_POST['class'] : "";
+            $school_year = isset($_POST['school_year']) ? $_POST['school_year'] : "";
+            $user = [
+               'given_name' => $_POST['given_name'],
+               'family_name' => $_POST['family_name'],
+               'email' => $email,
+               'class' => $class,
+               'school_year' => $school_year
+            ];
+            // var_dump($user);
+            $res = $this->user->update($_GET['id'], $user);
+            if ($res > 0) header('Location: ?controller=users&action=profile&id=' . $_GET['id']);
+            else header('Location: index.php?controller=pages&action=error'); 
+         } else header('Location: index.php?controller=pages&action=error');
+      } else header('Location: index.php?controller=pages&action=error');
    }
 }

@@ -15,10 +15,13 @@ class PostsController extends BaseController
 
     public function post()
     {
-        $tag = new Tag();
-        $tags = $tag->all();
-        $data = array('tags' => $tags);
-        $this->render('post', $data);
+        session_start();
+        if ($_SESSION['logged_in']) {
+            $tag = new Tag();
+            $tags = $tag->all();
+            $data = array('tags' => $tags);
+            $this->render('post', $data);
+        } else header('Location: ?controller=users&action=login');
     }
 
     public function tag()
@@ -32,9 +35,14 @@ class PostsController extends BaseController
     public function detail()
     {
         if (isset($_GET['id'])) {
+            $posts = $this->post->all();
             $selectedPost = $this->post->getById($_GET['id']);
             $listPostFromAuthor = $this->post->getByAuthorId($selectedPost->author->_id);
-            $data = array('post' => $selectedPost, 'listPost' => $listPostFromAuthor);
+            $listPostFromOtherAuthor = [];
+            foreach ($posts as $post) {
+                if ($post->author->_id != $selectedPost->author->_id) array_push($listPostFromOtherAuthor, $post);
+            }
+            $data = array('post' => $selectedPost, 'listPost' => $listPostFromAuthor, 'other' => $listPostFromOtherAuthor);
             $this->render('detail', $data);
         } else header('Location: index.php?controller=pages&action=error');
     }

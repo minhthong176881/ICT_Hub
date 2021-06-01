@@ -85,3 +85,13 @@
     margin-bottom: 10px;
     width: 50%;
 }
+
+.edit-content {
+    width: 80%;
+    margin: auto;
+    padding: 30px 50px 10px 50px;
+}
+
+.edit-content input[type=text] {
+    width: 100%;
+}

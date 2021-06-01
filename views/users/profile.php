@@ -72,8 +72,8 @@
     </div>
     <div class="right-side">
         <div id="summary">
-            <div class="right-items"><span>Posts</span><span><b><?php echo count($user->posts) ?></b></span></div>
-            <div class="right-items"><span>Tags</span><span><b><?php echo count($user->tags) ?></b></span></div>
+            <div class="right-items" onclick="window.location.href='?controller=users&action=profile&id=<?php echo $user->_id ?>'"><span>Posts</span><span><b><?php echo count($user->posts) ?></b></span></div>
+            <div class="right-items" onclick="window.location.href='?controller=users&action=profile&id=<?php echo $user->_id ?>&option=1'"><span>Tags</span><span><b><?php echo count($user->tags) ?></b></span></div>
         </div>
     </div>
 </div>
