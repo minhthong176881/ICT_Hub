@@ -57,3 +57,19 @@
 .red-btn:hover {
     color: white;
 }
+
+.edit-btn {
+    width: 75px;
+    height: 45px;
+    padding: 5px 15px 5px 15px;
+    font-size: 15px;
+    background-color: #1da4dd;
+    border: none;
+    color: white;
+    border-radius: 4px;
+}
+
+.edit-btn:hover {
+    cursor: pointer;
+    background-color: #16aae9;
+}

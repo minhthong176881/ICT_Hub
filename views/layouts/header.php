@@ -38,7 +38,7 @@
             <div class="nav-links" id="navLinks">
                 <i class="fas fa-times" id="close-icon"></i>
                 <ul>
-                    <li><input type="search" id="search" name="search" style="height: 30px; width: 200px" placeholder="Search anything"></li>
+                    <li><input type="search" id="search" name="search" style="height: 30px; width: 200px; margin-right: 12px" placeholder="Search anything"></li>
                     <li><a href="/">HOME</a></li>
                     <li><a href="?controller=pages&action=course">COURSES</a></li>
                     <li><a href="?controller=pages&action=blog">BLOG</a></li>
