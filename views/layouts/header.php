@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/stylesheets/login.css">
     <link rel="stylesheet" href="assets/stylesheets/post.css">
     <link rel="stylesheet" href="assets/stylesheets/common.css">
+    <link rel="stylesheet" href="assets/stylesheets/profile.css">
     <link rel="stylesheet" href="assets/stylesheets/pages/blog.css">
     <link rel="stylesheet" href="assets/stylesheets/pages/contact.css">
     <link rel="stylesheet" href="assets/stylesheets/pages/about.css">
@@ -49,6 +50,7 @@
                             print '<div class="dropdown">';
                             print '<li><a href="#">HI, ' . $_SESSION['given_name'] . '  <span><i class="fal fa-user"></i></span></a></li>';
                             print '<div class="dropdown-content">';
+                            print '<li><a href="?controller=users&action=profile&id=' . $_SESSION['userId'] . '">Profile</a></li><br>';
                             print '<li><a href="?controller=users&action=logout">Logout</a></li>';
                             print '</div>';
                             print '</div>';

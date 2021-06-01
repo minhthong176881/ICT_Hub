@@ -4,7 +4,7 @@
     <div class="left-content">
         <h1><?php echo $post->title; ?></h1>
         <div style="margin-top: 2%; margin-bottom: 2%; display: flex">
-            <div>Author: <?php echo $post->author->given_name ?></div>
+            <div>Author: <?php echo "<a href='?controller=users&action=profile&id=" . $post->author->_id . "'>" . $post->author->given_name . "</a>" ?></div>
             <div style="margin-left: auto">
                 Tags:
                 <?php
@@ -22,14 +22,27 @@
         </div>
     </div>
     <div class="right-content">
-        More from <?php echo $post->author->given_name ?>: <br>
-        <div class="list-post" style="margin-top: 10px">
-            <?php
-            foreach ($listPost as $item) {
-                if ($item->_id != $post->_id)
-                    echo "<a style='margin-bottom: 10px' href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a><br>";
-            }
-            ?>
+        <div>
+            <h3>More from <?php echo $post->author->given_name ?>: </h3>
+            <hr style="width: 95%">
+            <div class="list-post" style="margin-top: 10px">
+                <ul>
+                    <?php
+                    foreach ($listPost as $item) {
+                        if ($item->_id != $post->_id)
+                            echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a></li>";
+                    }
+                    ?>
+                </ul>
+            </div>
+            <hr style="margin-top: 20px; width: 95%">
+        </div>
+        <div style="margin-top: 50px">
+            <h3>From other authors:</h3>
+            <hr style="width: 95%">
+            <div class="list-post">
+
+            </div>
         </div>
     </div>
 </div>

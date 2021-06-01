@@ -1,7 +1,6 @@
 <?php
-
-
 require_once("models/user.php");
+require_once("models/post.php");
 require_once("base_controller.php");
 require_once 'common/constant.php';
 require_once 'common/utility.php';
@@ -17,7 +16,6 @@ class UsersController extends BaseController
    {
       parent::__construct();
       $this->user = new User();
-      
    }
 
    public function postRegister()
@@ -62,8 +60,7 @@ class UsersController extends BaseController
          } else {
             $this->render('login', ['loginSuccess' => false, 'username' => $username]);
          }
-      } 
-      else {
+      } else {
          $this->render('login');
       }
    }
@@ -89,7 +86,7 @@ class UsersController extends BaseController
       unset($_SESSION['given_name']);
       unset($_SESSION['userId']);
    }
- 
+
    public function logout()
    {
       $this->sessionLogout();
@@ -111,7 +108,7 @@ class UsersController extends BaseController
          }
          $options = array(
             'https' => array(
-                'method'  => 'GET'
+               'method'  => 'GET'
             )
          );
          $context  = stream_context_create($options);
@@ -172,7 +169,7 @@ class UsersController extends BaseController
          }
          $options = array(
             'https' => array(
-                'method'  => 'GET'
+               'method'  => 'GET'
             )
          );
          $context  = stream_context_create($options);
@@ -206,7 +203,7 @@ class UsersController extends BaseController
                header('Location: index.php?controller=pages&action=error');
                return;
             }
-            
+
             Utility::debug($accountJson);
             $isSuccess = $this->user->insert($account);
             if ($isSuccess) {
@@ -224,7 +221,43 @@ class UsersController extends BaseController
       $this->render('login');
    }
 
-   public function register() {
+   public function register()
+   {
       $this->render('register');
+   }
+
+   public function profile()
+   {
+      if (isset($_GET['id'])) {
+         $profile = $this->user->getById($_GET['id']);
+         $post = new Post();
+         $posts = $post->getByAuthorId($_GET['id']);
+         $listTag = [];
+         foreach ($posts as $post) {
+            foreach ($post->tags as $tag) {
+               if (!in_array($tag->name, $listTag)) {
+                  array_push($listTag, $tag->name);
+               }
+            }
+            unset($post->author);
+         }
+         $profile = (object) array_merge((array) $profile, array('posts' => $posts, 'tags' => $listTag));
+         if (isset($_GET['option'])) {
+            switch ($_GET['option']) {
+               case '1':
+                  $this->render('profile', ['user' => $profile, 'option' => '1']);
+                  break;
+               case '2':
+                  $this->render('profile', ['user' => $profile, 'option' => '2']);
+                  break;
+               case '3':
+                  $this->render('profile', ['user' => $profile, 'option' => '3']);
+                  break;
+               default:
+                  $this->render('profile', ['user' => $profile, 'option' => '0']);
+                  break;
+            }
+         } else $this->render('profile', ['user' => $profile, 'option' => 0]);
+      }
    }
 }

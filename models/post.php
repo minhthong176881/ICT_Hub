@@ -14,7 +14,9 @@ class Post
     public function all()
     {
         $list = [];
-        $req = $this->post->find();
+        $filter  = [];
+        $options = ['sort' => ['created_at' => -1]];
+        $req = $this->post->find($filter, $options);
         foreach ($req as $item) {
             array_push($list, $item);
         }
@@ -58,7 +60,8 @@ class Post
         return $list;
     }
 
-    public function search($query) {
+    public function search($query)
+    {
         $posts = $this->all();
         $list = [];
         foreach ($posts as $post) {

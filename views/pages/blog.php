@@ -12,7 +12,7 @@
         <div class="row">
             <div class="blog-left">
                 <img src="assets/img/certificate.jpg" alt="">
-                <h2>Recommended post</h2>
+                <h2>Recommended posts</h2>
                 <?php
                 echo "<ul>";
                 $appeared = [];
@@ -27,7 +27,7 @@
                         else echo "<a href='?controller=posts&action=tag&tag=" . $posts[$index]->tags[$j]->name . "'>" . $posts[$index]->tags[$j]->name . "</a>";
                     }
                     array_push($appeared, $index);
-                    echo "</li><br/>";
+                    echo "<hr style='margin-top: 5px'></li><br/>";
                 }
                 echo "</ul>";
                 ?>
@@ -44,25 +44,47 @@
 
             </div>
             <div class="blog-right">
-                <h3>Post Tags</h3>
-                <div id="tags">
-                    <?php
-                    foreach ($tags as $tag) {
-                        if ($tag->count != 0) { ?>
-                            <div class='tag' onclick="window.location.href='?controller=posts&action=tag&tag=<?php echo $tag->name ?>'"><span><?php echo $tag->name ?></span>
-                                <span><?php echo $tag->count ?></span>
-                            </div>
-                    <?php }
-                    }
-                    ?>
-                </div>
-                <br>
                 <div>
-                    <?php
-                    if (isset($_SESSION['userId']))
-                        echo '<button class="button-login" onclick="createPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
-                    else echo '<button class="button-login" onclick="loginToPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
-                    ?>
+                    <h3 style="text-align: center;">Post Tags</h3>
+                    <div id="tags">
+                        <div><span><b>Tags</b></span><span><b>#</b></span></div>
+                        <hr>
+                        <?php
+                        foreach ($tags as $tag) {
+                            if ($tag->count != 0) { ?>
+                                <div class='tag' onclick="window.location.href='?controller=posts&action=tag&tag=<?php echo $tag->name ?>'"><span><?php echo $tag->name ?></span>
+                                    <span><?php echo $tag->count ?></span>
+                                </div>
+                        <?php }
+                        }
+                        ?>
+                        <hr>
+                    </div>
+                </div>
+                <div style="margin-top: 50px">
+                    <h3 style="text-align: center;">Featured Authors</h3>
+                    <div id="authors">
+                        <div><span><b>Name</b></span><span><b>Posts</b></span></div>
+                        <hr>
+                        <?php
+                        foreach ($authors as $author) {
+                            if (count($author->posts) != 0) { ?>
+                                <div class='author' onclick="window.location.href='?controller=posts&action=tag&tag=<?php echo $author->_id ?>'"><span><?php echo $author->family_name . " " . $author->given_name ?></span>
+                                    <span><?php echo count($author->posts) ?></span>
+                                </div>
+                        <?php }
+                        }
+                        ?>
+                        <hr>
+                        <br>
+                        <div>
+                            <?php
+                            if (isset($_SESSION['userId']))
+                                echo '<button class="button-login" onclick="createPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
+                            else echo '<button class="button-login" onclick="loginToPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

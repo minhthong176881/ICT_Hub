@@ -74,9 +74,17 @@ class PagesController extends BaseController
     {
         $post = new Post();
         $tag = new Tag();
+        $user = new User();
         $posts = $post->all();
         $tags = $tag->all();
-        $data = array('posts' => $posts, 'tags' => $tags);
+        $users = $user->all();
+        $listAuthor = [];
+        foreach($users as $u) {
+            $listPost = $post->getByAuthorId($u->_id);
+            $u = (object) array_merge((array) $u, array('posts' => $listPost));
+            array_push($listAuthor, $u);
+        }
+        $data = array('posts' => $posts, 'tags' => $tags, 'authors' => $listAuthor);
         $this->render('blog', $data);
     }
 
