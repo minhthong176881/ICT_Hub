@@ -79,7 +79,7 @@
             if (count($users) == 0) echo "No result!";
             else {
                 foreach ($users as $user) {
-                    echo "<a href='?controller=pages&action=semester&id=" . $user->_id . "'>" . $user->family_name . " " . $user->given_name . "</a><br>";
+                    echo "<a href='?controller=users&action=profile&id=" . $user->_id . "'>" . $user->family_name . " " . $user->given_name . "</a><br>";
                 }
             }
             ?>
