@@ -5,7 +5,6 @@
         <img id="icon" src="assets/img/logo.png" alt="">
     </div>
     <?php
-    session_start();
     if (isset($_SESSION['userId'])) echo "<h3>You are logged in!</h3><div class='hiddenForm'>";
     else echo "<div>";
     ?>
