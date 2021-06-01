@@ -24,7 +24,11 @@
     <script src="assets/js/ckeditor/ckeditor.js"></script>
     <script src="assets/js/common.js"></script>
     <title>ICT Hub</title>
-    <?php session_start(); ?>
+    <?php 
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    ?>
 </head>
 
 <body>

@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 if (isset($result)) {
     if ($result == 0)
         echo "<p style='color:red'>Cannot create post. Try again!</p>";
