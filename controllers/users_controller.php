@@ -67,7 +67,9 @@ class UsersController extends BaseController
 
    private function sessionLogin($account)
    {
-      session_start();
+      if (session_status() === PHP_SESSION_NONE) {
+         session_start();
+      }
       $_SESSION['logged_in'] = true;
       $_SESSION['username'] = $account['username'];
       $_SESSION['given_name'] = $account['given_name'];
@@ -76,7 +78,9 @@ class UsersController extends BaseController
 
    private function sessionLogout()
    {
-      session_start();
+      if (session_status() === PHP_SESSION_NONE) {
+         session_start();
+      }
       unset($_SESSION['logged_in']);
       unset($_SESSION['username']);
       unset($_SESSION['given_name']);

@@ -1,3 +1,8 @@
+<?php 
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
 </header>
 <script src="https://apis.google.com/js/client:platform.js"></script>
 <div class="container">

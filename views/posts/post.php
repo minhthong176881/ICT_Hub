@@ -1,8 +1,11 @@
-<?php
-if (isset($result)) {
-    if ($result == 0)
-        echo "<p style='color:red'>Cannot create post. Try again!</p>";
-}
+
+<?php 
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
+<?php 
+    if (isset($result)) echo "<p style='color:black'>".$result."</p>";
 ?>
 <form action="?controller=posts&action=save&userId=<?php echo $_SESSION['userId'] ?>" method="POST">
     <input class="title" type="text" name="title" placeholder="Title" required>

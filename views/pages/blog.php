@@ -1,3 +1,8 @@
+    <?php 
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    ?>
     <h1>Maybe you miss this knowledge...</h1><br>
     <h3><span><i class="fas fa-horizontal-rule"></i></span><span><i class="fas fa-horizontal-rule"></i></span> Sharing is caring <span><i class="fas fa-horizontal-rule"></i></span><span><i class="fas fa-horizontal-rule"></i></span></h3>
     </header>
