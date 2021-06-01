@@ -24,9 +24,9 @@
     <script src="assets/js/common.js"></script>
     <title>ICT Hub</title>
     <?php 
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
     ?>
 </head>
 
