@@ -256,4 +256,11 @@ class UsersController extends BaseController
          } else $this->render('profile', ['user' => $profile, 'option' => 0]);
       }
    }
+
+   public function edit() {
+      if (isset($_GET['id'])) {
+         $profile = $this->user->getById($_GET['id']);
+         $this->render('edit_profile', ['user' => $profile]);
+      }
+   }
 }
