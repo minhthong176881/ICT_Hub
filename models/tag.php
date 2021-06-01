@@ -26,9 +26,9 @@ class Tag {
         return $req;
     }
 
-    public function update($id, $count) {
-        $inc = $this->getById($id)->count;
-        $req = $this->tag->updateOne(['_id' => new MongoDB\BSON\ObjectID($id)], ['$set' => ['count' => $inc + $count]]);
+    public function update($id, $inc) {
+        $count = $this->getById($id)->count;
+        $req = $this->tag->updateOne(['_id' => new MongoDB\BSON\ObjectID($id)], ['$set' => ['count' => $count + $inc]]);
         return $req;
     }
 
