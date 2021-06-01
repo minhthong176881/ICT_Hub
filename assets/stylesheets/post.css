@@ -34,6 +34,10 @@
     margin-top: 2%
 }
 
+.right-content a {
+    font-size: 18px;
+}
+
 .left-content {
     width: 70%;
     border-right: 0.1px black solid;
