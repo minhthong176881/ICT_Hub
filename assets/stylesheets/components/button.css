@@ -20,6 +20,22 @@
     border-radius: 4px;
 }
 
+.button-delete {
+    width: 86%;
+    height: 45px;
+    padding: 5px 15px 5px 15px;
+    font-size: 15px;
+    background-color: #ee5253;
+    border: none;
+    color: white;
+    border-radius: 4px;
+}
+
+.button-delete:hover {
+    cursor: pointer;
+    background-color: #ff6b6b;
+}
+
 .button-login:hover {
     cursor: pointer;
     background-color: #16aae9;

@@ -1,16 +1,8 @@
-<div style="display: flex; margin-left: 6%">
-    <div style="width: 25%">
-        <h1 style="text-align: left;">Profile <span><i class='fad fa-chevron-double-right'></i></span>
-            <?php
-            echo $user->family_name . " " . $user->given_name ?></h1>
-        <h4 style="text-align: left; margin-left: 37%"><?php echo $user->username ?></h4>
-    </div>
+<h1 style="text-align: left; margin-left: 6%">Profile <span><i class='fad fa-chevron-double-right'></i></span>
     <?php
     session_start();
-    if ($user->_id == $_SESSION['userId']) { ?>
-        <div style="margin-top: 6%"><button class="edit-btn" onclick="window.location.href='?controller=users&action=edit&id=<?php echo $_SESSION['userId'];?>'">Edit</button></div> <?php
-    }?>
-</div>
+    echo $user->family_name . " " . $user->given_name ?></h1>
+<h4 style="text-align: left; margin-left: 15%"><?php echo $user->username ?></h4>
 </header>
 <div class="profile-content">
     <div class="user-posts">
@@ -27,7 +19,12 @@
             if ($option == 0) {
                 echo "<ul>";
                 foreach ($user->posts as $post) {
-                    echo "<li class='user-post'><a style='font-size: 21px' href='?controller=posts&action=detail&id=" . $post->_id . "'>" . $post->title . "</a><br/>Author: " . $user->given_name . "<br/>Tags: ";
+                    echo "<li class='user-post'><a style='font-size: 21px' href='?controller=posts&action=detail&id=" . $post->_id . "'>" . $post->title . "</a>";
+                    if ($user->_id == $_SESSION['userId']) {
+            ?>
+                        <button onclick="window.location.href='?controller=posts&action=edit&id=<?php echo $post->_id ?>'">Edit</button>
+                    <?php }
+                    echo "<br/>Author: " . $user->given_name . "<br/>Tags: ";
                     for ($j = 0; $j < count($post->tags); $j++) {
                         if ($j != count($post->tags) - 1)
                             echo "<a href='?controller=posts&action=tag&tag=" . $post->tags[$j]->name . "'>" . $post->tags[$j]->name . "</a>| ";
@@ -55,6 +52,10 @@
                 if (isset($user->school_year))
                     echo "<div class='infor'>School year: " . $user->school_year . "</div>";
                 else echo "<div class='infor'>School year: Not provided.</div>";
+                if ($user->_id == $_SESSION['userId']) { ?>
+                    <div style="margin-top: 20px"><button class="edit-btn" onclick="window.location.href='?controller=users&action=edit&id=<?php echo $_SESSION['userId']; ?>'">Edit</button></div>
+                <?php
+                }
             }
             if ($option == 3) { ?>
                 <div class="contact-col">

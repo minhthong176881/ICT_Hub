@@ -49,7 +49,8 @@ class PostsController extends BaseController
 
     public function save()
     {
-        if (isset($_GET['userId']) && !empty($_GET['userId'])) {
+        session_start();
+        if (isset($_GET['userId']) && $_GET['userId'] == $_SESSION['userId']) {
             $user = new User();
             $tag = new Tag();
             $tagList = [];
@@ -62,7 +63,7 @@ class PostsController extends BaseController
                 $tags = explode(" ", $_POST['tags']);
                 foreach ($tags as $t) {
                     $item = $tag->getByName($t);
-                    $tag->update($item->_id, 1);
+                    $tag->update($item->_id, $item->count + 1);
                     unset($item->count);
                     array_push($tagList, $item);
                 }
@@ -77,6 +78,91 @@ class PostsController extends BaseController
                 if ($result > 0) header('Location: index.php?controller=pages&action=blog');
                 else $this->render('post', ['result' => $result]);
             } else $this->render('post', ['result' => 0]);
+        }
+    }
+
+    public function edit()
+    {
+        session_start();
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $currentPost = $this->post->getById($_GET['id']);
+            $tag = new Tag();
+            $tags = $tag->all();
+            if ($currentPost->author->_id == $_SESSION['userId']) {
+                $this->render('edit', ['post' => $currentPost, 'tags' => $tags]);
+            }
+        }
+    }
+
+    public function postEdit()
+    {
+        session_start();
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $currentPost = $this->post->getById($_GET['id']);
+            if ($currentPost->author->_id == $_SESSION['userId']) {
+                if (isset($_POST['title']) && isset($_POST['tags']) && isset($_POST['content'])) {
+                    $tag = new Tag();
+                    $tags = explode(" ", $_POST['tags']);
+                    $tagList = [];
+                    $currentTags = [];
+                    foreach ($currentPost->tags as $t) {
+                        array_push($currentTags, $t->name);
+                    }
+                    foreach ($tags as $tg) {
+                        $item = $tag->getByName($tg);
+                        if (!empty($item)) {
+                            unset($item->count);
+                            array_push($tagList, $item);
+                        }
+                    }
+                    $post = [
+                        'title' => $_POST['title'],
+                        'tags' => $tagList,
+                        'content' => $_POST['content'],
+                        'updated_at' => new MongoDB\BSON\UTCDateTime()
+                    ];
+                    $res = $this->post->update($currentPost->_id, $post);
+                    if ($res > 0) {
+                        foreach ($tags as $tg) {
+                            $item = $tag->getByName($tg);
+                            if (!empty($item)) {
+                                if (!in_array($tg, $currentTags)) $tag->update($item->_id, $item->count + 1);
+                            }
+                        }
+                        foreach ($currentTags as $ct) {
+                            $i = $tag->getByName($ct);
+                            if (!empty($i)) {
+                                if (!in_array($ct, $tagList)) $tag->update($i->_id, $i->count - 1);
+                            }
+                        }
+                        header('Location: index.php?controller=users&action=profile&id=' . $currentPost->author->_id);
+                    } else header('Location: ?controller=pages&action=error');
+                }
+            }
+        }
+    }
+
+    public function delete()
+    {
+        session_start();
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $currentPost = $this->post->getById($_GET['id']);
+            if ($currentPost->author->_id == $_SESSION['userId']) {
+                $tag = new Tag();
+                $tagList = [];
+                $currentAuthor = $currentPost->author->_id;
+                foreach ($currentPost->tags as $t) {
+                    $item = $tag->getById($t->_id);
+                    array_push($tagList, $item);
+                }
+                $res = $this->post->delete($currentPost->_id);
+                if ($res > 0) {
+                    foreach ($tagList as $tl) {
+                        $tag->update($tl->_id, $tl->count - 1);
+                    }
+                    header('Location: ?controller=users&action=profile&id=' . $currentAuthor);
+                }
+            }
         }
     }
 }

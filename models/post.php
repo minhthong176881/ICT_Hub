@@ -69,4 +69,17 @@ class Post
         }
         return $list;
     }
+
+    public function update($id, $post) {
+        $req = $this->post->updateOne(
+            ['_id' => new MongoDB\BSON\ObjectID($id)],
+            ['$set' => $post]
+        );
+        return $req;
+    }
+
+    public function delete($id) {
+        $req = $this->post->deleteOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
+        return $req->getDeletedCount();
+    }
 }
