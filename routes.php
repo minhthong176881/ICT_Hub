@@ -1,7 +1,7 @@
 <?php
 namespace ICT_Hub;
 $controllers = array(
-    'pages' => ['home', 'contact', 'blog', 'about', 'course', 'semester', 'subject', 'search', 'error'],
+    'pages' => ['home', 'contact', 'blog', 'about', 'course', 'semester', 'subject', 'search', 'liveSearch', 'error'],
     'users' => ['login', 'postLogin', 'all', 'register', 'postRegister', 'logout', 'externalLogin', 'externalRegister', 'profile', 'edit', 'editInfo'],
     'posts' => ['post', 'detail', 'save', 'tag'],
     'admin' => ['index']

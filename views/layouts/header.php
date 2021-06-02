@@ -24,10 +24,10 @@
     <script src="assets/js/ckeditor/ckeditor.js"></script>
     <script src="assets/js/common.js"></script>
     <title>ICT Hub</title>
-    <?php 
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+    <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     ?>
 </head>
 
@@ -66,10 +66,35 @@
             </div>
             <i class="fas fa-bars" id="menu-icon"></i>
         </nav>
+        <div id="livesearch"></div>
         <script>
             var search = document.getElementById('search');
-            search.addEventListener('change', () => {
-                if (search.value.trim() != "")
-                    window.location.href = "?controller=pages&action=search&search=" + search.value;
+            var results = document.getElementById("livesearch");
+            search.addEventListener('keyup', (e) => {
+                if (e.keyCode == 13) {
+                    event.preventDefault();
+                    if (search.value.trim() != "")
+                        window.location.href = "?controller=pages&action=search&search=" + search.value;
+                } else if (e.keyCode == 27) {
+                    results.innerHTML = "";
+                    if (results.classList.contains('search-results')) results.classList.remove('search-results');
+                    
+                } else {
+                    if (search.value.trim() == "") {
+                        results.innerHTML = "";
+                        if (results.classList.contains('search-results')) results.classList.remove('search-results');
+                        return;
+                    }
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            results.innerHTML = this.responseText;
+                            if (!results.classList.contains('search-results'))
+                            results.classList.add('search-results');
+                        }
+                    }
+                    xmlhttp.open("GET", "?controller=pages&action=liveSearch&search=" + search.value, true);
+                    xmlhttp.send();
+                }
             });
         </script>
