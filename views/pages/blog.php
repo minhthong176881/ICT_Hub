@@ -32,16 +32,6 @@
                 echo "</ul>";
                 ?>
 
-                <div class="comment-box">
-                    <h3>Leave a comment</h3>
-                    <form action="submit" class="comment-form">
-                        <input type="text" style="width: 100%; border:none" name="" id="" placeholder="Enter Name">
-                        <input type="email" style="width: 100%; border:none" placeholder="Enter email">
-                        <textarea rows="5" placeholder="Your comment"></textarea>
-                        <button class="hero-btn red-btn">POST COMMENT</button>
-                    </form>
-                </div>
-
             </div>
             <div class="blog-right">
                 <div>

@@ -3,6 +3,11 @@ require_once('controllers/base_controller.php');
 require_once('models/post.php');
 require_once('models/user.php');
 require_once('models/tag.php');
+require_once('models/comment.php');
+require_once('common/utility.php');
+
+use Model\Comment;
+use Common\Utility;
 
 class PostsController extends BaseController
 {
@@ -70,5 +75,32 @@ class PostsController extends BaseController
                 else $this->render('post', ['result' => $result]);
             } else $this->render('post', ['result' => 0]);
         }
+    }
+
+    public function postComment()
+    {
+        if (isset($_POST['post_id']) && !empty($_POST['content'])) {
+            if (isset($_POST['user_id'])) {
+                $postId = $_POST['post_id'];
+                $userId = $_POST['user_id'];
+                $content = $_POST['content'];
+                $commentContent = [
+                    'user_id' => $userId,
+                    'content' => $content,
+                    'created_at' => new MongoDB\BSON\UTCDateTime()
+                ];
+                Utility::debug($commentContent);
+                $comment = new Comment();
+                $comment->push($postId, $commentContent);
+
+                return http_response_code(200);
+            } else {
+                return http_response_code(401);
+            }
+        } else {
+            return http_response_code(400);
+        }
+        
+        
     }
 }

@@ -1,3 +1,8 @@
+<?php 
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
 <h1 style="text-align: left; margin-left: 6%">Blog</h1><br>
 </header>
 <div class="post-content" style="display: flex">
@@ -46,10 +51,36 @@
         </div>
     </div>
 </div>
+<div class="comment-box">
+    <h3>Leave a comment</h3>
+    <form action="submit" class="comment-form" name="comment">
+        <input type="hidden" name="user_id" value="<?php echo $_SESSION['userId'] ?? ''; ?>">
+        <input type="hidden" name="post_id" value="<?php echo $post['_id'] ?? ''; ?>">
+        <textarea rows="3" placeholder="Your comment" name="content"></textarea>
+        <button class="hero-btn red-btn">POST COMMENT</button>
+    </form>
+</div>
 <script>
     window.onload = function() {
         var el = document.getElementsByTagName('header');
         el[0].classList.add('sub-header');
         el[0].classList.add('post-header');
+    }
+
+    window.comment.onsubmit = function (e) {
+        e.preventDefault();
+        data = {
+            'user_id': document.comment.user_id.value,
+            'post_id': document.comment.post_id.value,
+            'content': document.comment.content.value
+        };
+
+        xhrPost({
+            url: 'index.php?controller=posts&action=postComment',
+            data: data,
+            success: function (txtResponse) {
+                alert("OK" + txtResponse);
+            }
+        })
     }
 </script>
