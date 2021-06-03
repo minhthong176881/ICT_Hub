@@ -145,6 +145,11 @@
                 
                 commentLst.innerHTML = commentHtml + commentLst.innerHTML;
                 window.comment.reset();
+            },
+            error: function (statusCode, txtResponse) {
+                if (statusCode == '401') {
+                    alert("You should login before commenting to this post!");
+                }
             }
         })
     }
