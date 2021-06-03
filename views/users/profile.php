@@ -59,11 +59,11 @@
             }
             if ($option == 3) { ?>
                 <div class="contact-col">
-                    <form action="submit">
-                        <input type="text" style="width: 100%;" placeholder="Enter your name" required>
-                        <input type="email" name="" style="width: 100%;" id="" placeholder="Email">
-                        <input type="text" name="" id="" style="width: 100%;" placeholder="Your subject">
-                        <textarea rows="8" placeholder="Message" style="width: 100%;" required></textarea>
+                    <form action="javascript:sendMail();" method="POST">
+                        <input type="text" style="width: 100%;" id="name" placeholder="Enter your name" required>
+                        <input type="email" name="" style="width: 100%;" id="email" placeholder="Email">
+                        <input type="text" name="" style="width: 100%;" id="subject" placeholder="Your subject">
+                        <textarea rows="8" placeholder="Message" style="width: 100%;" id="message" required></textarea>
                         <button type="submit" class="hero-btn red-btn">Send message</button>
                     </form>
                 </div>
@@ -83,5 +83,15 @@
         var el = document.getElementsByTagName('header');
         el[0].classList.add('sub-header');
         el[0].classList.add('profile-header');
+    }
+
+    function sendMail() {
+        var subject = document.getElementById('subject').value;
+        var body = document.getElementById('message').value;
+        <?php if (!empty($user->email)) { ?>
+            window.open('mailto:<?php echo $user->email ?>?subject=' + subject + '&body=' + body);
+        <?php } else {
+            echo "console.log('User has no email.');";
+        } ?>
     }
 </script>
