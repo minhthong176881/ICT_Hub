@@ -75,7 +75,7 @@ class Post
             ['_id' => new MongoDB\BSON\ObjectID($id)],
             ['$set' => $post]
         );
-        return $req;
+        return $req->getModifiedCount();
     }
 
     public function delete($id) {

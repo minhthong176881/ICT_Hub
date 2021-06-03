@@ -1,14 +1,10 @@
-
-<?php 
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
-<?php 
-    if (isset($result)) echo "<p style='color:black'>".$result."</p>";
-?>
-<form action="?controller=posts&action=save&userId=<?php echo $_SESSION['userId'] ?>" method="POST">
-    <input class="title" type="text" name="title" placeholder="Title" required>
+<form action="javascript:submit();" method="POST">
+    <input class="title" type="text" name="title" placeholder="Title" id="title" required>
     <br>
     <div class="dropdown dropdown-tags tag-input">
         <input type="text" id="inputTags" name="tags" placeholder="Tag your post. Maximum 5 tags. At least 1 tag." required>
@@ -21,7 +17,7 @@
             ?>
         </div>
     </div>
-    <Textarea class="content" rows="50" name="content" placeholder="Your post's content." id="post-content" required></Textarea>
+    <Textarea class="content" rows="50" name="content" placeholder="Your post's content." id="content" required></Textarea>
     <br>
     <div class="btn-group" style="display: flex; margin-top: 20px;">
         <div style="margin-left: auto; margin-right: 95px">
@@ -35,7 +31,7 @@
     window.onload = function() {
         el = document.getElementsByTagName('nav');
         el[0].classList.add('navbar');
-        CKEDITOR.replace('post-content');
+        CKEDITOR.replace('content');
     }
 
     function cancel() {
@@ -56,5 +52,23 @@
             }
         }
         inputTags.value = inputTags.value.trim();
+    }
+
+    function submit() {
+        var formData = new FormData();
+        formData.append("title", document.getElementById('title').value);
+        formData.append("tags", document.getElementById('inputTags').value);
+        formData.append("content", CKEDITOR.instances.content.getData());
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (parseInt(this.responseText) > 0) {
+                    alert('Create post successfully!');
+                    window.location.href = '?controller=pages&action=blog';
+                } else alert('Fail to create post. Some errors occured!');
+            }
+        }
+        xmlhttp.open("POST", "?controller=posts&action=save&userId=<?php echo $_SESSION['userId'] ?>");
+        xmlhttp.send(formData);
     }
 </script>

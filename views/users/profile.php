@@ -20,7 +20,7 @@
                 echo "<ul>";
                 foreach ($user->posts as $post) {
                     echo "<li class='user-post'><a style='font-size: 21px' href='?controller=posts&action=detail&id=" . $post->_id . "'>" . $post->title . "</a>";
-                    if ($user->_id == $_SESSION['userId']) {
+                    if (isset($_SESSION['userId']) && $user->_id == $_SESSION['userId']) {
             ?>
                         <button onclick="window.location.href='?controller=posts&action=edit&id=<?php echo $post->_id ?>'">Edit</button>
                     <?php }
@@ -52,7 +52,7 @@
                 if (isset($user->school_year))
                     echo "<div class='infor'>School year: " . $user->school_year . "</div>";
                 else echo "<div class='infor'>School year: Not provided.</div>";
-                if ($user->_id == $_SESSION['userId']) { ?>
+                if (isset($_SESSION['userId']) && $user->_id == $_SESSION['userId']) { ?>
                     <div style="margin-top: 20px"><button class="edit-btn" onclick="window.location.href='?controller=users&action=edit&id=<?php echo $_SESSION['userId']; ?>'">Edit</button></div>
                 <?php
                 }

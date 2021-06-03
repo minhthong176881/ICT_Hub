@@ -75,9 +75,8 @@ class PostsController extends BaseController
                     'created_at' => new MongoDB\BSON\UTCDateTime()
                 ];
                 $result = $this->post->insert($post);
-                if ($result > 0) header('Location: index.php?controller=pages&action=blog');
-                else $this->render('post', ['result' => $result]);
-            } else $this->render('post', ['result' => 0]);
+                echo $result;
+            }
         }
     }
 
@@ -135,8 +134,8 @@ class PostsController extends BaseController
                                 if (!in_array($ct, $tagList)) $tag->update($i->_id, $i->count - 1);
                             }
                         }
-                        header('Location: index.php?controller=users&action=profile&id=' . $currentPost->author->_id);
-                    } else header('Location: ?controller=pages&action=error');
+                        echo $res;
+                    } echo $res;
                 }
             }
         }
@@ -160,8 +159,9 @@ class PostsController extends BaseController
                     foreach ($tagList as $tl) {
                         $tag->update($tl->_id, $tl->count - 1);
                     }
-                    header('Location: ?controller=users&action=profile&id=' . $currentAuthor);
-                }
+                    // header('Location: ?controller=users&action=profile&id=' . $currentAuthor);
+                    echo $res;
+                } else echo $res;
             }
         }
     }
