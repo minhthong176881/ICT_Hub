@@ -80,17 +80,17 @@
         $comment = $post['comments'][$i];
         $avatar = $comment['avatar'] ?? 'https://i.pinimg.com/564x/85/8f/29/858f29fb77a5882831df52bf5de55d13.jpg';
         $name = $comment['given_name'];
-        $profileUrl = !empty($comment['user_id']->__toString()) ? 'index.php?controller=users&action=profile&id='.$comment['user_id']->__toString() : '#';
+        $profileUrl = !empty($comment['user_id']->__toString()) ? '?controller=users&action=profile&id='.$comment['user_id']->__toString() : '#';
         $content = $comment['content'];
         $timestamp = Utility::gmdateToLocalDate($comment['created_at']->toDateTime());
         echo <<<EOD
         <div class="comment-item">
             <div class="comment-left">
-                <div class="avatar-container"><a href="{$profileUrl}" target="_blank"><img class="comment-avatar" height="40" src="{$avatar}" width="40"></a></div>
+                <div class="avatar-container"><a href="{$profileUrl}"><img class="comment-avatar" height="40" src="{$avatar}" width="40"></a></div>
             </div>
             <div class="comment-right">
                 <div class="comment-header">
-                    <div class="author"><a href="{$profileUrl}" target="_blank">{$name}</a></div>
+                    <div style="font-weight: 600"><a href="{$profileUrl}">{$name}</a></div>
                     <div class="comment-time"><span class="comment-timestamp">{$timestamp}</span></div>
                 </div>
                 <div class="comment-body"><span class="comment-text">{$content}</span></div>

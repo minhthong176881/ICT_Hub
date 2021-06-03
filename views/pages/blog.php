@@ -1,7 +1,7 @@
-    <?php 
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+    <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     ?>
     <h1>Maybe you miss this knowledge...</h1><br>
     <h3><span><i class="fas fa-horizontal-rule"></i></span><span><i class="fas fa-horizontal-rule"></i></span> Sharing is caring <span><i class="fas fa-horizontal-rule"></i></span><span><i class="fas fa-horizontal-rule"></i></span></h3>
@@ -20,7 +20,8 @@
                     do {
                         $index = rand(0, count($posts) - 1);
                     } while (in_array($index, $appeared));
-                    echo "<li class='recommend'><a style='font-size: 21px' href='?controller=posts&action=detail&id=" . $posts[$index]->_id . "'>" . $posts[$index]->title . "</a><br/>Author: " . $posts[$index]->author->given_name . "<br/>Tags: ";
+                    echo "<li class='recommend'><a style='font-size: 21px' href='?controller=posts&action=detail&id=" . $posts[$index]->_id . "'>" . $posts[$index]->title . "</a>";
+                    echo "<br/>Author: <a href='?controller=users&action=profile&id=" . $posts[$index]->author->_id . "'>" . $posts[$index]->author->given_name . "</a><br/>Tags: ";
                     for ($j = 0; $j < count($posts[$index]->tags); $j++) {
                         if ($j != count($posts[$index]->tags) - 1)
                             echo "<a href='?controller=posts&action=tag&tag=" . $posts[$index]->tags[$j]->name . "'>" . $posts[$index]->tags[$j]->name . "</a>| ";
