@@ -82,9 +82,14 @@
     function loginGoogle() {
         if (typeof gapi !== 'undefined') {
             try {
+                var url = window.location.href;
+                var clientId = "";
+                if (url.includes('heroku')) {
+                    clientId = '562214550304-cmb55smmn2sm9h9hrt0qnq83g36a1r9b.apps.googleusercontent.com';
+                } else clientId = '764151411721-2l3pha8qtpb2jt5rm2smkpp2ucpronj2.apps.googleusercontent.com'
                 gapi.load('auth2', function() {
                     auth2 = gapi.auth2.init({
-                        client_id: '764151411721-2l3pha8qtpb2jt5rm2smkpp2ucpronj2.apps.googleusercontent.com'
+                        client_id: clientId
                     });
 
                     var loginButton = document.getElementById('gg');
