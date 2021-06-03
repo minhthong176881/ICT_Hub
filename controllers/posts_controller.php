@@ -39,7 +39,12 @@ class PostsController extends BaseController
         if (isset($_GET['id'])) {
             $selectedPost = $this->post->getById($_GET['id']);
             $listPostFromAuthor = $this->post->getByAuthorId($selectedPost->author->_id);
-            $data = array('post' => $selectedPost, 'listPost' => $listPostFromAuthor);
+            $allPost = $this->post->all();
+            $listPostFromOther = [];
+            foreach ($allPost as $post) {
+                if ($post->author->_id != $selectedPost->author->_id) array_push($listPostFromOther, $post);
+            }
+            $data = array('post' => $selectedPost, 'listPost' => $listPostFromAuthor, 'other' => $listPostFromOther);
             $this->render('detail', $data);
         } else header('Location: index.php?controller=pages&action=error');
     }
