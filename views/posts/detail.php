@@ -28,26 +28,34 @@
         </div>
     </div>
     <div class="right-content">
-        <div>
-            <h3>More from <?php echo $post->author->given_name ?>: </h3>
-            <hr style="width: 95%">
-            <div class="list-post" style="margin-top: 10px">
-                <ul>
-                    <?php
-                    foreach ($listPost as $item) {
-                        if ($item->_id != $post->_id)
-                            echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a></li>";
-                    }
-                    ?>
-                </ul>
+        <?php if (count($listPost) >= 2) { ?>
+            <div style="margin-bottom: 50px">
+                <h3>More from <?php echo $post->author->given_name ?>: </h3>
+                <hr style="width: 95%">
+                <div class="list-post" style="margin-top: 10px">
+                    <ul>
+                        <?php
+                        foreach ($listPost as $item) {
+                            if ($item->_id != $post->_id)
+                                echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a></li>";
+                        }
+                        ?>
+                    </ul>
+                </div>
+                <hr style="margin-top: 20px; width: 95%">
             </div>
-            <hr style="margin-top: 20px; width: 95%">
-        </div>
-        <div style="margin-top: 50px">
+        <?php } ?>
+        <div>
             <h3>From other authors:</h3>
             <hr style="width: 95%">
             <div class="list-post">
-
+                <ul>
+                    <?php
+                    foreach ($other as $item) {
+                        echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a> - <a href='?controller=users&action=profile&id=" . $item->author->_id . "'>" . $item->author->given_name . "</a></li>";
+                    }
+                    ?>
+                </ul>
             </div>
         </div>
     </div>

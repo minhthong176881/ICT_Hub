@@ -33,11 +33,11 @@
             </div>
         </div>
         <div class="contact-col">
-            <form action="submit">
-                <input type="text" placeholder="Enter your name" required>
-                <input type="email" name="" id="" placeholder="Email">
-                <input type="text" name="" id="" placeholder="Your subject">
-                <textarea rows="8" placeholder="Message" required></textarea>
+            <form action="javascript:sendMail();" method="POST">
+                <input type="text" placeholder="Enter your name" id="name" required>
+                <input type="email" name="" id="email" placeholder="Email">
+                <input type="text" name="" id="subject" placeholder="Your subject">
+                <textarea rows="8" placeholder="Message" id="message" required></textarea>
                 <button type="submit" class="hero-btn red-btn">Send message</button>
             </form>
         </div>
@@ -49,5 +49,11 @@
         var el =document.getElementsByTagName('header');
         el[0].classList.add('sub-header');
         el[0].classList.add('contact-header');
+    }
+
+    function sendMail() {
+        var subject = document.getElementById('subject').value;
+        var body = document.getElementById('message').value;
+        window.open('mailto:dominhthong99@gmail.com?subject=' + subject + '&body=' + body);
     }
 </script>

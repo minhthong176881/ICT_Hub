@@ -59,7 +59,7 @@
                         <?php
                         foreach ($authors as $author) {
                             if (count($author->posts) != 0) { ?>
-                                <div class='author' onclick="window.location.href='?controller=posts&action=tag&tag=<?php echo $author->_id ?>'"><span><?php echo $author->family_name . " " . $author->given_name ?></span>
+                                <div class='author' onclick="window.location.href='?controller=users&action=profile&id=<?php echo $author->_id ?>'"><span><?php echo $author->family_name . " " . $author->given_name ?></span>
                                     <span><?php echo count($author->posts) ?></span>
                                 </div>
                         <?php }
@@ -69,6 +69,9 @@
                         <br>
                         <div>
                             <?php
+                            if (session_status() === PHP_SESSION_NONE) {
+                                session_start();
+                            }
                             if (isset($_SESSION['userId']))
                                 echo '<button class="button-login" onclick="createPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
                             else echo '<button class="button-login" onclick="loginToPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';

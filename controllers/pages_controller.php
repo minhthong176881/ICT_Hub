@@ -79,7 +79,7 @@ class PagesController extends BaseController
         $tags = $tag->all();
         $users = $user->all();
         $listAuthor = [];
-        foreach($users as $u) {
+        foreach ($users as $u) {
             $listPost = $post->getByAuthorId($u->_id);
             $u = (object) array_merge((array) $u, array('posts' => $listPost));
             array_push($listAuthor, $u);
@@ -118,6 +118,68 @@ class PagesController extends BaseController
             $semester = new Semester();
             $semesters = $semester->search($query);
             $this->render('search', ['posts' => $posts, 'tags' => $tags, 'users' => $users, 'subjects' => $subjects, 'articles' => $articles, 'semesters' => $semesters, 'query' => $_GET['search']]);
+        }
+    }
+
+    public function liveSearch()
+    {
+        if (isset($_GET['search'])) {
+            $query = strtolower($_GET['search']);
+            $post = new Post();
+            $posts = $post->search($query);
+            $tag = new Tag();
+            $tags = $tag->search($query);
+            $user = new User();
+            $users = $user->search($query);
+            $subject = new Subject();
+            $subjects = $subject->search($query);
+            $article = new Article();
+            $articles = $article->search($query);
+            $semester = new Semester();
+            $semesters = $semester->search($query);
+            $hint = "";
+            if (count($posts) > 0) {
+                $hint .= "<div style='background-color: #1da4dd; color: white; text-align: center'>Posts: </div>";
+                foreach ($posts as $p) {
+                    $hint .= "<a href='?controller=posts&action=detail&id=" . $p->_id . "'>" . $p->title . "</a><br>";
+                }
+            }
+            if (count($tags) > 0) {
+                $hint .= "<br><div style='background-color: #1da4dd; color: white; text-align: center'>Tags: </div>";
+                foreach ($tags as $t) {
+                    $hint .= "<a href='?controller=posts&action=tag&tag=" . $t->name . "'>" . $t->name . "</a><br>";
+                }
+            }
+            if (count($users) > 0) {
+                $hint .= "<br><div style='background-color: #1da4dd; color: white; text-align: center'>Users: </div>";
+                foreach ($users as $u) {
+                    $hint .= "<a href='?controller=users&action=profile&id=" . $u->_id . "'>" . $u->given_name . "</a><br>";
+                }
+            }
+            if (count($subjects) > 0) {
+                $hint .= "<br><div style='background-color: #1da4dd; color: white; text-align: center'>Subjects: </div>";
+                foreach ($subjects as $s) {
+                    $hint .= "<a href='?controller=pages&action=subject&id=" . $s->_id . "'>" . $s->name . "</a><br>";
+                }
+            }
+            if (count($articles) > 0) {
+                $hint .= "<br><div style='background-color: #1da4dd; color: white; text-align: center'>Articles: </div>";
+                foreach ($articles as $a) {
+                    $hint .= "<a href='?controller=pages&action=subject&articleId=" . $a->_id . "'>" . $a->title . "</a><br>";
+                }
+            }
+            if (count($semesters) > 0) {
+                $hint .= "<br><div style='background-color: #1da4dd; color: white; text-align: center'>Semesters: </div>";
+                foreach ($semesters as $s) {
+                    $hint .= "<a href='?controller=pages&action=semester&id=" . $s->_id . "'>" . $s->name . "</a><br>";
+                }
+            }
+            if (trim($hint) == "") {
+                $response = "<span style='color: black'>No content.</span>";
+            } else {
+                $response = $hint;
+            }
+            echo $response;
         }
     }
 

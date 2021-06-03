@@ -90,7 +90,6 @@ class PostsController extends BaseController
                     'content' => $content,
                     'created_at' => new MongoDB\BSON\UTCDateTime()
                 ];
-                Utility::debug($commentContent);
                 $comment = new Comment();
                 $comment->push($postId, $commentContent);
                 $user = (new User())->getById($userId);

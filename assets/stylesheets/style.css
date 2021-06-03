@@ -409,3 +409,14 @@ footer h4 {
   border-radius: 4px;
 }
 
+.search-results {
+  text-align: left;
+  max-width: 300px;
+  padding: 15px;
+  margin-left: 56%;
+  margin-top: -60px;
+  z-index: -1;
+  background-color: white;
+  border: 0.1px #ccc sodlid;
+}
+

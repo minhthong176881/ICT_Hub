@@ -60,4 +60,13 @@ class User
         }
         return $list;
     }
+
+    public function update($id, $user)
+    {
+        $req = $this->user->updateOne(
+            ['_id' => new MongoDB\BSON\ObjectID($id)],
+            ['$set' => $user]
+        );
+        return $req;
+    }
 }
