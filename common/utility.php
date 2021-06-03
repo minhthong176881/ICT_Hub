@@ -13,4 +13,11 @@ class Utility {
     
         file_put_contents('.debug', "Debug Objects: '" . $result . "'\n", FILE_APPEND);
     }
+
+    static function gmdateToLocalDate($dateTime){
+        /* $gmdate must be in YYYY-mm-dd H:i:s format*/
+        $userTz = new \DateTimeZone(date_default_timezone_get());
+        $dateTime->setTimeZone($userTz);
+        return $dateTime->format('D, j M, Y \a\\t H:i');
+    }
 }

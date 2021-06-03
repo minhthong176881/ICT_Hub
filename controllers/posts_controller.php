@@ -3,6 +3,11 @@ require_once('controllers/base_controller.php');
 require_once('models/post.php');
 require_once('models/user.php');
 require_once('models/tag.php');
+require_once('models/comment.php');
+require_once('common/utility.php');
+
+use Model\Comment;
+use Common\Utility;
 
 class PostsController extends BaseController
 {
@@ -15,13 +20,10 @@ class PostsController extends BaseController
 
     public function post()
     {
-        session_start();
-        if ($_SESSION['logged_in']) {
-            $tag = new Tag();
-            $tags = $tag->all();
-            $data = array('tags' => $tags);
-            $this->render('post', $data);
-        } else header('Location: ?controller=users&action=login');
+        $tag = new Tag();
+        $tags = $tag->all();
+        $data = array('tags' => $tags);
+        $this->render('post', $data);
     }
 
     public function tag()
@@ -35,22 +37,16 @@ class PostsController extends BaseController
     public function detail()
     {
         if (isset($_GET['id'])) {
-            $posts = $this->post->all();
             $selectedPost = $this->post->getById($_GET['id']);
             $listPostFromAuthor = $this->post->getByAuthorId($selectedPost->author->_id);
-            $listPostFromOtherAuthor = [];
-            foreach ($posts as $post) {
-                if ($post->author->_id != $selectedPost->author->_id) array_push($listPostFromOtherAuthor, $post);
-            }
-            $data = array('post' => $selectedPost, 'listPost' => $listPostFromAuthor, 'other' => $listPostFromOtherAuthor);
+            $data = array('post' => $selectedPost, 'listPost' => $listPostFromAuthor);
             $this->render('detail', $data);
         } else header('Location: index.php?controller=pages&action=error');
     }
 
     public function save()
     {
-        session_start();
-        if (isset($_GET['userId']) && $_GET['userId'] == $_SESSION['userId']) {
+        if (isset($_GET['userId']) && !empty($_GET['userId'])) {
             $user = new User();
             $tag = new Tag();
             $tagList = [];
@@ -63,7 +59,7 @@ class PostsController extends BaseController
                 $tags = explode(" ", $_POST['tags']);
                 foreach ($tags as $t) {
                     $item = $tag->getByName($t);
-                    $tag->update($item->_id, $item->count + 1);
+                    $tag->update($item->_id, 1);
                     unset($item->count);
                     array_push($tagList, $item);
                 }
@@ -80,16 +76,16 @@ class PostsController extends BaseController
         }
     }
 
-    public function edit()
-    {
-        session_start();
-        if (isset($_GET['id']) && !empty($_GET['id'])) {
-            $currentPost = $this->post->getById($_GET['id']);
-            $tag = new Tag();
-            $tags = $tag->all();
-            if ($currentPost->author->_id == $_SESSION['userId']) {
-                $this->render('edit', ['post' => $currentPost, 'tags' => $tags]);
-            }
+    public function edit() {
+        session_start(); {
+            if (isset($_GET['id']) && !empty($_GET['id'])) {
+                $currentPost = $this->post->getById($_GET['id']);
+                $tag = new Tag();
+                $tags = $tag->all();
+                if ($currentPost->author->_id == $_SESSION['userId']) {
+                    $this->render('edit', ['post' => $currentPost, 'tags' => $tags]);
+                }  header('Location: ?controller=pages&action=error');
+            } header('Location: ?controller=pages&action=error');
         }
     }
 
@@ -135,7 +131,8 @@ class PostsController extends BaseController
                             }
                         }
                         echo $res;
-                    } echo $res;
+                    }
+                    echo $res;
                 }
             }
         }
@@ -163,6 +160,39 @@ class PostsController extends BaseController
                     echo $res;
                 } else echo $res;
             }
+        }
+    }
+
+    function postComment()
+    {
+        if (!empty($_POST['post_id']) && !empty($_POST['content'])) {
+            if (!empty($_POST['user_id'])) {
+                $postId = $_POST['post_id'];
+                $userId = $_POST['user_id'];
+                $content = $_POST['content'];
+                $commentContent = [
+                    'user_id' => new MongoDB\BSON\ObjectId($userId),
+                    'content' => $content,
+                    'created_at' => new MongoDB\BSON\UTCDateTime()
+                ];
+                $comment = new Comment();
+                $comment->push($postId, $commentContent);
+                $user = (new User())->getById($userId);
+
+                header('Content-type: application/json');
+                echo json_encode([
+                    'user_id' => $userId,
+                    'content' => $content,
+                    'created_at' => Utility::gmdateToLocalDate($commentContent['created_at']->toDateTime()),
+                    'avatar' => $user['avatar'] ?? '',
+                    'given_name' => $user['given_name']
+                ]);
+                return;
+            } else {
+                return http_response_code(401);
+            }
+        } else {
+            return http_response_code(400);
         }
     }
 }

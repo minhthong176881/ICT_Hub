@@ -31,8 +31,35 @@ class Post
 
     public function getById($id)
     {
-        $post = $this->post->findOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
-        return $post;
+        $post = $this->post->aggregate([
+            ['$match' => ['_id' => new \MongoDB\BSON\ObjectId($id)]],
+            ['$addFields' => ['comments' => ['$ifNull' => ['$comments', [ ]] ]]],
+            ['$lookup' => ['from' => 'users', 'localField' => 'comments.user_id', 'foreignField' => '_id', 'as' => 'user_detail']],
+            ['$addFields' =>
+                ['comments' => [
+                    '$map' => [
+                        'input' => '$comments',
+                        'in' => [
+                            '$mergeObjects' => [
+                                '$$this',
+                                ['$arrayElemAt' => [
+                                        '$user_detail',
+                                        [
+                                            '$indexOfArray' => [
+                                                '$user_detail._id',
+                                                '$$this.user_id'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]]],
+                ['$project' => ['user_detail' => 0, 'comments.email' => 0, 'comments._id' => 0, 'comments.password' => 0, 'comments.class' => 0, 'comments.external' => 0, 'comments.school_year' => 0]]
+        ])->toArray();
+        
+        return $post[0];
     }
 
     public function getByAuthorId($id)

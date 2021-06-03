@@ -138,7 +138,7 @@ class UsersController extends BaseController
                header('Location: index.php?controller=pages&action=error');
                return;
             }
-            Utility::debug($account);
+            // Utility::debug($account);
             $result = $this->user->getByUsername($account['email']);
             if (!is_null($result)) {
                if (isset($result['external']) && $result['external'] == true) {
@@ -204,7 +204,7 @@ class UsersController extends BaseController
                return;
             }
 
-            Utility::debug($accountJson);
+            // Utility::debug($accountJson);
             $isSuccess = $this->user->insert($account);
             if ($isSuccess) {
                // register success
