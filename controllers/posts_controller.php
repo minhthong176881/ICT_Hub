@@ -41,6 +41,7 @@ class PostsController extends BaseController
             $listPostFromAuthor = $this->post->getByAuthorId($selectedPost->author->_id);
             $data = array('post' => $selectedPost, 'listPost' => $listPostFromAuthor);
             $this->render('detail', $data);
+
         } else header('Location: index.php?controller=pages&action=error');
     }
 
@@ -79,21 +80,30 @@ class PostsController extends BaseController
 
     public function postComment()
     {
-        if (isset($_POST['post_id']) && !empty($_POST['content'])) {
-            if (isset($_POST['user_id'])) {
+        if (!empty($_POST['post_id']) && !empty($_POST['content'])) {
+            if (!empty($_POST['user_id'])) {
                 $postId = $_POST['post_id'];
                 $userId = $_POST['user_id'];
                 $content = $_POST['content'];
                 $commentContent = [
-                    'user_id' => $userId,
+                    'user_id' => new MongoDB\BSON\ObjectId($userId),
                     'content' => $content,
                     'created_at' => new MongoDB\BSON\UTCDateTime()
                 ];
                 Utility::debug($commentContent);
                 $comment = new Comment();
                 $comment->push($postId, $commentContent);
+                $user = (new User())->getById($userId);
 
-                return http_response_code(200);
+                header('Content-type: application/json');
+                echo json_encode([
+                    'user_id' => $userId,
+                    'content' => $content,
+                    'created_at' => Utility::gmdateToLocalDate($commentContent['created_at']->toDateTime()),
+                    'avatar' => $user['avatar'] ?? '',
+                    'given_name' => $user['given_name']
+                ]);
+                return;
             } else {
                 return http_response_code(401);
             }
