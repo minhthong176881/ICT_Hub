@@ -414,9 +414,9 @@ footer h4 {
   max-width: 300px;
   padding: 15px;
   margin-left: 56%;
-  margin-top: -60px;
+  margin-top: -50px;
   z-index: -1;
   background-color: white;
-  border: 0.1px #ccc sodlid;
+  border: 0.1px #ccc solid;
 }
 

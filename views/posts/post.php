@@ -2,6 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+$mode = 'create';
 ?>
 <form action="javascript:submit();" method="POST">
     <input class="title" type="text" name="title" placeholder="Title" id="title" required>
@@ -26,6 +28,8 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </div>
 </form>
+
+<?php include "views/popup/noti.php";?>
 
 <script>
     window.onload = function() {
@@ -63,12 +67,19 @@ if (session_status() === PHP_SESSION_NONE) {
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 if (parseInt(this.responseText) > 0) {
-                    alert('Create post successfully!');
-                    window.location.href = '?controller=pages&action=blog';
+                    var popup = document.querySelector('.popup');
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                    if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
                 } else alert('Fail to create post. Some errors occured!');
             }
         }
         xmlhttp.open("POST", "?controller=posts&action=save&userId=<?php echo $_SESSION['userId'] ?>");
         xmlhttp.send(formData);
+    }
+
+    function btnCloseOnClick() {
+        var popup = document.querySelector('.popup');
+        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+        window.location.href = '?controller=pages&action=blog';
     }
 </script>

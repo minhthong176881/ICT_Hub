@@ -22,7 +22,7 @@
                     echo "<li class='user-post'><a style='font-size: 21px' href='?controller=posts&action=detail&id=" . $post->_id . "'>" . $post->title . "</a>";
                     if (isset($_SESSION['userId']) && $user->_id == $_SESSION['userId']) {
             ?>
-                        <button onclick="window.location.href='?controller=posts&action=edit&id=<?php echo $post->_id ?>'">Edit</button>
+                        <button class="btn-edit" onclick="window.location.href='?controller=posts&action=edit&id=<?php echo $post->_id ?>'"><span><i class="fal fa-edit"></i></span></button>
                     <?php }
                     echo "<br/>Author: " . $user->given_name . "<br/>Tags: ";
                     for ($j = 0; $j < count($post->tags); $j++) {

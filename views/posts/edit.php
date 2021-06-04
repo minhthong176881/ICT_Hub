@@ -2,6 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+$mode = 'edit';
+$warning = false;
 ?>
 <form action="javascript:submit();" method="POST">
     <input class="title" id="title" type="text" name="title" placeholder="Title" required>
@@ -32,7 +34,11 @@ if (session_status() === PHP_SESSION_NONE) {
             <button type="reset" class="button-cancel" style="width: 200px;" onclick="cancel()">Cancel</button>
         </div>
     </div>
-</>
+</form>
+
+<?php include "views/popup/noti.php"; ?>
+<?php include "views/popup/del_noti.php"; ?>
+<?php include "views/popup/warn_noti.php"; ?>
 
 <script>
     window.onload = function() {
@@ -81,9 +87,21 @@ if (session_status() === PHP_SESSION_NONE) {
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 if (parseInt(this.responseText) > 0) {
-                    alert('Update post successfully!');
-                    window.location.href = '?controller=users&action=profile&id=<?php echo $post->author->_id ?>';
-                } else alert('Fail to update post. Some errors occured!');
+                    var popup = document.querySelector('.popup');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
+                } else {
+                    <?php $warning = true; ?>
+                    var popup = document.querySelector('.warn-popup');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
+                }
             }
         }
         xmlhttp.open("POST", "?controller=posts&action=postEdit&id=<?php echo $post->_id ?>");
@@ -91,16 +109,38 @@ if (session_status() === PHP_SESSION_NONE) {
     }
 
     function deletePost() {
+        <?php $mode = 'delete' ?>
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 if (parseInt(this.responseText) > 0) {
-                    alert('Delete post successfully!');
-                    window.location.href = '?controller=users&action=profile&id=<?php echo $_SESSION['userId'] ?>';
-                } else alert('Fail to delete. Some errors occured!');
+                    var popup = document.querySelector('.del-popup');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
+                } else {
+                    <?php $warning = true; ?>
+                    var popup = document.querySelector('.warn-popup');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
+                }
             }
         }
         xmlhttp.open("GET", "?controller=posts&action=delete&id=<?php echo $post->_id ?>", true);
         xmlhttp.send();
+    }
+
+    function btnCloseOnClick() {
+        var popup = document.querySelector('.popup');
+        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+        <?php if (!$warning) {
+            if ($mode == 'delete') echo "window.location.href = '?controller=users&action=profile&id=" . $_SESSION['userId'] . "'";
+            if ($mode == 'edit') echo "window.location.href = '?controller=users&action=profile&id=" . $post->author->_id . "'";
+        } ?>
     }
 </script>

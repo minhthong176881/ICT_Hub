@@ -1,7 +1,7 @@
     <div class="text-box">
         <h1>Diễn đàn đầu hàng công nghệ ở Việt Nam</h1>
         <p>Lorem ipsum dolo abcksjdfskd ksdhaf kasdhf ks aksdfh kasdhf k askdfh k asfdhk </p>
-        <a href="https://www.facebook.com/groups/990352754392150" class="hero-btn">Visit us to know more</a>
+        <a href="https://www.facebook.com/groups/990352754392150" target="_blank" class="hero-btn">Visit us to know more</a>
     </div>
 
     </header>

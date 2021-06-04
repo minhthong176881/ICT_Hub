@@ -10,7 +10,7 @@
         <div class="about-col">
             <h1>We are the best university in Vietnam</h1>
             <p>Lorem ipsum dolo abcksjdfskd ksdhaf kasdhf ks aksdfh kasdhf k askdfh k asfdhk Lorem ipsum dolo abcksjdfskd ksdhaf kasdhf ks aksdfh kasdhf k askdfh k asfdhk</p>
-            <a href="https://www.hust.edu.vn/" class="hero-btn red-btn">Explore now</a>
+            <a href="https://www.hust.edu.vn/" target="_blank" class="hero-btn red-btn">Explore now</a>
         </div>
         <div class="about-col">
             <img src="assets/img/about.jpg" alt="">
