@@ -4,7 +4,7 @@ function xhrPost (url, data, success, error) {
     xhr.open("POST", url, true);
 
     //Send the proper header information along with the request
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function() { // Call a function when the state changes.
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
@@ -17,15 +17,15 @@ function xhrPost (url, data, success, error) {
             }
         }
     }
-    xhr.send(objToUrlEncoded(data));
+    xhr.send(JSON.stringify(data));
 }
 
-function xhrGet (url, data, success, error) {
+function xhrGet (url, success, error) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
 
     //Send the proper header information along with the request
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function() { // Call a function when the state changes.
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
@@ -38,7 +38,7 @@ function xhrGet (url, data, success, error) {
             }
         }
     }
-    xhr.send(objToUrlEncoded(data));
+    xhr.send();
 }
 
 function virtualFormSubmit (url, data, method) {
@@ -60,3 +60,4 @@ function virtualFormSubmit (url, data, method) {
 
     form.submit();
 }
+

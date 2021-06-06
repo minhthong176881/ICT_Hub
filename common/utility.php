@@ -13,4 +13,7 @@ class Utility {
     
         file_put_contents('.debug', "Debug Objects: '" . $result . "'\n", FILE_APPEND);
     }
+    static function returnResult($data) {
+        echo '{"result":"' . $data . '"}';
+    }
 }

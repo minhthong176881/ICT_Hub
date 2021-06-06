@@ -32,6 +32,9 @@ class User {
         // if ($req) return 1;
         // else return 0;
     }
+    public function deleteOne($id){
+        return $this->user->deleteOne(['_id' => new MongoDB\BSON\ObjectID( $id )]);
+    }
 
     public function insert($account)
     {

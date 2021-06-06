@@ -6,40 +6,40 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="#" class="active"><span class="fas fa-tachometer-alt"></span>
+                    <a href="?controller=admin&action=index#" <?= $file =='index' ? 'class="active"' : '' ?>><span class="fas fa-tachometer-alt"></span>
                     <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"><span class="fas fa-user"></span>
-                    <span>Customers</span>
+                    <a href="?controller=admin&action=users" <?= $file =='users' ? 'class="active"' : '' ?>><span class="fas fa-user"></span>
+                    <span>Users</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"><span class="fas fa-project-diagram"></span>
-                    <span>Projects</span>
+                    <a href="?controller=admin&action=articles" <?= $file =='articles' ? 'class="active"' : '' ?>><span class="fas fa-project-diagram"></span>
+                    <span>Articles</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"><span class="fab fa-first-order"></span>
-                    <span>Orders</span>
+                    <a href="?controller=admin&action=subjects" <?= $file =='subjects' ? 'class="active"' : '' ?>><span class="fab fa-first-order"></span>
+                    <span>Subjects</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"><span class="fas fa-boxes"></span>
-                    <span>Inventory</span>
+                    <a href="?controller=admin&action=posts" <?= $file =='posts' ? 'class="active"' : '' ?>><span class="fas fa-boxes"></span>
+                    <span>Posts</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"><span class="fas fa-user-circle"></span>
+                    <a href="?controller=admin&action=accounts" <?= $file =='accounts' ? 'class="active"' : '' ?>><span class="fas fa-user-circle"></span>
                     <span>Accounts</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#"><span class="fas fa-tasks"></span>
                     <span>Tasks</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

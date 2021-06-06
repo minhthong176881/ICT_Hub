@@ -1,4 +1,6 @@
 <?php
+
+use Common\Utility;
 use ICT_Hub\models;
 
 require_once 'controllers/base_controller.php';
@@ -44,6 +46,8 @@ class AdminController extends BaseController {
         $posts = new Post();
         $posts = $posts->all();
         $postCount = count($posts);
+        session_start();
+        $user_given_name = $_SESSION['given_name'];
 
         $data = [
             "users" => $users,
@@ -51,11 +55,77 @@ class AdminController extends BaseController {
             "artileCount" => $artileCount,
             "subjectCount" => $subjectCount,
             "postCount" => $postCount,
-            "posts" => $posts
+            "posts" => $posts,
+            "user_given_name" => $user_given_name
         ];
 
     
         $this->render('dashboard', $data);
+    }
+    public function users() {
+        $users = new User();
+        $users = $users->all();
+        $userCount = count($users);
+
+        $article = new Article();
+        $artileCount = count($article->all());
+
+        $subjectCount = count((new Subject())->all());
+        
+        
+        $posts = new Post();
+        $posts = $posts->all();
+        $postCount = count($posts);
+        session_start();
+        $user_given_name = $_SESSION['given_name'];
+
+        $data = [
+            "users" => $users,
+            "userCount" => $userCount,
+            "artileCount" => $artileCount,
+            "subjectCount" => $subjectCount,
+            "postCount" => $postCount,
+            "posts" => $posts,
+            "user_given_name" => $user_given_name
+        ];
+
+    
+        $this->render('users', $data);
+    }
+    public function deleteUser($id){
+        $article = new User();
+        if($article->deleteOne($id)){
+            Utility::returnResult("OK");
+        } else{
+            Utility::returnResult("ERROR");
+        }
+    }
+    public function articles() {
+
+        $article = new Article();
+        $articles = $article->all();
+        $artileCount = count($articles);
+        
+        session_start();
+        $user_given_name = $_SESSION['given_name'];
+
+        $data = [
+            "articles" => $articles,
+            "artileCount" => $artileCount,
+            "user_given_name" => $user_given_name
+        ];
+
+    
+        $this->render('articles', $data);
+    }
+
+    public function deleteArticle($id){
+        $article = new Article();
+        if($article->deleteOne($id)){
+            Utility::returnResult("OK");
+        } else{
+            Utility::returnResult("ERROR");
+        }
     }
 }
 // }
