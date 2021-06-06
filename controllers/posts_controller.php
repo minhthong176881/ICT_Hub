@@ -64,7 +64,7 @@ class PostsController extends BaseController
                 $tags = explode(" ", $_POST['tags']);
                 foreach ($tags as $t) {
                     $item = $tag->getByName($t);
-                    $tag->update($item->_id, 1);
+                    $tag->update($item->_id, $item->count + 1);
                     unset($item->count);
                     array_push($tagList, $item);
                 }
@@ -132,7 +132,7 @@ class PostsController extends BaseController
                         foreach ($currentTags as $ct) {
                             $i = $tag->getByName($ct);
                             if (!empty($i)) {
-                                if (!in_array($ct, $tagList)) $tag->update($i->_id, $i->count - 1);
+                                if (!in_array($ct, $tags)) $tag->update($i->_id, $i->count - 1);
                             }
                         }
                         echo $res;

@@ -23,6 +23,7 @@
                     if (isset($_SESSION['userId']) && $user->_id == $_SESSION['userId']) {
             ?>
                         <button class="btn-edit" onclick="window.location.href='?controller=posts&action=edit&id=<?php echo $post->_id ?>'"><span><i class="fal fa-edit"></i></span></button>
+                        <button class="btn-delete" onclick="deletePost()"><span><i class="fal fa-trash-alt"></i></span></button>
                     <?php }
                     echo "<br/>Author: " . $user->given_name . "<br/>Tags: ";
                     for ($j = 0; $j < count($post->tags); $j++) {
@@ -78,6 +79,7 @@
         </div>
     </div>
 </div>
+<?php include "views/popup/del_noti.php"; ?>
 <script>
     window.onload = function() {
         var el = document.getElementsByTagName('header');
@@ -93,5 +95,39 @@
         <?php } else {
             echo "console.log('User has no email.');";
         } ?>
+    }
+
+    function deletePost() {
+        <?php $mode = 'delete' ?>
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (parseInt(this.responseText) > 0) {
+                    var popup = document.querySelector('.del-popup');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
+                } else {
+                    var popup = document.querySelector('.warn-popup');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
+                }
+            }
+        }
+        xmlhttp.open("GET", "?controller=posts&action=delete&id=<?php echo $post->_id ?>", true);
+        xmlhttp.send();
+    }
+
+    function btnCloseOnClick() {
+        var popup = document.querySelector('.popup');
+        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+        <?php
+            echo "window.location.href = '?controller=users&action=profile&id=" . $_SESSION['userId'] . "'";
+        ?>
     }
 </script>

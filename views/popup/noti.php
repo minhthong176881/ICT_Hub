@@ -1,4 +1,4 @@
-<div class="popup popup-hide">
+<div class="popup popup-hide" id="noti-popup">
     <div class="model"></div>
     <div class="popup-content">
         <div class="popup-header">

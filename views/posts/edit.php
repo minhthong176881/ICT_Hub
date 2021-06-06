@@ -3,7 +3,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $mode = 'edit';
-$warning = false;
 ?>
 <form action="javascript:submit();" method="POST">
     <input class="title" id="title" type="text" name="title" placeholder="Title" required>
@@ -38,19 +37,21 @@ $warning = false;
 
 <?php include "views/popup/noti.php"; ?>
 <?php include "views/popup/del_noti.php"; ?>
-<?php include "views/popup/warn_noti.php"; ?>
+<?php //include "views/popup/warn_noti.php"; ?>
 
 <script>
     window.onload = function() {
         el = document.getElementsByTagName('nav');
         el[0].classList.add('navbar');
+        CKEDITOR.replace('content');
 
         var title = document.getElementById('title');
         title.value = "<?php echo $post->title ?>";
         var tags = document.getElementById('inputTags');
         tags.value = "<?php echo $tagList ?>";
-        var content = document.getElementById('content');
-        content.value = `<?php echo $post->content ?>`;
+        // var content = document.getElementById('content');
+        // content.value = `<?php //echo $post->content ?>`;
+        CKEDITOR.instances.content.setData(`<?php echo $post->content ?>`);
     }
 
     function cancel() {
@@ -82,19 +83,18 @@ $warning = false;
         var formData = new FormData();
         formData.append("title", document.getElementById('title').value);
         formData.append("tags", document.getElementById('inputTags').value);
-        formData.append("content", document.getElementById('content').value);
+        formData.append("content", CKEDITOR.instances.content.getData());
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 if (parseInt(this.responseText) > 0) {
-                    var popup = document.querySelector('.popup');
+                    var popup = document.querySelector('.noti-popup');
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     });
                     if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
                 } else {
-                    <?php $warning = true; ?>
                     var popup = document.querySelector('.warn-popup');
                     window.scrollTo({
                         top: 0,
@@ -121,7 +121,6 @@ $warning = false;
                     });
                     if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
                 } else {
-                    <?php $warning = true; ?>
                     var popup = document.querySelector('.warn-popup');
                     window.scrollTo({
                         top: 0,
@@ -138,9 +137,9 @@ $warning = false;
     function btnCloseOnClick() {
         var popup = document.querySelector('.popup');
         if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
-        <?php if (!$warning) {
+        <?php
             if ($mode == 'delete') echo "window.location.href = '?controller=users&action=profile&id=" . $_SESSION['userId'] . "'";
             if ($mode == 'edit') echo "window.location.href = '?controller=users&action=profile&id=" . $post->author->_id . "'";
-        } ?>
+        ?>
     }
 </script>

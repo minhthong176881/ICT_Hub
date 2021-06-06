@@ -2,6 +2,7 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
+    $warning = 'login';
 ?>
 <link rel="stylesheet" href="assets/stylesheets/pages/comment.css">
 <h1 style="text-align: left; margin-left: 6%">Blog</h1><br>
@@ -101,6 +102,7 @@
     }
 ?>
 </div>
+<?php include "views/popup/warn_noti.php" ?>
 <script>
     window.onload = function() {
         var el = document.getElementsByTagName('header');
@@ -148,9 +150,18 @@
             },
             error: function (statusCode, txtResponse) {
                 if (statusCode == '401') {
-                    alert("You should login before commenting to this post!");
+                    // alert("You should login before commenting to this post!");
+                    var popup = document.querySelector('.popup');
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                    if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
                 }
             }
         })
+    }
+
+    function btnCloseOnClick() {
+        var popup = document.querySelector('.popup');
+        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+        window.location.href = '?controller=users&action=login';
     }
 </script>

@@ -1,4 +1,4 @@
-<div class="popup popup-hide warn-popup"></div>
+<div class="popup popup-hide warn-popup">
     <div class="model"></div>
     <div class="popup-content">
         <div class="popup-header">
@@ -9,7 +9,19 @@
             <hr>
         </div><br>
         <div class="popup-body">
-            <div style="font-size: 13px; color: #000">Some error occured, try again!</div>
+        <?php 
+        if (isset($warning)) {
+            switch ($warning) {
+                case 'login':
+                    echo '<div style="font-size: 13px; color: #000">You should login before commenting to this post!</div>';
+                    break;
+                default:
+                    echo '<div style="font-size: 13px; color: #000">Some error occured, try again!</div>';
+                    break;
+            }
+        } else 
+            echo '<div style="font-size: 13px; color: #000">Some error occured, try again!</div>';
+        ?>
         </div>
         <hr>
         <div class="popup-footer">
