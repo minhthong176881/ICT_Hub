@@ -8,8 +8,6 @@ class BaseController
         $controller = get_class($this);
         $controller = lcfirst(substr($controller, 0, strpos($controller, "Controller")));
         $this->folder = $controller;
-        // exit();
-        //made by NhonDZ
     }
 
     function render($file, $data = null)

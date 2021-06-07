@@ -1,19 +1,19 @@
 
-function xhrPost (url, data, success, error) {
+function xhrPost (postInfo) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
+    xhr.open("POST", postInfo.url, true);
 
     //Send the proper header information along with the request
     // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function() { // Call a function when the state changes.
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            if (success) {
-                success(this.responseText);
+            if (postInfo.success) {
+                postInfo.success(this.responseText);
             }
         } else if (this.readyState == XMLHttpRequest.DONE && this.status !== 200) {
-            if (error) {
-                error(this.status, this.responseText);
+            if (postInfo.error) {
+                postInfo.error(this.status, this.responseText);
             }
         }
     }

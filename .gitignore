@@ -2,7 +2,7 @@
 .idea
 vendor
 .DS_Store
-composer.lock
 .debug
 .vscode
 composer-setup.php
+composer.phar

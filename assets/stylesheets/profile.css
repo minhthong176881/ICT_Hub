@@ -1,0 +1,97 @@
+.profile-header {
+    height: 50vh;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.3)), url('../img/profile.jpg');
+}
+
+.profile-content {
+    width: 80%;
+    margin: auto;
+    padding: 30px 50px 10px 50px;
+    display: flex;
+}
+
+.user-posts {
+    width: 70%;
+    padding-right: 5%;
+    border-right: 0.1px #555 solid;
+}
+
+.user-post {
+    border-bottom: 0.1px #ccc solid;
+    padding-bottom: 5px;
+}
+
+.right-side {
+    width: 26%;
+    padding: 20px;
+    margin-left: auto;
+}
+
+#summary {
+    border: 0.1px #555 solid;
+}
+
+#summary div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #555;
+    padding: 8px;
+}
+
+.right-items:hover {
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+
+.nav-bar ul li {
+    display: inline-block;
+    position: relative;
+}
+
+.nav-bar {
+    flex: 1;
+    text-align: right;
+    padding-bottom: 5px;
+    text-align: left;
+    padding-left: 0;
+    border-bottom: 0.1px #ccc solid;
+}
+
+.nav-bar ul li a {
+    margin-right: 12px;
+    color: #ccc;
+    font-size: 18px;
+}
+
+.nav-bar ul li a:hover {
+    color: black;
+}
+
+.nav-bar .selected a {
+    color: #1da4dd;
+    border-bottom: 2px #1da4dd solid;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+.nav-bar .selected a:hover {
+    color: #1da4dd;
+}
+
+.infor {
+    padding-bottom: 5px;
+    border-bottom: 0.1px #ccc solid;
+    margin-bottom: 10px;
+    width: 50%;
+}
+
+.edit-content {
+    width: 80%;
+    margin: auto;
+    padding: 30px 50px 10px 50px;
+}
+
+.edit-content input[type=text] {
+    width: 100%;
+}

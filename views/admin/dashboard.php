@@ -35,7 +35,7 @@
                     <span>Articles</span>
                 </div>
                 <div>
-                    <span class="fas fa-project-diagram"></span>
+                    <span><i class="fal fa-book"></i></span>
                 </div>
             </div>
             <div class="card-single">
@@ -44,7 +44,7 @@
                     <span>Subjects</span>
                 </div>
                 <div>
-                    <span class="fab fa-first-order"></span>
+                    <span class="far fa-books"></span>
                 </div>
             </div>
             <div class="card-single">
@@ -70,8 +70,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <td>Post Title</td>
-                                        <td>User</td>
+                                        <td>Title</td>
+                                        <td>Author</td>
                                         <td>Tag</td>
                                     </tr>
                                 </thead>
@@ -81,7 +81,7 @@
                                     ?>
                                         <tr>
                                             <td><?= $post->title ? $post->title : "No title" ?></td>
-                                            <td><?= $post?->author ? $post->author->given_name: "No user" ?></td>
+                                            <td><?= $post->author ? $post->author->given_name: "No user" ?></td>
                                             <td>
                                                 <span class="status purple"></span>
                                                 <?php

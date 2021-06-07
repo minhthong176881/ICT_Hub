@@ -10,3 +10,48 @@
 .content {
     margin-top: 20px;
 }
+
+.post-header {
+    height: 50vh;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.4)), url("../img/blog.jpg");
+}
+
+.dropdown-tags {
+    position: relative;
+    display: inline-block;
+    color: black;
+    width: 100%;
+}
+
+.checkbox-tags {
+    margin-top: 5px;
+}
+
+.right-content {
+    width: 25%;
+    padding: 10px;
+    margin-left: 2%;
+    margin-top: 2%
+}
+
+.right-content a {
+    font-size: 18px;
+}
+
+.left-content {
+    width: 70%;
+    border-right: 0.1px black solid;
+    padding: 20px;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.detail-content {
+    overflow: auto;
+}
+
+.post-tag-content {
+    width: 80%;
+    margin:auto;
+    padding: 30px 50px 10px 50px;
+}

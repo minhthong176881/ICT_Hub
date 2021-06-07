@@ -23,4 +23,13 @@ class Article {
 
         return $article;
     }
+
+    public function search($query) {
+        $articles = $this->all();
+        $list = [];
+        foreach ($articles as $article) {
+            if (str_contains(strtolower($article->title), $query)) array_push($list, $article);
+        }
+        return $list;
+    }
 }

@@ -10,3 +10,20 @@
 .selected-article {
     border: 1px #1da4dd solid;
 }
+
+.subject-content {
+    width: 20%;
+    margin-left: 2%;
+    margin-top: 2%;
+    padding: 10px;
+    border-right: 1px #777777 solid
+}
+
+.article-content {
+    max-width: 74%;
+    margin-left: 2%;
+    margin-top: 2%;
+    padding: 20px;
+    overflow: auto;
+    overflow-wrap: normal;
+}
