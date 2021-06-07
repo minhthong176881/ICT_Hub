@@ -1,23 +1,44 @@
 
-function xhrPost (postInfo) {
+function xhrPost (url, data, success, error) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", postInfo.url, true);
+    xhr.open("POST", url, true);
 
     //Send the proper header information along with the request
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function() { // Call a function when the state changes.
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            if (postInfo.success) {
-                postInfo.success(this.responseText);
+            if (success) {
+                success(this.responseText);
             }
         } else if (this.readyState == XMLHttpRequest.DONE && this.status !== 200) {
-            if (postInfo.error) {
-                postInfo.error(this.status, this.responseText);
+            if (error) {
+                error(this.status, this.responseText);
             }
         }
     }
-    xhr.send(objToUrlEncoded(postInfo.data));
+    xhr.send(JSON.stringify(data));
+}
+
+function xhrGet (url, success, error) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+
+    //Send the proper header information along with the request
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function() { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (success) {
+                success(this.responseText);
+            }
+        } else if (this.readyState == XMLHttpRequest.DONE && this.status !== 200) {
+            if (error) {
+                error(this.status, this.responseText);
+            }
+        }
+    }
+    xhr.send();
 }
 
 function virtualFormSubmit (url, data, method) {
@@ -39,3 +60,4 @@ function virtualFormSubmit (url, data, method) {
 
     form.submit();
 }
+

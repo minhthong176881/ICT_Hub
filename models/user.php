@@ -37,6 +37,9 @@ class User
         $req = $this->user->findOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
         return $req;
     }
+    public function deleteOne($id){
+        return $this->user->deleteOne(['_id' => new MongoDB\BSON\ObjectID( $id )]);
+    }
 
     public function insert($account)
     {

@@ -4,7 +4,7 @@
             <label for="nav-toggle">
                 <i class="fas fa-bars"></i>
             </label>
-            Dashboard
+            Users
         </h2>
         <div class="search-wrapper">
             <span class="fas fa-search"></span>
@@ -19,47 +19,8 @@
         </div>
     </header>
     <main>
-        <div class="cards">
-            <div class="card-single">
-                <div>
-                    <h1><?= $userCount ?></h1>
-                    <span>Users</span>
-                </div>
-                <div>
-                    <span class="fas fa-users"></span>
-                </div>
-            </div>
-            <div class="card-single">
-                <div>
-                    <h1><?= $artileCount ?></h1>
-                    <span>Articles</span>
-                </div>
-                <div>
-                    <span><i class="fal fa-book"></i></span>
-                </div>
-            </div>
-            <div class="card-single">
-                <div>
-                    <h1><?= $subjectCount ?></h1>
-                    <span>Subjects</span>
-                </div>
-                <div>
-                    <span class="far fa-books"></span>
-                </div>
-            </div>
-            <div class="card-single">
-                <div>
-                    <h1><?= $postCount ?></h1>
-                    <span>Posts</span>
-                </div>
-                <div>
-                    <span class="fas fa-mail-bulk"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="recent-grid">
-            <div class="projects">
+        <div class="">
+            <!-- <div class="projects">
                 <div class="card">
                     <div class="card-header">
                         <h3>Recent Posts</h3>
@@ -70,8 +31,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <td>Title</td>
-                                        <td>Author</td>
+                                        <td>Post Title</td>
+                                        <td>User</td>
                                         <td>Tag</td>
                                     </tr>
                                 </thead>
@@ -81,7 +42,7 @@
                                     ?>
                                         <tr>
                                             <td><?= $post->title ? $post->title : "No title" ?></td>
-                                            <td><?= $post->author ? $post->author->given_name: "No user" ?></td>
+                                            <td><?= $post?->author ? $post->author->given_name: "No user" ?></td>
                                             <td>
                                                 <span class="status purple"></span>
                                                 <?php
@@ -170,18 +131,18 @@
                                             <span class="status orange"></span>
                                             pending
                                         </td>
-                                    </tr> -->
+                                    </tr> 
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="customers">
+            </div> -->
+            <div class="">
                 <div class="card">
                     <div class="card-header">
                         <h3>New users</h3>
-                        <button>See all <span class="fas fa-arrow-right"></span></button>
+                        <!-- <button>See all <span class="fas fa-arrow-right"></span></button> -->
                     </div>
 
                     <div class="card-body">
@@ -203,6 +164,11 @@
                                         echo '<span class="fab fa-facebook"></span>';
                                     }
                                     ?>
+                                </div>
+                                <div class="contact">
+                                    <span class="fas fa-times" style="cursor: pointer;"
+                                     onclick="deleteUser('<?= $user->_id ?>')"> </span>
+                                    
                                 </div>
                             </div>
                         <?php
@@ -286,3 +252,36 @@
 
     </main>
 </div>
+<script>
+    const deleteUser = (id) => {
+        if (confirm('Do you really want to delete this user?')) {
+            // Delete it!
+            xhrPost(
+                url = '?controller=admin&action=deleteUser',
+                data = {
+                    'id': id
+                },
+                success = function(responseTxt) {
+                    response = JSON.parse(responseTxt);
+                    if (response.result == "OK") {
+                        alert("Delete successfully!");
+                        window.location.href = '?controller=admin&action=users';
+                    } else {
+                        alert("ERROR!");
+                        return;
+                    }
+
+
+                },
+                error = function(status, responseTxt) {
+                    alert('Server error!');
+                    // window.location.reload();
+                }
+            )
+
+        } else {
+            // Do nothing!
+
+        }
+    }
+</script>

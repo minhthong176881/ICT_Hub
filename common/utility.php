@@ -20,4 +20,7 @@ class Utility {
         $dateTime->setTimeZone($userTz);
         return $dateTime->format('D, j M, Y \a\\t H:i');
     }
+    static function returnResult($data) {
+        echo '{"result":"' . $data . '"}';
+    }
 }
