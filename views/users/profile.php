@@ -23,7 +23,7 @@
                     if (isset($_SESSION['userId']) && $user->_id == $_SESSION['userId']) {
             ?>
                         <button class="btn-edit" onclick="window.location.href='?controller=posts&action=edit&id=<?php echo $post->_id ?>'"><span><i class="fal fa-edit"></i></span></button>
-                        <button class="btn-delete" onclick="deletePost('<?php echo $post->_id ?>')"><span><i class="fal fa-trash-alt"></i></span></button>
+                        <button class="btn-delete" onclick="btnDeleteOnClick('<?php echo $post->_id ?>')"><span><i class="fal fa-trash-alt"></i></span></button>
                     <?php }
                     echo "<br/>Author: " . $user->given_name . "<br/>Tags: ";
                     for ($j = 0; $j < count($post->tags); $j++) {
@@ -80,12 +80,15 @@
     </div>
 </div>
 <?php include "views/popup/del_noti.php"; ?>
+<?php include "views/popup/confirm_noti.php"; ?>
 <script>
     window.onload = function() {
         var el = document.getElementsByTagName('header');
         el[0].classList.add('sub-header');
         el[0].classList.add('profile-header');
     }
+
+    var deletePostId = "";
 
     function sendMail() {
         var subject = document.getElementById('subject').value;
@@ -129,5 +132,26 @@
         <?php
         echo "window.location.href = '?controller=users&action=profile&id=" . $_SESSION['userId'] . "'";
         ?>
+    }
+
+    function btnOKOnClick() {
+        var popup = document.querySelector('.confirm-popup');
+        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+        deletePost(deletePostId);
+    }
+
+    function closePopup() {
+        var popup = document.querySelector('.confirm-popup');
+        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+    }
+
+    function btnDeleteOnClick(id) {
+        var popup = document.querySelector('.confirm-popup');
+        if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        deletePostId = id;
     }
 </script>
