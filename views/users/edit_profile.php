@@ -1,4 +1,4 @@
-<h1 style="text-align: left; margin-left: 6%">
+<div class="text-box" style="top: 25%; text-indent: -5.4%"><h1 style="text-align: left; margin-left: 6%; font-size: 36px">
     <a style="font-size: 36px; color: white; font-weight: 600" href="?controller=users&action=profile&id=<?php echo $user->_id ?>">Profile</a>
     <span><i class='fad fa-chevron-double-right'></i></span> Edit <span><i class='fad fa-chevron-double-right'></i></span>
     <?php
@@ -8,6 +8,7 @@
     $isWarn = false;
     ?>
 </h1>
+</div>
 
 </header>
 <div class="edit-content">

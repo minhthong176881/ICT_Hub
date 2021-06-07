@@ -40,9 +40,15 @@ class PostsController extends BaseController
             $selectedPost = $this->post->getById($_GET['id']);
             $listPostFromAuthor = $this->post->getByAuthorId($selectedPost->author->_id);
             $allPost = $this->post->all();
+            $tag = new Tag();
             $listPostFromOther = [];
             foreach ($allPost as $post) {
                 if ($post->author->_id != $selectedPost->author->_id) array_push($listPostFromOther, $post);
+            }
+            $selectedTags = [];
+            foreach ($selectedPost->tags as $item) {
+                $tagName = $tag->getByName($item->name);
+                
             }
             $data = array('post' => $selectedPost, 'listPost' => $listPostFromAuthor, 'other' => $listPostFromOther);
             $this->render('detail', $data);

@@ -1,10 +1,12 @@
-<h1 style="text-align: left; margin-left: 6%">
-    <?php
-    if (isset($semester) && isset($subject)) {
-        echo "<a style='font-size: 36px; color: white; font-weight: 600' href='?controller=pages&action=semester&id=" . $semester->_id . "'>" . $semester->name . "</a> <span><i class='fad fa-chevron-double-right'></i></span> ";
-        echo $subject->name;
-    }
-    ?></h1><br>
+<div class="text-box" style="top: 25%; text-indent: -5.4%">
+    <h1 style="text-align: left; margin-left: 6%; font-size: 36px">
+        <?php
+        if (isset($semester) && isset($subject)) {
+            echo "<a style='font-size: 36px; color: white; font-weight: 600' href='?controller=pages&action=semester&id=" . $semester->_id . "'>" . $semester->name . "</a> <span><i class='fad fa-chevron-double-right'></i></span> ";
+            echo $subject->name;
+        }
+        ?></h1><br>
+</div>
 </header>
 <div style="display: flex">
     <div class="subject-content">
@@ -13,10 +15,12 @@
             if (count($articles) >= 1) {
                 $index = 1;
                 foreach ($articles as $article) {
-                    if ($article->_id == $selectedArticle->_id) {
-                        echo '<div class="article-list selected-article"><a href="?controller=pages&action=subject&id=' . $subject->_id . '&articleId=' . $article->_id . '">' . $index . '. ' . $article->title . '</a></div><br>';
-                    } else echo '<div class="article-list"><a href="?controller=pages&action=subject&id=' . $subject->_id . '&articleId=' . $article->_id . '">' . $index . '. ' . $article->title . '</a></div><br>';
-                    $index++;
+                    if (!empty($article)) {
+                        if ($article->_id == $selectedArticle->_id) {
+                            echo '<div class="article-list selected-article"><a href="?controller=pages&action=subject&id=' . $subject->_id . '&articleId=' . $article->_id . '">' . $index . '. ' . $article->title . '</a></div><br>';
+                        } else echo '<div class="article-list"><a href="?controller=pages&action=subject&id=' . $subject->_id . '&articleId=' . $article->_id . '">' . $index . '. ' . $article->title . '</a></div><br>';
+                        $index++;
+                    }
                 }
             }
         }

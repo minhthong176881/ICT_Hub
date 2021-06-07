@@ -1,4 +1,4 @@
-<h1 style="text-align: left; margin-left: 6%">Search Results for: <?php echo $query ?></h1><br>
+<div class="text-box" style="top: 25%; text-indent: -5.4%"><h1 style="text-align: left; margin-left: 6%">Search Results for: <?php echo $query ?></h1><br></div>
 </header>
 <div class="search-content">
     <div class="left">

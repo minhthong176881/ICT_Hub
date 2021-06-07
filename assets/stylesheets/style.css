@@ -5,9 +5,7 @@
   font-family: "Open Sans", sans-serif;
 }
 
-a,
-a:active,
-a:visited {
+a, a:active, a:visited {
   text-decoration: none;
 }
 
@@ -16,8 +14,7 @@ ul {
 }
 
 .home-header {
-  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.4)),
-    url("../img/background-b1.jpg");
+  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.4)), url("../img/background-b1.jpg");
 }
 
 nav {
@@ -101,8 +98,7 @@ nav .fas {
 }
 
 .course-header {
-  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.3)),
-    url("../img/graduate.jpg");
+  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.3)), url("../img/graduate.jpg");
 }
 
 h1 {
@@ -131,10 +127,11 @@ header {
   margin: 5%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .course-col {
-  flex-basis: 22%;
+  flex-basis: 45%;
   background: #fff3f3;
   border-radius: 10px;
   margin-bottom: 5%;
@@ -213,7 +210,7 @@ h3, h2, h1 {
   width: 80%;
   margin: auto;
   text-align: center;
-  padding-top: 100px;
+  /* padding-top: 100px; */
 }
 
 .facilities-col {
@@ -305,7 +302,6 @@ footer h4 {
   .text-box h1 {
     font-size: 20px;
   }
-
   .nav-links ul li {
     display: block;
   }
@@ -320,7 +316,6 @@ footer h4 {
     z-index: 2;
     transition: 0.5s;
   }
-
   nav .fas {
     display: block;
     color: white;
@@ -328,11 +323,9 @@ footer h4 {
     margin: 10px;
     font-size: 22px;
   }
-
   .row {
     flex-direction: column;
   }
-
   .testimonials-col img {
     margin-left: 0px;
     margin-right: 15px;
@@ -340,14 +333,12 @@ footer h4 {
   .contact h1 {
     font-size: 24px;
   }
-
   .blog h1 {
     font-size: 24px;
   }
 }
 
-.error,
-.login {
+.error, .login {
   height: auto;
 }
 
@@ -360,7 +351,9 @@ footer h4 {
   display: none;
   text-align: left;
   position: absolute;
-  min-width: 160px;
+  top: 100%;
+  left: 0;
+  width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 0px;
   z-index: 1;
@@ -372,7 +365,7 @@ footer h4 {
 
 .dropdown-bg {
   background-color: white;
-  width: 250px;
+  width: 100%;
   padding: 10px;
 }
 
@@ -383,16 +376,19 @@ footer h4 {
 }
 
 .subject {
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
   font-weight: 500;
+  padding: 10px;
 }
 
 .subject:hover {
   cursor: pointer;
-  border: 1px #1da4dd solid;
+  /* border: 1px #1da4dd solid; */
+  transition: 1s;
 }
 
 /* Scroll to top button */
+
 #scroll-top {
   display: none;
   position: fixed;
@@ -409,14 +405,56 @@ footer h4 {
   border-radius: 4px;
 }
 
-.search-results {
+#livesearch {
   text-align: left;
   max-width: 300px;
   padding: 15px;
-  margin-left: 56%;
-  margin-top: -50px;
+  margin-left: 76%;
+  margin-top: -40px;
   z-index: -1;
   background-color: white;
   border: 0.1px #ccc solid;
+  border-radius: 4px;
 }
 
+.hide-search {
+  display: none;
+}
+
+.home-dropdown {
+  display: block;
+}
+
+.home-dropdown a {
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  margin: 10px 30px;
+  display: block;
+}
+
+.home-dropdown a:hover {
+  background-color: #1da4dd;
+  border: 1px solid transparent;
+  color: white;
+  transition: 1s;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

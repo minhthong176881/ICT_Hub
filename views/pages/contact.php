@@ -1,4 +1,4 @@
-    <h1>Contact us</h1>
+    <div class="text-box"><h1>Contact us</h1></div>
 
 </header>
 

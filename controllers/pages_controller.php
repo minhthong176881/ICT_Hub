@@ -7,6 +7,7 @@ require_once('models/subject.php');
 require_once('models/semester.php');
 require_once('models/article.php');
 require_once('models/user.php');
+require_once('models/lecturer.php');
 
 class PagesController extends BaseController
 {
@@ -46,8 +47,10 @@ class PagesController extends BaseController
             $selectedSubject = $subject->getById($_GET['id']);
             $selectedSemester = $semester->getBySubjectId($_GET['id']);
             foreach ($selectedSubject->articles as $item) {
-                $a = $article->getById($item->_id);
-                array_push($articles, $a);
+                if (isset($item->_id) && !empty($item->_id)) {
+                    $a = $article->getById($item->_id);
+                    array_push($articles, $a);
+                }
             }
             $data = array('semester' => $selectedSemester, 'subject' => $selectedSubject, 'articles' => $articles, 'selectedArticle' => $selectedArticle);
             $this->render('subject', $data);
@@ -96,8 +99,15 @@ class PagesController extends BaseController
     public function course()
     {
         $subject = new Subject();
+        $lecturer = new Lecturer();
         $subjects = $subject->all();
-        $data = array('subjects' => $subjects);
+        $listSubject = [];
+        foreach ($subjects as $sub) {
+            $currentLecturer = $lecturer->getBySubjectId($sub->_id);
+            $sub = (object) array_merge((array) $sub, array('lecturer' => $currentLecturer));
+            array_push($listSubject, $sub);
+        }
+        $data = array('subjects' => $listSubject);
         $this->render('course', $data);
     }
 
@@ -139,7 +149,7 @@ class PagesController extends BaseController
             $semesters = $semester->search($query);
             $hint = "";
             if (count($posts) > 0) {
-                $hint .= "<div style='background-color: #1da4dd; color: white; text-align: center'>Posts: </div>";
+                $hint .= "<div style='background-color: #1da4dd; margin-top: 10px; color: white; text-align: center'>Posts: </div>";
                 foreach ($posts as $p) {
                     $hint .= "<a href='?controller=posts&action=detail&id=" . $p->_id . "'>" . $p->title . "</a><br>";
                 }

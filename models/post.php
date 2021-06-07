@@ -33,32 +33,33 @@ class Post
     {
         $post = $this->post->aggregate([
             ['$match' => ['_id' => new \MongoDB\BSON\ObjectId($id)]],
-            ['$addFields' => ['comments' => ['$ifNull' => ['$comments', [ ]] ]]],
+            ['$addFields' => ['comments' => ['$ifNull' => ['$comments', []]]]],
             ['$lookup' => ['from' => 'users', 'localField' => 'comments.user_id', 'foreignField' => '_id', 'as' => 'user_detail']],
             ['$addFields' =>
-                ['comments' => [
-                    '$map' => [
-                        'input' => '$comments',
-                        'in' => [
-                            '$mergeObjects' => [
-                                '$$this',
-                                ['$arrayElemAt' => [
-                                        '$user_detail',
-                                        [
-                                            '$indexOfArray' => [
-                                                '$user_detail._id',
-                                                '$$this.user_id'
-                                            ]
+            ['comments' => [
+                '$map' => [
+                    'input' => '$comments',
+                    'in' => [
+                        '$mergeObjects' => [
+                            '$$this',
+                            [
+                                '$arrayElemAt' => [
+                                    '$user_detail',
+                                    [
+                                        '$indexOfArray' => [
+                                            '$user_detail._id',
+                                            '$$this.user_id'
                                         ]
                                     ]
                                 ]
                             ]
                         ]
                     ]
-                ]]],
-                ['$project' => ['user_detail' => 0, 'comments.email' => 0, 'comments._id' => 0, 'comments.password' => 0, 'comments.class' => 0, 'comments.external' => 0, 'comments.school_year' => 0]]
+                ]
+            ]]],
+            ['$project' => ['user_detail' => 0, 'comments.email' => 0, 'comments._id' => 0, 'comments.password' => 0, 'comments.class' => 0, 'comments.external' => 0, 'comments.school_year' => 0]]
         ])->toArray();
-        
+
         return $post[0];
     }
 
@@ -78,9 +79,11 @@ class Post
         $list = [];
         foreach ($posts as $post) {
             foreach ($post->tags as $item) {
-                if ($item->name == $tag) {
-                    if (!in_array($post, $list))
-                        array_push($list, $post);
+                if (!empty($item)) {
+                    if ($item->name == $tag) {
+                        if (!in_array($post, $list))
+                            array_push($list, $post);
+                    }
                 }
             }
         }
@@ -97,7 +100,8 @@ class Post
         return $list;
     }
 
-    public function update($id, $post) {
+    public function update($id, $post)
+    {
         $req = $this->post->updateOne(
             ['_id' => new MongoDB\BSON\ObjectID($id)],
             ['$set' => $post]
@@ -105,7 +109,8 @@ class Post
         return $req->getModifiedCount();
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $req = $this->post->deleteOne(['_id' => new MongoDB\BSON\ObjectID($id)]);
         return $req->getDeletedCount();
     }

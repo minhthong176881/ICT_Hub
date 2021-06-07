@@ -1,4 +1,4 @@
-    <h1>About us</h1>
+    <div class="text-box"><h1>About us</h1></div>
 
 </header>
 
@@ -14,6 +14,28 @@
         </div>
         <div class="about-col">
             <img src="assets/img/about.jpg" alt="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="about-col">
+            <img src="assets/img/about.jpg" alt="">
+        </div>
+        <div class="about-col">
+        <h1>We are ICT alumni</h1>
+            <p>Lorem ipsum dolo abcksjdfskd ksdhaf kasdhf ks aksdfh kasdhf k askdfh k asfdhk Lorem ipsum dolo abcksjdfskd ksdhaf kasdhf ks aksdfh kasdhf k askdfh k asfdhk</p>
+            <a href="https://www.facebook.com/groups/ict.hust" target="_blank" class="hero-btn red-btn">See what they say</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="about-col">
+            <h1>ICT Global community </h1>
+            <p>Lorem ipsum dolo abcksjdfskd ksdhaf kasdhf ks aksdfh kasdhf k askdfh k asfdhk Lorem ipsum dolo abcksjdfskd ksdhaf kasdhf ks aksdfh kasdhf k askdfh k asfdhk</p>
+            <a href="https://www.facebook.com/groups/promo.ict.hust" target="_blank" class="hero-btn red-btn">Explore now</a>
+        </div>
+        <div class="about-col">
+            <img src="assets/img/ict-global.jpg" alt="">
         </div>
     </div>
 </div>

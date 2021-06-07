@@ -1,4 +1,4 @@
-<h1 style="text-align: left; margin-left: 6%"><?php echo $semester->name; ?></h1><br>
+<div class="text-box" style="top: 25%; text-indent: -5.4%"><h1 style="text-align: left; margin-left: 6%"><?php echo $semester->name; ?></h1><br></div>
 </header>
     <div class="semester-content">
         <?php 

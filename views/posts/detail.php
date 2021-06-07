@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $warning = 'login';
 ?>
 <link rel="stylesheet" href="assets/stylesheets/pages/comment.css">
-<h1 style="text-align: left; margin-left: 6%">Blog</h1><br>
+<div class="text-box" style="top: 25%; text-indent: -5.4%"><h1 style="text-align: left; margin-left: 6%">Blog</h1><br></div>
 </header>
 <div class="post-content" style="display: flex">
     <div class="left-content">
@@ -28,47 +28,51 @@ $warning = 'login';
             echo $post->content . '<br>'; ?>
         </div>
     </div>
-    <div class="right-content">
-        <?php if (count($listPost) >= 2) { ?>
-            <div style="margin-bottom: 50px">
-                <h3>More from <?php echo $post->author->given_name ?>: </h3>
-                <hr style="width: 95%">
-                <div class="list-post" style="margin-top: 10px">
-                    <ul>
-                        <?php
-                        if (count($listPost) > 10) {
-                            $appeared = [];
-                            for ($i = 0; $i < 10; $i++) {
-                                do {
-                                    $index = rand(0, count($listPost) - 1);
-                                } while (in_array($index, $appeared));
-                                echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $listPost[$index]->_id . "'>" . $listPost[$index]->title . "</a></li>";
-                                array_push($appeared, $index);
+    <div class="right-content" style="position: relative;">
+        <div style="position: absolute;">
+            <div class="fixed-right"> 
+                <?php if (count($listPost) >= 2) { ?>
+                    <div style="margin-bottom: 50px">
+                        <h3>More from <?php echo $post->author->given_name ?>: </h3>
+                        <hr style="width: 95%">
+                        <div class="list-post" style="margin-top: 10px">
+                            <ul>
+                                <?php
+                                if (count($listPost) > 10) {
+                                    $appeared = [];
+                                    for ($i = 0; $i < 10; $i++) {
+                                        do {
+                                            $index = rand(0, count($listPost) - 1);
+                                        } while (in_array($index, $appeared));
+                                        echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $listPost[$index]->_id . "'>" . $listPost[$index]->title . "</a></li>";
+                                        array_push($appeared, $index);
+                                    }
+                                    echo "<li style='margin-bottom: 10px'><a href='?controller=users&action=profile&id=" . $post->author->_id . "'>More...</a></li>";
+                                } else {
+                                    foreach ($listPost as $item) {
+                                        if ($item->_id != $post->_id)
+                                            echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a></li>";
+                                    }
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                        <hr style="margin-top: 20px; width: 95%">
+                    </div>
+                <?php } ?>
+                <div>
+                    <h3>From other authors:</h3>
+                    <hr style="width: 95%">
+                    <div class="list-post">
+                        <ul>
+                            <?php
+                            foreach ($other as $item) {
+                                echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a> - <a href='?controller=users&action=profile&id=" . $item->author->_id . "'>" . $item->author->given_name . "</a></li>";
                             }
-                            echo "<li style='margin-bottom: 10px'><a href='?controller=users&action=profile&id=" . $post->author->_id . "'>More...</a></li>";
-                        } else {
-                            foreach ($listPost as $item) {
-                                if ($item->_id != $post->_id)
-                                    echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a></li>";
-                            }
-                        }
-                        ?>
-                    </ul>
+                            ?>
+                        </ul>
+                    </div>
                 </div>
-                <hr style="margin-top: 20px; width: 95%">
-            </div>
-        <?php } ?>
-        <div>
-            <h3>From other authors:</h3>
-            <hr style="width: 95%">
-            <div class="list-post">
-                <ul>
-                    <?php
-                    foreach ($other as $item) {
-                        echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a> - <a href='?controller=users&action=profile&id=" . $item->author->_id . "'>" . $item->author->given_name . "</a></li>";
-                    }
-                    ?>
-                </ul>
             </div>
         </div>
     </div>
@@ -84,7 +88,7 @@ $warning = 'login';
     </form>
 </div>
 
-<div class="comment-container" id="comment-list">
+<div class="comment-container" style="width: 72.25%; border-right: 1px #ccc solid" id="comment-list">
     <?php
     require_once 'common/utility.php';
 
@@ -100,7 +104,7 @@ $warning = 'login';
         echo <<<EOD
         <div class="comment-item">
             <div class="comment-left">
-                <div class="avatar-container"><a href="{$profileUrl}"><img class="comment-avatar" height="40" src="{$avatar}" width="40"></a></div>
+                <div class="avatar-container"><a href="{$profileUrl}"><img class="comment-avatar" height="60" src="{$avatar}" width="60"></a></div>
             </div>
             <div class="comment-right">
                 <div class="comment-header">

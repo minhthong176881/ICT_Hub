@@ -39,7 +39,9 @@
             <div class="nav-links" id="navLinks">
                 <i class="fas fa-times" id="close-icon"></i>
                 <ul>
-                    <li><input type="search" id="search" name="search" style="height: 30px; width: 200px; margin-right: 12px" placeholder="Search anything"></li>
+                    <li>
+                        <!-- <input type="search" id="search" name="search" style="height: 30px; width: 200px; margin-right: 12px; border: none; outline: none" placeholder="Search anything"> -->
+                    </li>
                     <li><a href="/">HOME</a></li>
                     <li><a href="?controller=pages&action=course">COURSES</a></li>
                     <li><a href="?controller=pages&action=blog">BLOG</a></li>
@@ -63,39 +65,71 @@
                         print '<li><a href="?controller=users&action=login">LOGIN <span style="color:white"><i class="far fa-sign-in-alt"></i></span></a></li>';
                     }
                     ?>
+                    <li class="search-icon" onclick="searchOnClick()"><span style="color: white"><i class="far fa-search"></i></span></li>
                 </ul>
             </div>
             <i class="fas fa-bars" id="menu-icon"></i>
         </nav>
-        <div id="livesearch"></div>
+        <div id="livesearch" class="hide-search">
+            <div id="search-input"></div>
+            <div id="search-results" style="max-height: 500px; overflow: auto; padding: 5px"></div>
+        </div>
         <script>
-            var search = document.getElementById('search');
-            var results = document.getElementById("livesearch");
-            search.addEventListener('keyup', (e) => {
-                if (e.keyCode == 13) {
-                    event.preventDefault();
-                    if (search.value.trim() != "")
-                        window.location.href = "?controller=pages&action=search&search=" + search.value;
-                } else if (e.keyCode == 27) {
-                    results.innerHTML = "";
-                    if (results.classList.contains('search-results')) results.classList.remove('search-results');
-                    
-                } else {
-                    if (search.value.trim() == "") {
-                        results.innerHTML = "";
-                        if (results.classList.contains('search-results')) results.classList.remove('search-results');
-                        return;
-                    }
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            results.innerHTML = this.responseText;
-                            if (!results.classList.contains('search-results'))
-                            results.classList.add('search-results');
+            function liveSearch() {
+                var search = document.getElementById('search');
+                var results = document.getElementById("search-results");
+                if (search != null) {
+                    search.addEventListener('keyup', (e) => {
+                        if (e.keyCode == 13) {
+                            event.preventDefault();
+                            if (search.value.trim() != "")
+                                window.location.href = "?controller=pages&action=search&search=" + search.value;
+                        } else if (e.keyCode == 27) {
+                            results.innerHTML = "";
+                            if (!results.classList.contains('hide-search')) results.classList.add('hide-search');
+                            if (!document.querySelector('#livesearch').classList.contains('hide-search')) document.querySelector('#livesearch').classList.add('hide-search')
+
+                        } else {
+                            if (search.value.trim() == "") {
+                                results.innerHTML = "";
+                                if (!results.classList.contains('hide-search')) results.classList.add('hide-search');
+                                if (!document.querySelector('#livesearch').classList.contains('hide-search')) document.querySelector('#livesearch').classList.add('hide-search')
+                                return;
+                            }
+                            var xmlhttp = new XMLHttpRequest();
+                            xmlhttp.onreadystatechange = function() {
+                                if (this.readyState == 4 && this.status == 200) {
+                                    results.innerHTML = this.responseText;
+                                    if (results.classList.contains('hide-search')) results.classList.remove('hide-search');
+                                }
+                            }
+                            xmlhttp.open("GET", "?controller=pages&action=liveSearch&search=" + search.value, true);
+                            xmlhttp.send();
                         }
-                    }
-                    xmlhttp.open("GET", "?controller=pages&action=liveSearch&search=" + search.value, true);
-                    xmlhttp.send();
+                    });
                 }
-            });
+            }
+
+            function searchOnClick() {
+                if (document.querySelector('.search-div') == null && document.querySelector('#livesearch').classList.contains('hide-search')) {
+                    var searchDiv = document.createElement('div');
+                    searchDiv.setAttribute('class', 'search-div');
+                    var searchInput = document.createElement('input');
+                    searchInput.setAttribute('type', 'search');
+                    searchInput.style.width = '100%';
+                    searchInput.setAttribute('placeholder', 'Search anything...')
+                    searchInput.setAttribute('id', 'search');
+                    searchInput.setAttribute('onkeyup', 'liveSearch()');
+                    searchDiv.insertBefore(searchInput, searchDiv.firstChild);
+                    var search = document.querySelector('#search-input');
+                    if (search.classList.contains('hide-search')) search.classList.remove('hide-search');
+                    search.appendChild(searchDiv);
+                } else if (document.querySelector('.search-div') != null && document.querySelector('#livesearch').classList.contains('hide-search')) {
+                    var search = document.querySelector('#livesearch');
+                    search.classList.remove('hide-search');
+                } else {
+                    var search = document.querySelector('#livesearch');
+                    if (!search.classList.contains('hide-search')) search.classList.add('hide-search');
+                }
+            }
         </script>
