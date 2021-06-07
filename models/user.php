@@ -67,6 +67,6 @@ class User
             ['_id' => new MongoDB\BSON\ObjectID($id)],
             ['$set' => $user]
         );
-        return $req;
+        return $req->getModifiedCount();
     }
 }

@@ -1,4 +1,4 @@
-<div class="popup popup-hide" id="noti-popup">
+<div class="popup popup-hide noti-popup">
     <div class="model"></div>
     <div class="popup-content">
         <div class="popup-header">
@@ -8,6 +8,7 @@
                     if ($mode == 'create') echo "Create post";
                     if ($mode == 'edit') echo "Update post";
                     if ($mode == 'delete') echo "Delete post";
+                    if ($mode == 'profile') echo "Update profile";
                 }
                 ?>
             </div>
@@ -19,6 +20,7 @@
                 if ($mode == 'create') echo '<div style="font-size: 13px; color: #000">Created post successfully!</div>';
                 if ($mode == 'edit') echo '<div style="font-size: 13px; color: #000">Updated post successfully!</div>';
                 if ($mode == 'delete') echo '<div style="font-size: 13px; color: #000">Deleted post successfully!</div>';
+                if ($mode == 'profile') echo '<div style="font-size: 13px; color: #000">Updated profile successfully!</div>';
             } ?>
         </div>
         <hr>

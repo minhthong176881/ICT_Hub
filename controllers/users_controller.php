@@ -245,16 +245,16 @@ class UsersController extends BaseController
          if (isset($_GET['option'])) {
             switch ($_GET['option']) {
                case '1':
-                  $this->render('profile', ['user' => $profile, 'option' => '1']);
+                  $this->render('profile', ['user' => $profile, 'option' => 1]);
                   break;
                case '2':
-                  $this->render('profile', ['user' => $profile, 'option' => '2']);
+                  $this->render('profile', ['user' => $profile, 'option' => 2]);
                   break;
                case '3':
-                  $this->render('profile', ['user' => $profile, 'option' => '3']);
+                  $this->render('profile', ['user' => $profile, 'option' => 3]);
                   break;
                default:
-                  $this->render('profile', ['user' => $profile, 'option' => '0']);
+                  $this->render('profile', ['user' => $profile, 'option' => 0]);
                   break;
             }
          } else $this->render('profile', ['user' => $profile, 'option' => 0]);
@@ -285,10 +285,8 @@ class UsersController extends BaseController
                'class' => $class,
                'school_year' => $school_year
             ];
-            // var_dump($user);
             $res = $this->user->update($_GET['id'], $user);
-            if ($res > 0) header('Location: ?controller=users&action=profile&id=' . $_GET['id']);
-            else header('Location: index.php?controller=pages&action=error'); 
+            echo $res;
          } else header('Location: index.php?controller=pages&action=error');
       } else header('Location: index.php?controller=pages&action=error');
    }

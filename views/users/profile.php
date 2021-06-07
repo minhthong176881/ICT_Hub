@@ -23,7 +23,7 @@
                     if (isset($_SESSION['userId']) && $user->_id == $_SESSION['userId']) {
             ?>
                         <button class="btn-edit" onclick="window.location.href='?controller=posts&action=edit&id=<?php echo $post->_id ?>'"><span><i class="fal fa-edit"></i></span></button>
-                        <button class="btn-delete" onclick="deletePost()"><span><i class="fal fa-trash-alt"></i></span></button>
+                        <button class="btn-delete" onclick="deletePost('<?php echo $post->_id ?>')"><span><i class="fal fa-trash-alt"></i></span></button>
                     <?php }
                     echo "<br/>Author: " . $user->given_name . "<br/>Tags: ";
                     for ($j = 0; $j < count($post->tags); $j++) {
@@ -97,7 +97,7 @@
         } ?>
     }
 
-    function deletePost() {
+    function deletePost(id) {
         <?php $mode = 'delete' ?>
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
@@ -119,7 +119,7 @@
                 }
             }
         }
-        xmlhttp.open("GET", "?controller=posts&action=delete&id=<?php echo $post->_id ?>", true);
+        xmlhttp.open("GET", "?controller=posts&action=delete&id=" + id, true);
         xmlhttp.send();
     }
 
@@ -127,7 +127,7 @@
         var popup = document.querySelector('.popup');
         if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
         <?php
-            echo "window.location.href = '?controller=users&action=profile&id=" . $_SESSION['userId'] . "'";
+        echo "window.location.href = '?controller=users&action=profile&id=" . $_SESSION['userId'] . "'";
         ?>
     }
 </script>
