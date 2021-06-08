@@ -30,7 +30,7 @@
                     <span>Posts</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="?controller=admin&action=accounts" <?= $file =='accounts' ? 'class="active"' : '' ?>><span class="fas fa-user-circle"></span>
                     <span>Accounts</span>
                     </a>
@@ -39,7 +39,7 @@
                     <a href="/"><span class="fad fa-home"></span>
                     <span>Home Page</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
