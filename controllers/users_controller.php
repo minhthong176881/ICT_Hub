@@ -56,7 +56,8 @@ class UsersController extends BaseController
          if (!is_null($result) && password_verify($_POST['password'], $result['password'])) {
             // login success
             $this->sessionLogin($result);
-            header('Location: index.php');
+            Utility::debug($_POST);
+            header('Location: '. (!empty($_POST['from']) ? $_POST['from'] : 'index.php'));
          } else {
             $this->render('login', ['loginSuccess' => false, 'username' => $username]);
          }
@@ -74,6 +75,7 @@ class UsersController extends BaseController
       $_SESSION['username'] = $account['username'];
       $_SESSION['given_name'] = $account['given_name'];
       $_SESSION['userId'] = $account['_id'];
+      $_SESSION['role'] = $account['role'] ?? 'student';
    }
 
    private function sessionLogout()
@@ -85,6 +87,7 @@ class UsersController extends BaseController
       unset($_SESSION['username']);
       unset($_SESSION['given_name']);
       unset($_SESSION['userId']);
+      unset($_SESSION['role']);
    }
 
    public function logout()
@@ -143,8 +146,8 @@ class UsersController extends BaseController
             if (!is_null($result)) {
                if (isset($result['external']) && $result['external'] == true) {
                   // login success
-                  $this->sessionLogin(['username' => $account['email'], 'given_name' => $account['given_name'],  '_id' => $result->_id]);
-                  header('Location: index.php');
+                  $this->sessionLogin($result);
+                  header('Location: '. (!empty($_POST['from']) ? $_POST['from'] : 'index.php'));
                } else {
                   $this->render('login', ['loginSuccess' => false, 'external' => true]);
                }
@@ -218,7 +221,14 @@ class UsersController extends BaseController
 
    public function login()
    {
-      $this->render('login');
+      if (session_status() === PHP_SESSION_NONE) {
+         session_start();
+      }
+      if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+         header('Location: '. (!empty($_GET['from']) ? $_GET['from'] : 'index.php'));
+      } else {
+         $this->render('login');
+      }
    }
 
    public function register()

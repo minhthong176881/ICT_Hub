@@ -19,9 +19,17 @@
         if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
             // document.getElementById("nav-bar").style.display = "none";
             scrollButton.style.display = 'block';
+            if (document.querySelector('.fixed-right') != null) {
+                document.querySelector('.fixed-right').style.position = 'fixed';
+                document.querySelector('.fixed-right').style.top = '10px';
+            }
         } else {
             // document.getElementById("nav-bar").style.display = "initial";
             scrollButton.style.display = 'none';
+            if (document.querySelector('.fixed-right') != null) {
+                document.querySelector('.fixed-right').style.top = '';
+                document.querySelector('.fixed-right').style.position = '';
+            }
         }
     }
     scrollButton.addEventListener('click', () => {

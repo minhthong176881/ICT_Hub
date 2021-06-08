@@ -10,13 +10,25 @@ require_once('models/subject.php');
 require_once('models/post.php');
 
 
-class AdminController extends BaseController {
+class AdminController extends BaseController
+{
     function __construct()
     {
         parent::__construct();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+            if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+                header('Location: index.php?controller=pages&action=error');
+            }
+        } else {
+            header('Location: index.php?controller=users&action=login&from='.urlencode($_SERVER['REQUEST_URI']));
+        }
     }
 
-    public function render($file, $data = null) {
+    public function render($file, $data = null)
+    {
         $viewFile = 'views/' . $this->folder . '/' . $file . '.php';
         if (is_file($viewFile)) {
             if ($data) {
@@ -32,7 +44,8 @@ class AdminController extends BaseController {
         }
     }
 
-    public function index() {
+    public function index()
+    {
         $users = new User();
         $users = $users->all();
         $userCount = count($users);
@@ -41,12 +54,13 @@ class AdminController extends BaseController {
         $artileCount = count($article->all());
 
         $subjectCount = count((new Subject())->all());
-        
+
 
         $posts = new Post();
         $posts = $posts->all();
         $postCount = count($posts);
-        session_start();
+        
+        
         $user_given_name = $_SESSION['given_name'];
 
         $data = [
@@ -58,11 +72,10 @@ class AdminController extends BaseController {
             "posts" => $posts,
             "user_given_name" => $user_given_name
         ];
-
-    
         $this->render('dashboard', $data);
     }
-    public function users() {
+    public function users()
+    {
         $users = new User();
         $users = $users->all();
         $userCount = count($users);
@@ -71,41 +84,45 @@ class AdminController extends BaseController {
         $artileCount = count($article->all());
 
         $subjectCount = count((new Subject())->all());
-        
-        
+
+
         $posts = new Post();
         $posts = $posts->all();
         $postCount = count($posts);
         session_start();
-        $user_given_name = $_SESSION['given_name'];
+        if (isset($_SESSION['given_name']) && !empty($_SESSION['given_name'])) {
+            $user_given_name = $_SESSION['given_name'];
 
-        $data = [
-            "users" => $users,
-            "userCount" => $userCount,
-            "artileCount" => $artileCount,
-            "subjectCount" => $subjectCount,
-            "postCount" => $postCount,
-            "posts" => $posts,
-            "user_given_name" => $user_given_name
-        ];
+            $data = [
+                "users" => $users,
+                "userCount" => $userCount,
+                "artileCount" => $artileCount,
+                "subjectCount" => $subjectCount,
+                "postCount" => $postCount,
+                "posts" => $posts,
+                "user_given_name" => $user_given_name
+            ];
 
-    
-        $this->render('users', $data);
+
+            $this->render('users', $data);
+        }
     }
-    public function deleteUser($id){
+    public function deleteUser($id)
+    {
         $article = new User();
-        if($article->deleteOne($id)){
+        if ($article->deleteOne($id)) {
             Utility::returnResult("OK");
-        } else{
+        } else {
             Utility::returnResult("ERROR");
         }
     }
-    public function articles() {
+    public function articles()
+    {
 
         $article = new Article();
         $articles = $article->all();
         $artileCount = count($articles);
-        
+
         session_start();
         $user_given_name = $_SESSION['given_name'];
 
@@ -115,7 +132,7 @@ class AdminController extends BaseController {
             "user_given_name" => $user_given_name
         ];
 
-    
+
         $this->render('articles', $data);
     }
     public function createArticle(){
@@ -155,11 +172,12 @@ class AdminController extends BaseController {
         }
     }
 
-    public function deleteArticle($id){
+    public function deleteArticle($id)
+    {
         $article = new Article();
-        if($article->deleteOne($id)){
+        if ($article->deleteOne($id)) {
             Utility::returnResult("OK");
-        } else{
+        } else {
             Utility::returnResult("ERROR");
         }
     }

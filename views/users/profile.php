@@ -1,8 +1,9 @@
-<h1 style="text-align: left; margin-left: 6%">Profile <span><i class='fad fa-chevron-double-right'></i></span>
+<div class="text-box" style="top: 25%; text-indent: -5.4%"><h1 style="text-align: left; margin-left: 6%">Profile <span><i class='fad fa-chevron-double-right'></i></span>
     <?php
     session_start();
     echo $user->family_name . " " . $user->given_name ?></h1>
-<h4 style="text-align: left; margin-left: 15%"><?php echo $user->username ?></h4>
+<h3 style="text-align: left; margin-left: 20%"><?php echo $user->username ?></h3>
+</div>
 </header>
 <div class="profile-content">
     <div class="user-posts">
@@ -23,7 +24,7 @@
                     if (isset($_SESSION['userId']) && $user->_id == $_SESSION['userId']) {
             ?>
                         <button class="btn-edit" onclick="window.location.href='?controller=posts&action=edit&id=<?php echo $post->_id ?>'"><span><i class="fal fa-edit"></i></span></button>
-                        <button class="btn-delete" onclick="deletePost('<?php echo $post->_id ?>')"><span><i class="fal fa-trash-alt"></i></span></button>
+                        <button class="btn-delete" onclick="btnDeleteOnClick('<?php echo $post->_id ?>')"><span><i class="fal fa-trash-alt"></i></span></button>
                     <?php }
                     echo "<br/>Author: " . $user->given_name . "<br/>Tags: ";
                     for ($j = 0; $j < count($post->tags); $j++) {
@@ -80,12 +81,15 @@
     </div>
 </div>
 <?php include "views/popup/del_noti.php"; ?>
+<?php include "views/popup/confirm_noti.php"; ?>
 <script>
     window.onload = function() {
         var el = document.getElementsByTagName('header');
         el[0].classList.add('sub-header');
         el[0].classList.add('profile-header');
     }
+
+    var deletePostId = "";
 
     function sendMail() {
         var subject = document.getElementById('subject').value;
@@ -129,5 +133,26 @@
         <?php
         echo "window.location.href = '?controller=users&action=profile&id=" . $_SESSION['userId'] . "'";
         ?>
+    }
+
+    function btnOKOnClick() {
+        var popup = document.querySelector('.confirm-popup');
+        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+        deletePost(deletePostId);
+    }
+
+    function closePopup() {
+        var popup = document.querySelector('.confirm-popup');
+        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+    }
+
+    function btnDeleteOnClick(id) {
+        var popup = document.querySelector('.confirm-popup');
+        if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        deletePostId = id;
     }
 </script>

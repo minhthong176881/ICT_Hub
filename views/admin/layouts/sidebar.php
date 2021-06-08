@@ -35,11 +35,11 @@
                     <span>Accounts</span>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="#"><span class="fas fa-tasks"></span>
-                    <span>Tasks</span>
+                <li>
+                    <a href="/"><span class="fad fa-home"></span>
+                    <span>Home Page</span>
                     </a>
-                </li> -->
+                </li>
             </ul>
         </div>
     </div>

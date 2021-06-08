@@ -3,8 +3,10 @@
         session_start();
     }
     ?>
-    <h1>Maybe you miss this knowledge...</h1><br>
-    <h3><span><i class="fas fa-horizontal-rule"></i></span><span><i class="fas fa-horizontal-rule"></i></span> Sharing is caring <span><i class="fas fa-horizontal-rule"></i></span><span><i class="fas fa-horizontal-rule"></i></span></h3>
+    <div class="text-box">
+        <h1>Maybe you miss this knowledge...</h1><br>
+        <h2><span><i class="fas fa-horizontal-rule"></i></span><span><i class="fas fa-horizontal-rule"></i></span> Sharing is caring <span><i class="fas fa-horizontal-rule"></i></span><span><i class="fas fa-horizontal-rule"></i></span></h2>
+    </div>
     </header>
 
     <!-- blog page -->
@@ -23,9 +25,11 @@
                     echo "<li class='recommend'><a style='font-size: 21px' href='?controller=posts&action=detail&id=" . $posts[$index]->_id . "'>" . $posts[$index]->title . "</a>";
                     echo "<br/>Author: <a href='?controller=users&action=profile&id=" . $posts[$index]->author->_id . "'>" . $posts[$index]->author->given_name . "</a><br/>Tags: ";
                     for ($j = 0; $j < count($posts[$index]->tags); $j++) {
-                        if ($j != count($posts[$index]->tags) - 1)
-                            echo "<a href='?controller=posts&action=tag&tag=" . $posts[$index]->tags[$j]->name . "'>" . $posts[$index]->tags[$j]->name . "</a>| ";
-                        else echo "<a href='?controller=posts&action=tag&tag=" . $posts[$index]->tags[$j]->name . "'>" . $posts[$index]->tags[$j]->name . "</a>";
+                        if (!empty($posts[$index]->tags[$j])) {
+                            if ($j != count($posts[$index]->tags) - 1)
+                                echo "<a href='?controller=posts&action=tag&tag=" . $posts[$index]->tags[$j]->name . "'>" . $posts[$index]->tags[$j]->name . "</a>| ";
+                            else echo "<a href='?controller=posts&action=tag&tag=" . $posts[$index]->tags[$j]->name . "'>" . $posts[$index]->tags[$j]->name . "</a>";
+                        }
                     }
                     array_push($appeared, $index);
                     echo "<hr style='margin-top: 5px'></li><br/>";

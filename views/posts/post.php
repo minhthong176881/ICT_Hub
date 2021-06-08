@@ -5,12 +5,14 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $mode = 'create';
 ?>
+</header>
+<div style="text-align: center;">
 <form action="javascript:submit();" method="POST">
     <input class="title" type="text" name="title" placeholder="Title" id="title" required>
     <br>
     <div class="dropdown dropdown-tags tag-input">
         <input type="text" id="inputTags" name="tags" placeholder="Tag your post. Maximum 5 tags. At least 1 tag." required>
-        <div class="dropdown-content dropdown-bg" style="margin-left: 5%">
+        <div class="dropdown-content dropdown-bg" style="margin-left: 5%; width: 90%">
             <?php
             foreach ($tags as $tag) {
                 echo "<div class='checkbox-tags'><input class='tag' type='checkbox' name='" . $tag->name . "' value='" . $tag->_id . "' onclick='check()'/>";
@@ -28,13 +30,16 @@ $mode = 'create';
         </div>
     </div>
 </form>
+</div>
 
 <?php include "views/popup/noti.php";?>
 
 <script>
     window.onload = function() {
-        el = document.getElementsByTagName('nav');
-        el[0].classList.add('navbar');
+        // var el = document.getElementsByTagName('nav');
+        var head = document.getElementsByTagName('header');
+        head[0].classList.add('post-header');
+        // el[0].classList.add('navbar');
         CKEDITOR.replace('content');
     }
 

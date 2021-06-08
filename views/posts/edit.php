@@ -29,7 +29,7 @@ $mode = 'edit';
     <div class="btn-group" style="display: flex; margin-top: 20px;">
         <div style="margin-left: auto; margin-right: 95px">
             <button type="submit" name="btn-submit" class="button-login" style="width: 200px; margin-right: 20px">Update</button>
-            <button type="reset" onclick="deletePost()" name="btn-submit" class="button-delete" style="width: 200px; margin-right: 20px">Delete</button>
+            <button type="reset" onclick="btnDeleteOnClick()" name="btn-submit" class="button-delete" style="width: 200px; margin-right: 20px">Delete</button>
             <button type="reset" class="button-cancel" style="width: 200px;" onclick="cancel()">Cancel</button>
         </div>
     </div>
@@ -37,7 +37,7 @@ $mode = 'edit';
 
 <?php include "views/popup/noti.php"; ?>
 <?php include "views/popup/del_noti.php"; ?>
-<?php //include "views/popup/warn_noti.php"; ?>
+<?php include "views/popup/confirm_noti.php"; ?>
 
 <script>
     window.onload = function() {
@@ -141,5 +141,25 @@ $mode = 'edit';
             if ($mode == 'delete') echo "window.location.href = '?controller=users&action=profile&id=" . $_SESSION['userId'] . "'";
             if ($mode == 'edit') echo "window.location.href = '?controller=users&action=profile&id=" . $post->author->_id . "'";
         ?>
+    }
+
+    function btnOKOnClick() {
+        var popup = document.querySelector('.confirm-popup');
+        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+        deletePost();
+    }
+
+    function closePopup() {
+        var popup = document.querySelector('.confirm-popup');
+        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+    }
+
+    function btnDeleteOnClick() {
+        var popup = document.querySelector('.confirm-popup');
+        if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
 </script>
