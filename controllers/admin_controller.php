@@ -9,6 +9,7 @@ require_once('models/article.php');
 require_once('models/subject.php');
 require_once('models/post.php');
 require_once('models/semester.php');
+require_once('models/tag.php');
 
 
 class AdminController extends BaseController
@@ -305,5 +306,53 @@ class AdminController extends BaseController
             Utility::returnResult("ERROR");
         }
     }
+
+    public function posts()
+    {
+
+        $posts = new Post();
+        $posts = $posts->all();
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $user_given_name = $_SESSION['given_name'];
+
+        $data = [
+            "posts" => $posts,
+            "user_given_name" => $user_given_name
+        ];
+
+
+        $this->render('posts', $data);
+    }
+    public function deletePost($id)
+    {
+        try {
+            $post = new Post();
+
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            $currentPost = $post->getById($id);
+            $tag = new Tag();
+            $tagList = [];
+            $currentAuthor = $currentPost->author->_id;
+            foreach ($currentPost->tags as $t) {
+                $item = $tag->getById($t->_id);
+                array_push($tagList, $item);
+            }
+            $res = $post->delete($currentPost->_id);
+            if ($res > 0) {
+                foreach ($tagList as $tl) {
+                    $tag->update($tl->_id, $tl->count - 1);
+                }
+                // header('Location: ?controller=users&action=profile&id=' . $currentAuthor);
+                Utility::returnResult("OK");
+            } else Utility::returnResult("ERROR");
+        } catch (Exception $e) {
+            Utility::returnResult("ERROR");
+        }
+    }
 }
-// }
