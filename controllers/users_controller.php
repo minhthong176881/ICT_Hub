@@ -146,7 +146,7 @@ class UsersController extends BaseController
             if (!is_null($result)) {
                if (isset($result['external']) && $result['external'] == true) {
                   // login success
-                  $this->sessionLogin(['username' => $account['email'], 'given_name' => $account['given_name'],  '_id' => $result->_id]);
+                  $this->sessionLogin($result);
                   header('Location: '. (!empty($_POST['from']) ? $_POST['from'] : 'index.php'));
                } else {
                   $this->render('login', ['loginSuccess' => false, 'external' => true]);
