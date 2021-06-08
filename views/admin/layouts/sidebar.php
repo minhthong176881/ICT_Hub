@@ -6,7 +6,7 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="?controller=admin&action=index#" <?= $file =='index' ? 'class="active"' : '' ?>><span class="fas fa-tachometer-alt"></span>
+                    <a href="?controller=admin&action=index#" <?= $file =='dashboard' ? 'class="active"' : '' ?>><span class="fas fa-tachometer-alt"></span>
                     <span>Dashboard</span>
                     </a>
                 </li>
