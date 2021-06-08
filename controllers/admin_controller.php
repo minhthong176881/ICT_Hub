@@ -15,6 +15,16 @@ class AdminController extends BaseController
     function __construct()
     {
         parent::__construct();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+            if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+                header('Location: index.php?controller=pages&action=error');
+            }
+        } else {
+            header('Location: index.php?controller=users&action=login&from='.urlencode($_SERVER['REQUEST_URI']));
+        }
     }
 
     public function render($file, $data = null)
@@ -49,21 +59,20 @@ class AdminController extends BaseController
         $posts = new Post();
         $posts = $posts->all();
         $postCount = count($posts);
-        session_start();
-        if (isset($_SESSION['given_name']) && !empty($_SESSION['given_name'])) {
-            $user_given_name = $_SESSION['given_name'];
+        
+        
+        $user_given_name = $_SESSION['given_name'];
 
-            $data = [
-                "users" => $users,
-                "userCount" => $userCount,
-                "artileCount" => $artileCount,
-                "subjectCount" => $subjectCount,
-                "postCount" => $postCount,
-                "posts" => $posts,
-                "user_given_name" => $user_given_name
-            ];
-            $this->render('dashboard', $data);
-        }
+        $data = [
+            "users" => $users,
+            "userCount" => $userCount,
+            "artileCount" => $artileCount,
+            "subjectCount" => $subjectCount,
+            "postCount" => $postCount,
+            "posts" => $posts,
+            "user_given_name" => $user_given_name
+        ];
+        $this->render('dashboard', $data);
     }
     public function users()
     {
