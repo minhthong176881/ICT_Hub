@@ -176,11 +176,12 @@ class PostsController extends BaseController
 
     function postComment()
     {
-        if (!empty($_POST['post_id']) && !empty($_POST['content'])) {
-            if (!empty($_POST['user_id'])) {
-                $postId = $_POST['post_id'];
-                $userId = $_POST['user_id'];
-                $content = $_POST['content'];
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (!empty($data['post_id']) && !empty($data['content'])) {
+            if (!empty($data['user_id'])) {
+                $postId = $data['post_id'];
+                $userId = $data['user_id'];
+                $content = $data['content'];
                 $commentContent = [
                     'user_id' => new MongoDB\BSON\ObjectId($userId),
                     'content' => $content,

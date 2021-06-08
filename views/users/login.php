@@ -22,7 +22,8 @@
                 print 'Login to ICT Hub';
             ?>
         </h3>
-        <form method="POST" action="?controller=users&action=postLogin">
+        <form method="POST" action="?controller=users&action=postLogin" name="login">
+            <input type="hidden" id="from" name="from" <?php if (!empty($_GET['from'])) print 'value="'.$_GET['from'].'"'; ?>>
             <p>
                 <input type="text" id="username" name="username" placeholder="Username" <?php if (!empty($username)) print "value=\"$username\""; ?> required>
                 <!-- <br> -->
@@ -73,6 +74,7 @@
         var data = {
             "idToken": access_token,
             "provider": provider,
+            "from": document.login.from.value
         };
 
         virtualFormSubmit('?controller=users&action=externalLogin', data, 'post');

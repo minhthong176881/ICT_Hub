@@ -135,10 +135,10 @@ $warning = 'login';
             'content': document.comment.content.value
         };
 
-        xhrPost({
-            url: 'index.php?controller=posts&action=postComment',
-            data: data,
-            success: function(txtResponse) {
+        xhrPost(
+            url = 'index.php?controller=posts&action=postComment',
+            data = data,
+            success = function(txtResponse) {
                 let commentLst = document.getElementById('comment-list');
                 let comment = JSON.parse(txtResponse);
                 let avatar = comment['avatar'] ? comment['avatar'] : 'https://i.pinimg.com/564x/85/8f/29/858f29fb77a5882831df52bf5de55d13.jpg';
@@ -165,7 +165,7 @@ $warning = 'login';
                 commentLst.innerHTML = commentHtml + commentLst.innerHTML;
                 window.comment.reset();
             },
-            error: function(statusCode, txtResponse) {
+            error = function(statusCode, txtResponse) {
                 if (statusCode == '401') {
                     // alert("You should login before commenting to this post!");
                     var popup = document.querySelector('.popup');
@@ -176,7 +176,7 @@ $warning = 'login';
                     if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
                 }
             }
-        })
+        );
     }
 
     function btnCloseOnClick() {
