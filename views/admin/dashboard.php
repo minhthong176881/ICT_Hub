@@ -63,7 +63,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Recent Posts</h3>
-                        <button>See all <span class="fas fa-arrow-right"></span></button>
+                        <button onclick="location.href = '?controller=admin&action=posts';" >See all <span class="fas fa-arrow-right"></span></button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -181,7 +181,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>New users</h3>
-                        <button>See all <span class="fas fa-arrow-right"></span></button>
+                        <button onclick="location.href = '?controller=admin&action=users';">See all <span class="fas fa-arrow-right"></span></button>
                     </div>
 
                     <div class="card-body">
