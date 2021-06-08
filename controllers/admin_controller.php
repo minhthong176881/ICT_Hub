@@ -8,6 +8,7 @@ require_once('models/user.php');
 require_once('models/article.php');
 require_once('models/subject.php');
 require_once('models/post.php');
+require_once('models/semester.php');
 
 
 class AdminController extends BaseController
@@ -60,7 +61,9 @@ class AdminController extends BaseController
         $posts = $posts->all();
         $postCount = count($posts);
         
-        
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         $user_given_name = $_SESSION['given_name'];
 
         $data = [
@@ -89,7 +92,9 @@ class AdminController extends BaseController
         $posts = new Post();
         $posts = $posts->all();
         $postCount = count($posts);
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         if (isset($_SESSION['given_name']) && !empty($_SESSION['given_name'])) {
             $user_given_name = $_SESSION['given_name'];
 
@@ -123,7 +128,9 @@ class AdminController extends BaseController
         $articles = $article->all();
         $artileCount = count($articles);
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         $user_given_name = $_SESSION['given_name'];
 
         $data = [
@@ -139,7 +146,9 @@ class AdminController extends BaseController
         $subjects = new Subject();
         $subjects = $subjects->all();
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         $user_given_name = $_SESSION['given_name'];
         $userId = $_SESSION['userId'];
         $data = [
@@ -149,7 +158,27 @@ class AdminController extends BaseController
         ];
         $this->render('createArticle', $data);
     }
-    public function addArticle($title, $inputSubject, $inputSubjectId, $content){
+    public function editArticles(){
+        $articleId = $_GET['_id'];
+        $article = new Article();
+        $article = $article->getById($articleId);
+
+        $user_given_name = $_SESSION['given_name'];
+
+        $subjectObj = new Subject();
+        $subjects = $subjectObj->all();
+
+        $currSubject = $subjectObj->getByArticleId($articleId);
+
+        $data = [
+            "subjects" => $subjects,
+            "article" => $article,
+            "user_given_name" => $user_given_name,
+            "currSubject" => $currSubject
+        ];
+        $this->render('editArticle', $data);
+    }
+    public function addArticle($title, $inputSubjectId, $content){
         try {
             $subjectObj = new Subject();
             // $subject = $subjectObj->getById($inputSubjectId);
@@ -160,9 +189,32 @@ class AdminController extends BaseController
                 "html" => $content
             ];
             $result1 = $articleObj->insertOne($article);
-            // array_push($subject->articles, $article);
+            $article['_id'] = $result1->getInsertedId();
+            
             $result2 = $subjectObj->addArticleToSubject($inputSubjectId, $article);
-            if ($result1 && $result2) {
+            if ($result1->getInsertedCount() && $result2->getModifiedCount()) {
+                Utility::returnResult("OK");
+            } else {
+                Utility::returnResult("ERROR");
+            }
+        } catch (Exception $e) {
+            Utility::returnResult("ERROR");
+        }
+    }
+    public function updateArticle($title, $inputSubjectId, $content, $articleId){
+        try {
+            $subjectObj = new Subject();
+            // $subject = $subjectObj->getById($inputSubjectId);
+            $articleObj = new Article();
+
+            $article = [
+                "title" => $title,
+                "html" => $content
+            ];
+            $result1 = $articleObj->updateOne($articleId, $article);
+            $article = $articleObj->getById($articleId);
+            $result2 = $subjectObj->updateArticleOfSubject($inputSubjectId, $article);
+            if ($result1->getModifiedCount() && $result2->getModifiedCount()) {
                 Utility::returnResult("OK");
             } else {
                 Utility::returnResult("ERROR");
@@ -176,6 +228,78 @@ class AdminController extends BaseController
     {
         $article = new Article();
         if ($article->deleteOne($id)) {
+            Utility::returnResult("OK");
+        } else {
+            Utility::returnResult("ERROR");
+        }
+    }
+    public function subjects()
+    {
+
+        $subject = new Subject();
+        $subjects = $subject->all();
+        // $artileCount = count($articles);
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $user_given_name = $_SESSION['given_name'];
+
+        $data = [
+            "subjects" => $subjects,
+            "user_given_name" => $user_given_name
+        ];
+
+
+        $this->render('subjects', $data);
+    }
+    public function createSubject(){
+        $semesters = new Semester();
+        $semesters = $semesters->all();
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $user_given_name = $_SESSION['given_name'];
+        $userId = $_SESSION['userId'];
+        $data = [
+            "semesters" => $semesters,
+            "user_given_name" => $user_given_name,
+            "userId" => $userId
+        ];
+        $this->render('createSubject', $data);
+    }
+    public function addSubject($name, $inputSemesterId, $description){
+        try {
+            $subjectObj = new Subject();
+            // $subject = $subjectObj->getById($inputSubjectId);
+            $semesterObj = new Semester();
+
+            $subject = [
+                "name" => $name,
+                "description" => $description,
+                "articles" => (array) []
+            ];
+            $result1 = $subjectObj->insertOne($subject);
+            $subject['_id'] = $result1->getInsertedId();
+
+            $subject = array_diff_key($subject, ["description" => "nonsense", "articles" => "nonsense"]);
+            
+            $result2 = $semesterObj->addSubjectToSemester($inputSemesterId, $subject);
+            if ($result1->getInsertedCount() && $result2->getModifiedCount()) {
+                Utility::returnResult("OK");
+            } else {
+                Utility::returnResult("ERROR");
+            }
+        } catch (Exception $e) {
+            Utility::returnResult("ERROR");
+        }
+    }
+
+    public function deleteSubject($id)
+    {
+        $subject = new Subject();
+        if ($subject->deleteOne($id)) {
             Utility::returnResult("OK");
         } else {
             Utility::returnResult("ERROR");
