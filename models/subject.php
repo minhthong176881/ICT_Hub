@@ -1,5 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
+require_once('models/semester.php');
 
 class Subject {
     private $subject;
@@ -25,11 +26,16 @@ class Subject {
 
     public function getByArticleId($id) {
         $subjects = $this->all();
+        $id =  new MongoDB\BSON\ObjectID($id);
+        $selectedSub = null;
         foreach ($subjects as $subject) {
             foreach ($subject->articles as $article) {
-                if ($article->_id == $id) return $subject;
+                if ($article->_id == $id){
+                     $selectedSub = $subject;
+                }
             }
         }
+        return $selectedSub;
     }
 
     public function search($query) {
@@ -52,6 +58,40 @@ class Subject {
             ['_id' => new MongoDB\BSON\ObjectID($subjectId)],
             ['$push' => ["articles" => $article]]
         );
-        return $req->getModifiedCount();
+        return $req;
+    }
+    public function updateArticleOfSubject($subjectId, $article) {
+        $this->deleteArticleById($article->_id);
+
+        $req = $this->subject->updateOne(
+            ['_id' => new MongoDB\BSON\ObjectID($subjectId)],
+            ['$push' => ["articles" => $article]]
+        );
+        return $req;
+    }
+
+    public function insertOne($subject)
+    {
+        // $insertResult = ;
+        return $this->subject->insertOne($subject);
+    }
+    public function deleteOne($id){
+        try{
+            $this->subject->deleteOne(['_id' => new MongoDB\BSON\ObjectID( $id )]);
+            
+            $semester = new Semester;
+            $semester->deleteSubject($id);
+
+            return 1;
+        }catch(Exception $e){
+            return 0;
+        }
+    }
+    public function deleteArticleById($articleId) {
+        $subId = $this->getByArticleId($articleId)->_id;
+        $this->subject->updateOne(
+            [ "_id" => $subId ],
+            [ '$pull' => [ "articles" => [ "_id" => new MongoDB\BSON\ObjectID($articleId) ] ] ]
+          );
     }
 }

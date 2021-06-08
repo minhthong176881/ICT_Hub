@@ -4,7 +4,7 @@
             <label for="nav-toggle">
                 <i class="fas fa-bars"></i>
             </label>
-            Articles
+            Subjects
         </h2>
         <div class="search-wrapper">
             <span class="fas fa-search"></span>
@@ -24,8 +24,8 @@
             <div class="">
                 <div class="card">
                     <div class="card-header">
-                        <h3>New articles</h3>
-                        <button onclick="createArticle()">Create Articles <span class="fas fa-arrow-right"></span></button>
+                        <h3>New subjects</h3>
+                        <button onclick="createSubject()">Create Subject <span class="fas fa-arrow-right"></span></button>
                     </div>
 
                     <div class="card-body">
@@ -33,21 +33,20 @@
                             <thead>
                                 <tr>
                                     <td style="justify-content: center;">No.</td>
-                                    <td>Title</td>
+                                    <td>Name</td>
+                                    <td>Description</td>
                                     <td style="justify-content: center;">Action</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                foreach ($articles as $key => $article) {
+                                foreach ($subjects as $key => $subject) {
                                 ?>
                                     <tr>
                                         <td style="justify-content: center;"><?= $key ?></td>
-                                        <td><?= $article->title ?></td>
-                                        <td style="justify-content: center;">
-                                        <span class="fas fa-edit action" style="cursor: pointer;" onclick="editArticle('<?= $article->_id ?>')"></span>
-                                        <span class="fas fa-times action" style="cursor: pointer;" onclick="deleteArticle('<?= $article->_id ?>')"></span>
-                                        </td>
+                                        <td><?= $subject->name ?></td>
+                                        <td><?= $subject->description ?></td>
+                                        <td style="justify-content: center;"><span class="fas fa-times" style="cursor: pointer;" onclick="deleteSubject('<?= $subject->_id ?>')"></span></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -64,14 +63,14 @@
 </div>
 
 <script>
-    const createArticle = () => {
-            window.location.href = "?controller=admin&action=createArticle";
+    const createSubject = () => {
+            window.location.href = "?controller=admin&action=createSubject";
         }
-    const deleteArticle = (id) => {
-        if (confirm('Do you really want to delete this article?')) {
+    const deleteSubject = (id) => {
+        if (confirm('Do you really want to delete this subject?')) {
             // Delete it!
             xhrPost({
-                url: '?controller=admin&action=deleteArticle',
+                url: '?controller=admin&action=deleteSubject',
                 data: {
                     'id': id
                 },
@@ -79,7 +78,7 @@
                     response = JSON.parse(responseTxt);
                     if (response.result == "OK") {
                         alert("Delete successfully!");
-                        window.location.href = '?controller=admin&action=articles';
+                        window.location.href = '?controller=admin&action=subjects';
                     } else {
                         alert("ERROR!");
                         return;
@@ -95,9 +94,7 @@
 
         } else {
             // Do nothing!
+
         }
-    }
-    const editArticle = (id) => {
-        window.location.href = '?controller=admin&action=editArticles&_id=' + id;
     }
 </script>
