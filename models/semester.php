@@ -31,6 +31,13 @@ class Semester {
         }
         return $selectedSemester;
     }
+    public function deleteSubject($subjectId) {
+        $semId = $this->getBySubjectId($subjectId)->_id;
+        $this->semester->updateOne(
+            [ "_id" => $semId ],
+            [ '$pull' => [ "subjects" => [ "_id" => new MongoDB\BSON\ObjectID($subjectId) ] ] ]
+          );
+    }
 
     public function search($query) {
         $semesters = $this->all();
@@ -39,5 +46,12 @@ class Semester {
             if (str_contains(strtolower($semester->name), $query)) array_push($list, $semester);
         }
         return $list;
+    }
+    public function addSubjectToSemester($semesterId, $subject) {
+        $req = $this->semester->updateOne(
+            ['_id' => new MongoDB\BSON\ObjectID($semesterId)],
+            ['$push' => ["subjects" => $subject]]
+        );
+        return $req;
     }
 }

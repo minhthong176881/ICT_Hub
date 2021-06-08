@@ -1,4 +1,5 @@
 <?php
+require_once('models/subject.php');
 class Article {
     private $article;
     
@@ -15,7 +16,16 @@ class Article {
         return $list;
     }
     public function deleteOne($id){
-        return $this->article->deleteOne(['_id' => new MongoDB\BSON\ObjectID( $id )]);
+        try{
+            $this->article->deleteOne(['_id' => new MongoDB\BSON\ObjectID( $id )]);
+            
+            $subject = new Subject;
+            $subject->deleteArticleById($id);
+
+            return 1;
+        }catch(Exception $e){
+            return 0;
+        }
     }
 
     public function getById($id) {
@@ -37,11 +47,11 @@ class Article {
             ['_id' => new MongoDB\BSON\ObjectID($id)],
             ['$set' => $article]
         );
-        return $req->getModifiedCount();
+        return $req;
     }
     public function insertOne($post)
     {
-        $insertResult = $this->article->insertOne($post);
-        return $insertResult->getInsertedCount();
+        // $insertResult = ;
+        return $this->article->insertOne($post);
     }
 }
