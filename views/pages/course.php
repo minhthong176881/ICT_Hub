@@ -1,4 +1,6 @@
-    <div class="text-box"><h1>Our courses</h1></div>
+    <div class="text-box">
+        <h1>Our courses</h1>
+    </div>
 
     </header>
 
@@ -17,11 +19,28 @@
                 } while (in_array($index, $appeared));
                 echo "";
                 echo "<div class='course-col'>";
-                echo "<a style='color:black;' href='?controller=pages&action=subject&id=".$subjects[$index]->_id."'><h3>" . $subjects[$index]->name . "</h3>";
+                echo "<a style='color:black;' href='?controller=pages&action=subject&id=" . $subjects[$index]->_id . "'><h3>" . $subjects[$index]->name . "</h3>";
                 echo "<div class='subject-preview' style='display: flex'>";
-                echo "<p>" . $subjects[$index]->description . "</p>"; ?>
-                <img style="width: 200px; display: block; border-radius: 10px" src="<?php if(!empty($subjects[$index]->lecturer->avatar)) echo $subjects[$index]->lecturer->avatar ?>" alt="">
-                <?php
+                echo "<div class='left-preview'><p>" . $subjects[$index]->description . "</p></div>"; ?>
+                <div class="right-preview"><img style="width: 200px;height: 300px; border-radius: 10px" src="<?php if (!empty($subjects[$index]->lecturer->avatar)) echo $subjects[$index]->lecturer->avatar ?>" alt="">
+                    <div class="lecturer-info" style="text-align: left;">
+                        <p><b>Lecturer:</b> <?php echo $subjects[$index]->lecturer->name ?></p>
+                        <p><b>Department:</b> <?php echo $subjects[$index]->lecturer->department->name ?></p>
+                        <p><b>Email:</b>
+                            <?php
+                            for ($j = 0; $j < count($subjects[$index]->lecturer->email); $j++) {
+                                if (!empty($subjects[$index]->lecturer->email[$j])) {
+                                    if ($j != count($subjects[$index]->lecturer->email) - 1)
+                                        echo $subjects[$index]->lecturer->email[$j] . "| ";
+                                    else echo $subjects[$index]->lecturer->email[$j];
+                                }
+                            }
+                            ?>
+                        </p>
+                        <p><b>Web:</b> <a href="<?php echo $subjects[$index]->lecturer->detail ?>" target="_blank"><?php echo $subjects[$index]->lecturer->detail ?></a></p>
+                    </div>
+                </div>
+            <?php
                 echo "</div></a>";
                 echo "</div>";
                 array_push($appeared, $index);

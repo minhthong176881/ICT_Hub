@@ -23,7 +23,13 @@
                 document.querySelector('.fixed-right').style.position = 'fixed';
                 document.querySelector('.fixed-right').style.top = '10px';
             }
-        } else {
+        } else if (document.body.scrollTop > document.body.scrollHeight - 500 || document.documentElement.scrollTop > document.documentElement.scrollHeight - 500) {
+            if (document.querySelector('.fixed-right') != null) {
+                document.querySelector('.fixed-right').style.top = '';
+                document.querySelector('.fixed-right').style.position = '';
+            }
+        }
+        else {
             // document.getElementById("nav-bar").style.display = "initial";
             scrollButton.style.display = 'none';
             if (document.querySelector('.fixed-right') != null) {

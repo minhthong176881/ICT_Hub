@@ -13,7 +13,7 @@
 }
 
 .blog {
-    background-image: linear-gradient(rgba(4,9,30, 0.7), rgba(4,9,30, 0.3)), url('../../img/graduate-girl.jpg');
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.3)), url('../../img/graduate-girl.jpg');
     height: 100vh;
     background-position: center;
     background-size: cover;
@@ -89,4 +89,9 @@
 
 .comment-form button {
     margin: 10px 0px;
+}
+
+.paginate {
+    display: flex;
+    justify-content: center;
 }

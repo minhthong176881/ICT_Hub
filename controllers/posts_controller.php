@@ -45,12 +45,15 @@ class PostsController extends BaseController
             foreach ($allPost as $post) {
                 if ($post->author->_id != $selectedPost->author->_id) array_push($listPostFromOther, $post);
             }
-            $selectedTags = [];
+            $postSameTag = [];
             foreach ($selectedPost->tags as $item) {
-                $tagName = $tag->getByName($item->name);
-                
+                $postsByTag = $this->post->getByTagName($item->name);
+                foreach ($postsByTag as $p) {
+                    if ($p->_id != $selectedPost->_id)
+                        array_push($postSameTag, $p);
+                }
             }
-            $data = array('post' => $selectedPost, 'listPost' => $listPostFromAuthor, 'other' => $listPostFromOther);
+            $data = array('post' => $selectedPost, 'listPost' => $listPostFromAuthor, 'other' => $listPostFromOther, 'related' => $postSameTag);
             $this->render('detail', $data);
         } else header('Location: index.php?controller=pages&action=error');
     }
@@ -87,7 +90,8 @@ class PostsController extends BaseController
         }
     }
 
-    public function edit() {
+    public function edit()
+    {
         session_start(); {
             if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $currentPost = $this->post->getById($_GET['id']);
@@ -95,8 +99,10 @@ class PostsController extends BaseController
                 $tags = $tag->all();
                 if ($currentPost->author->_id == $_SESSION['userId']) {
                     $this->render('edit', ['post' => $currentPost, 'tags' => $tags]);
-                }  header('Location: ?controller=pages&action=error');
-            } header('Location: ?controller=pages&action=error');
+                }
+                header('Location: ?controller=pages&action=error');
+            }
+            header('Location: ?controller=pages&action=error');
         }
     }
 

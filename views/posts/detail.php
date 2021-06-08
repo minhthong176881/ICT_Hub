@@ -5,7 +5,9 @@ if (session_status() === PHP_SESSION_NONE) {
 $warning = 'login';
 ?>
 <link rel="stylesheet" href="assets/stylesheets/pages/comment.css">
-<div class="text-box" style="top: 25%; text-indent: -5.4%"><h1 style="text-align: left; margin-left: 6%">Blog</h1><br></div>
+<div class="text-box" style="top: 25%; text-indent: -5.4%">
+    <h1 style="text-align: left; margin-left: 6%">Blog</h1><br>
+</div>
 </header>
 <div class="post-content" style="display: flex">
     <div class="left-content">
@@ -30,17 +32,17 @@ $warning = 'login';
     </div>
     <div class="right-content" style="position: relative;">
         <div style="position: absolute;">
-            <div class="fixed-right"> 
+            <div class="fixed-right">
                 <?php if (count($listPost) >= 2) { ?>
-                    <div style="margin-bottom: 50px">
+                    <div style="margin-bottom: 30px">
                         <h3>More from <?php echo $post->author->given_name ?>: </h3>
                         <hr style="width: 95%">
                         <div class="list-post" style="margin-top: 10px">
                             <ul>
                                 <?php
-                                if (count($listPost) > 10) {
+                                if (count($listPost) > 4) {
                                     $appeared = [];
-                                    for ($i = 0; $i < 10; $i++) {
+                                    for ($i = 0; $i < 4; $i++) {
                                         do {
                                             $index = rand(0, count($listPost) - 1);
                                         } while (in_array($index, $appeared));
@@ -66,8 +68,13 @@ $warning = 'login';
                     <div class="list-post">
                         <ul>
                             <?php
-                            foreach ($other as $item) {
-                                echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a> - <a href='?controller=users&action=profile&id=" . $item->author->_id . "'>" . $item->author->given_name . "</a></li>";
+                            $otherAppeared = [];
+                            for ($i = 0; $i < 4; $i++) {
+                                do {
+                                    $index = rand(0, count($listPost) - 1);
+                                } while (in_array($index, $otherAppeared));
+                                echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $other[$index]->_id . "'>" . $other[$index]->title . "</a> - <a href='?controller=users&action=profile&id=" . $other[$index]->author->_id . "'>" . $other[$index]->author->given_name . "</a></li>";
+                                array_push($otherAppeared, $index);
                             }
                             ?>
                         </ul>
@@ -78,30 +85,68 @@ $warning = 'login';
     </div>
 </div>
 
-<div class="comment-box">
-    <h3>Leave a comment</h3>
-    <form action="submit" class="comment-form" name="comment">
-        <input type="hidden" name="user_id" value="<?php echo $_SESSION['userId'] ?? ''; ?>">
-        <input type="hidden" name="post_id" value="<?php echo $post['_id'] ?? ''; ?>">
-        <textarea rows="3" placeholder="Your comment" name="content"></textarea>
-        <button class="hero-btn red-btn">POST COMMENT</button>
-    </form>
-</div>
+<?php if (count($related) > 0) { ?>
+    <div class="more-content" style="background-color: #f0f0f0; width: 70%; padding: 15px; margin-left: 1%; margin-top: 1%">
+        <b>Related</b>
+        <div class="related">
+            <?php
+            $relatedAppeared = [];
+            if (count($related) > 4) {
+                for ($i = 0; $i < 4; $i++) {
+                    do {
+                        $index = rand(0, count($related) - 1);
+                    } while (in_array($index, $relatedAppeared)); ?>
+                    <div class="post-container" onclick="window.location.href = '?controller=posts&action=detail&id=<?php echo $related[$index]->_id ?>'">
+                    <?php echo '<div class="ellipsis">' . $related[$index]->title . "</div><hr>";
+                    echo "<a href='?controller=users&action=profile&id=" . $related[$index]->author->_id . "'>" . $related[$index]->author->given_name . "</a><br>";
+                    echo '<span><i class="fas fa-comments-alt"></i></span> ';
+                    if (isset($related[$index]->comments) && !empty($related[$index]->comments))
+                        echo count($related[$index]->comments) . "</div>";
+                    else echo "0</div>";
+                    array_push($relatedAppeared, $index);
+                }
+            } else {
+                foreach ($related as $rp) {
+                    ?>
+                        <div class="post-container" onclick="window.location.href = '?controller=posts&action=detail&id=<?php echo $rp->_id ?>'">
+                <?php
+                    echo '<div class="ellipsis">' . $rp->title . "</div><hr>";
+                    echo "<a href='?controller=users&action=profile&id=" . $rp->author->_id . "'>" . $rp->author->given_name . "</a><br>";
+                    echo '<span><i class="fas fa-comments-alt"></i></span> ';
+                    if (isset($rp->comments) && !empty($rp->comments))
+                        echo count($rp->comments) . "</div>";
+                    else echo "0</div>";
+                }
+            }
+        } ?>
 
-<div class="comment-container" style="width: 72.25%; border-right: 1px #ccc solid" id="comment-list">
-    <?php
-    require_once 'common/utility.php';
+                        </div>
+                    </div>
 
-    use Common\Utility;
+                    <div class="comment-box">
+                        <h3>Leave a comment</h3>
+                        <form action="submit" class="comment-form" name="comment">
+                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['userId'] ?? ''; ?>">
+                            <input type="hidden" name="post_id" value="<?php echo $post['_id'] ?? ''; ?>">
+                            <textarea rows="3" placeholder="Your comment" name="content"></textarea>
+                            <button class="hero-btn red-btn">POST COMMENT</button>
+                        </form>
+                    </div>
 
-    for ($i = count($post['comments']) - 1; $i >= 0; --$i) {
-        $comment = $post['comments'][$i];
-        $avatar = $comment['avatar'] ?? 'https://i.pinimg.com/564x/85/8f/29/858f29fb77a5882831df52bf5de55d13.jpg';
-        $name = $comment['given_name'];
-        $profileUrl = !empty($comment['user_id']->__toString()) ? '?controller=users&action=profile&id=' . $comment['user_id']->__toString() : '#';
-        $content = $comment['content'];
-        $timestamp = Utility::gmdateToLocalDate($comment['created_at']->toDateTime());
-        echo <<<EOD
+                    <div class="comment-container" style="width: 72.25%; border-right: 1px #ccc solid" id="comment-list">
+                        <?php
+                        require_once 'common/utility.php';
+
+                        use Common\Utility;
+
+                        for ($i = count($post['comments']) - 1; $i >= 0; --$i) {
+                            $comment = $post['comments'][$i];
+                            $avatar = $comment['avatar'] ?? 'https://i.pinimg.com/564x/85/8f/29/858f29fb77a5882831df52bf5de55d13.jpg';
+                            $name = $comment['given_name'];
+                            $profileUrl = !empty($comment['user_id']->__toString()) ? '?controller=users&action=profile&id=' . $comment['user_id']->__toString() : '#';
+                            $content = $comment['content'];
+                            $timestamp = Utility::gmdateToLocalDate($comment['created_at']->toDateTime());
+                            echo <<<EOD
         <div class="comment-item">
             <div class="comment-left">
                 <div class="avatar-container"><a href="{$profileUrl}"><img class="comment-avatar" height="60" src="{$avatar}" width="60"></a></div>
@@ -116,37 +161,37 @@ $warning = 'login';
             </div>
         </div>
         EOD;
-    }
-    ?>
-</div>
-<?php include "views/popup/warn_noti.php" ?>
-<script>
-    window.onload = function() {
-        var el = document.getElementsByTagName('header');
-        el[0].classList.add('sub-header');
-        el[0].classList.add('post-header');
-    }
+                        }
+                        ?>
+                    </div>
+                    <?php include "views/popup/warn_noti.php" ?>
+                    <script>
+                        window.onload = function() {
+                            var el = document.getElementsByTagName('header');
+                            el[0].classList.add('sub-header');
+                            el[0].classList.add('post-header');
+                        }
 
-    window.comment.onsubmit = function(e) {
-        e.preventDefault();
-        data = {
-            'user_id': document.comment.user_id.value,
-            'post_id': document.comment.post_id.value,
-            'content': document.comment.content.value
-        };
+                        window.comment.onsubmit = function(e) {
+                            e.preventDefault();
+                            data = {
+                                'user_id': document.comment.user_id.value,
+                                'post_id': document.comment.post_id.value,
+                                'content': document.comment.content.value
+                            };
 
-        xhrPost(
-            url = 'index.php?controller=posts&action=postComment',
-            data = data,
-            success = function(txtResponse) {
-                let commentLst = document.getElementById('comment-list');
-                let comment = JSON.parse(txtResponse);
-                let avatar = comment['avatar'] ? comment['avatar'] : 'https://i.pinimg.com/564x/85/8f/29/858f29fb77a5882831df52bf5de55d13.jpg';
-                let name = comment['given_name'];
-                let profileUrl = comment['user_id'] ? 'index.php?controller=users&action=profile&id=' + comment['user_id'] : '#';
-                let content = comment['content'];
-                let timestamp = comment['created_at'];
-                let commentHtml = `
+                            xhrPost(
+                                url = 'index.php?controller=posts&action=postComment',
+                                data = data,
+                                success = function(txtResponse) {
+                                    let commentLst = document.getElementById('comment-list');
+                                    let comment = JSON.parse(txtResponse);
+                                    let avatar = comment['avatar'] ? comment['avatar'] : 'https://i.pinimg.com/564x/85/8f/29/858f29fb77a5882831df52bf5de55d13.jpg';
+                                    let name = comment['given_name'];
+                                    let profileUrl = comment['user_id'] ? 'index.php?controller=users&action=profile&id=' + comment['user_id'] : '#';
+                                    let content = comment['content'];
+                                    let timestamp = comment['created_at'];
+                                    let commentHtml = `
                 <div class="comment-item">
                     <div class="comment-left">
                         <div class="avatar-container"><a href="${profileUrl}" target="_blank"><img class="comment-avatar" height="40" src="${avatar}" width="40"></a></div>
@@ -162,26 +207,26 @@ $warning = 'login';
                 </div>
                 `;
 
-                commentLst.innerHTML = commentHtml + commentLst.innerHTML;
-                window.comment.reset();
-            },
-            error = function(statusCode, txtResponse) {
-                if (statusCode == '401') {
-                    // alert("You should login before commenting to this post!");
-                    var popup = document.querySelector('.popup');
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                    if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
-                }
-            }
-        );
-    }
+                                    commentLst.innerHTML = commentHtml + commentLst.innerHTML;
+                                    window.comment.reset();
+                                },
+                                error = function(statusCode, txtResponse) {
+                                    if (statusCode == '401') {
+                                        // alert("You should login before commenting to this post!");
+                                        var popup = document.querySelector('.popup');
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth'
+                                        });
+                                        if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
+                                    }
+                                }
+                            );
+                        }
 
-    function btnCloseOnClick() {
-        var popup = document.querySelector('.popup');
-        if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
-        window.location.href = '?controller=users&action=login';
-    }
-</script>
+                        function btnCloseOnClick() {
+                            var popup = document.querySelector('.popup');
+                            if (!popup.classList.contains('popup-hide')) popup.classList.add('popup-hide');
+                            window.location.href = '?controller=users&action=login';
+                        }
+                    </script>
