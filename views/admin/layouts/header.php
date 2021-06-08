@@ -7,6 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="assets/stylesheets/admin/admin.css">
+    <link rel="stylesheet" href="assets/stylesheets/components/button.css">
+    <link rel="stylesheet" href="assets/stylesheets/components/popup.css">
+    <link rel="stylesheet" href="assets/stylesheets/components/input.css">
+    <!-- <link rel="stylesheet" href="assets/stylesheets/style.css"> -->
     <script src="assets/js/common.js"></script>
     <script src="assets/js/ckeditor/ckeditor.js"></script>
     <title>Admin</title>

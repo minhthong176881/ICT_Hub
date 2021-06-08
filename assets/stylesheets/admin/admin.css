@@ -142,7 +142,7 @@ header label span {
 .search-wrapper input {
     height: 100%;
     padding: 0.5rem;
-    border: none;
+    border: none !important;
     outline: none;
 }
 
@@ -235,7 +235,10 @@ main {
     padding: 0.5rem 1rem;
     border: 1px solid var(--main-color);
 }
-
+.card-header button:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
 table {
     border-collapse: collapse;
     width: 100%;
@@ -320,7 +323,47 @@ td .status {
     margin-left: 0.5rem;
     color: var(--main-color);
 }
+.dropdown {
+    position: relative;
+    display: inline-block;
+    color: black;
+    width: 100%;
+}
+.subject-input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
+.content {
+    margin-top: 20px;
+}
+
+.dropdown-content {
+    display: none;
+    text-align: left;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 0px;
+    z-index: 1;
+    margin-left: 5%;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-bg {
+    background-color: white;
+    width: 250px;
+    padding: 10px;
+  }
+  .content {
+    height: 30%;
+    padding: 10px 50px 10px 50px;
+    text-align: center;
+  }
+  
 @media only screen and (max-width: 1200px) {
     
     .sidebar {

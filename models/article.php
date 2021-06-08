@@ -32,4 +32,16 @@ class Article {
         }
         return $list;
     }
+    public function updateOne($id, $article) {
+        $req = $this->article->updateOne(
+            ['_id' => new MongoDB\BSON\ObjectID($id)],
+            ['$set' => $article]
+        );
+        return $req->getModifiedCount();
+    }
+    public function insertOne($post)
+    {
+        $insertResult = $this->article->insertOne($post);
+        return $insertResult->getInsertedCount();
+    }
 }
