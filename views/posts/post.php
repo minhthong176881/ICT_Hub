@@ -75,7 +75,7 @@ $mode = 'create';
                     var popup = document.querySelector('.popup');
                     window.scrollTo({top: 0, behavior: 'smooth'});
                     if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
-                } else alert('Fail to create post. Some errors occured!');
+                } else alert('Fail to create post. Some errors occured!');      
             }
         }
         xmlhttp.open("POST", "?controller=posts&action=save&userId=<?php echo $_SESSION['userId'] ?>");

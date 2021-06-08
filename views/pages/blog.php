@@ -13,10 +13,22 @@
 
     <!-- blog page -->
     <div class="blog-content">
-        <div class="row">
+        <div class="row" style="margin: 0">
             <div class="blog-left">
                 <img src="assets/img/certificate.jpg" alt="">
-                <h2>Posts</h2>
+                <div style="display: flex;">
+                    <h2>Posts</h2>
+                    <div style="margin-top: 3%; margin-left: auto">
+                        <?php
+                        if (session_status() === PHP_SESSION_NONE) {
+                            session_start();
+                        }
+                        if (isset($_SESSION['userId']))
+                            echo '<button class="button-login" onclick="createPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
+                        else echo '<button class="button-login" onclick="loginToPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
+                        ?>
+                    </div>
+                </div>
                 <div class="post-list">
                 </div>
                 <div class="paginate">
@@ -73,17 +85,30 @@
                         ?>
                         <hr>
                         <br>
-                        <div>
-                            <?php
-                            if (session_status() === PHP_SESSION_NONE) {
-                                session_start();
-                            }
-                            if (isset($_SESSION['userId']))
-                                echo '<button class="button-login" onclick="createPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
-                            else echo '<button class="button-login" onclick="loginToPost()" style="width:100%"><span><i class="fas fa-pen"></i></span> CREATE POST</button>';
-                            ?>
-                        </div>
                     </div>
+                </div>
+                <div class="random-post">
+                    <?php
+                    $appeared = [];
+                    for ($i = 0; $i < 2; $i++) {
+                        $lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
+                        do {
+                            $index = rand(0, count($posts) - 1);
+                        } while (in_array($index, $appeared) || !(isset($posts[$index]->comments) && count($posts[$index]->comments) > 0));
+                        echo "<div>";
+                        echo "<a href='?controller=posts&action=detail&id=" . $posts[$index]->_id . "'><h4 style='color: black'>" . $posts[$index]->title . "</h4></a>";
+                        echo "Author: <a href='?controller=users&action=profile&id=" . $posts[$index]->author->_id . "'>" . $posts[$index]->author->given_name . "</a><br>Tags: ";
+                        for ($j = 0; $j < count($posts[$index]->tags); $j++) {
+                            if ($j != count($posts[$index]->tags) - 1) {
+                                echo '<a href="?controller=posts&action=tag&tag=' . $posts[$index]->tags[$j]->name . '">' . $posts[$index]->tags[$j]->name . '</a>| ';
+                            } else echo '<a href="?controller=posts&action=tag&tag=' . $posts[$index]->tags[$j]->name . '">' . $posts[$index]->tags[$j]->name . '</a>';
+                        }
+                        echo "<br>";
+                        echo '<span><i class="fas fa-comments-alt"></i></span> ' . count($posts[$index]->comments) . '<p>';
+                        echo strlen($lorem) > 150 ? substr($lorem, 0, 150) . "..." : $lorem;
+                        echo "</p></div><hr style='margin-bottom: 10px'>";
+                        array_push($appeared, $index);
+                    } ?>
                 </div>
             </div>
         </div>

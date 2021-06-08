@@ -49,8 +49,8 @@
         </div>
     </div>
 
-    <div class="semester">
-
+    <div class="content">
+        <h1>All courses</h1>
     </div>
 
     <script>

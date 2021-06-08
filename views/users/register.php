@@ -3,7 +3,11 @@
 <div class="container">
     <div class="icon">
         <img id="icon" src="assets/img/logo.png" alt="">
-    </div>
+    </div> <?php
+            session_start();
+            if (isset($_SESSION['userId'])) echo "<h3 style='text-align: center'>You are logged in!</h3><div class='hiddenForm'>";
+            else echo "<div>";
+            ?>
     <div class="form-input">
         <h3>Register account</h3>
         <form method="POST" action="?controller=users&action=postRegister">
@@ -31,9 +35,9 @@
                 <label class="required"></label>
                 <br>
                 <?php
-                    if (isset($isDup) && $isDup == true) {
-                        print '<div class="invalid-feedback">Not matching</div>';
-                    }
+                if (isset($isDup) && $isDup == true) {
+                    print '<div class="invalid-feedback">Not matching</div>';
+                }
                 ?>
             </p>
             <p>
@@ -43,18 +47,18 @@
             <div style="display: flex; margin-bottom: 20px; margin-top: 10px">
                 <input style="width: 40%; margin-left: 28px" type="text" id="class" name="class" placeholder="Class (e.g. ICT 02 K62)" <?php if (!empty($class)) print "value=\"$class\""; ?>>
                 <br>
-                <input  style="width: 40%; margin-left: auto; margin-right: 38px" type="text" id="school-year" name="school_year" placeholder="School year (e.g. K62)" <?php if (!empty($school_year)) print "value=\"$school_year\""; ?>>
+                <input style="width: 40%; margin-left: auto; margin-right: 38px" type="text" id="school-year" name="school_year" placeholder="School year (e.g. K62)" <?php if (!empty($school_year)) print "value=\"$school_year\""; ?>>
                 <br>
             </div>
             <button class="button-login" type="submit">Register</button>
             <?php
-                if (isset($registerSuccess) && $registerSuccess == false) {
-                    if (isset($external) && $external == true) {
-                        print '<div class="invalid-feedback">Your email has been registered</div>';
-                    } else {
-                        print '<div class="invalid-feedback">Your username has been existed</div>';
-                    }
+            if (isset($registerSuccess) && $registerSuccess == false) {
+                if (isset($external) && $external == true) {
+                    print '<div class="invalid-feedback">Your email has been registered</div>';
+                } else {
+                    print '<div class="invalid-feedback">Your username has been existed</div>';
                 }
+            }
             ?>
             <br><br>
             <a href="?controller=users&action=login" style="float: right; margin-right: 30px">Already had account? Login</a><br>
@@ -68,6 +72,7 @@
         <button class="inner" id="gg"><span><i style="color: red" class="fab fa-google"></i></span> Google</button>
         <button class="inner" id="outlook">Outlook</button>
     </div>
+</div>
 </div>
 <script>
     window.onload = function() {
@@ -102,19 +107,19 @@
         //     }
         // )
     }
-  
+
     // Login Google
-    function loginGoogle  () {
+    function loginGoogle() {
         if (typeof gapi !== 'undefined') {
             try {
-                gapi.load('auth2', function () {
+                gapi.load('auth2', function() {
                     auth2 = gapi.auth2.init({
                         client_id: '764151411721-2l3pha8qtpb2jt5rm2smkpp2ucpronj2.apps.googleusercontent.com'
                     });
 
                     var loginButton = document.getElementById('gg');
                     auth2.attachClickHandler(loginButton, {},
-                        function (googleUser) {         // on success
+                        function(googleUser) { // on success
                             if (googleUser.getAuthResponse()) {
                                 var profile = googleUser.getBasicProfile();
                                 var name = profile.getName();
@@ -124,11 +129,11 @@
                                 externalRegister(access_token, email, "Google", name, imageUrl);
                             }
                         },
-                        function (error) {
+                        function(error) {
                             alert("Sign in Google error!");
                         });
                 });
-               
+
             } catch (err) {
                 console.log(err);
             }
@@ -140,17 +145,20 @@
     // Initial FB
     window.fbAsyncInit = function() {
         FB.init({
-            appId      : '799342317388985',
-            cookie     : true,
-            xfbml      : true,
-            version    : 'v10.0'
-        });        
+            appId: '799342317388985',
+            cookie: true,
+            xfbml: true,
+            version: 'v10.0'
+        });
     };
 
-    (function(d, s, id){
+    (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
         js.src = "https://connect.facebook.net/vi_VN/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));

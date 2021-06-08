@@ -95,3 +95,27 @@
     display: flex;
     justify-content: center;
 }
+
+.random-post {
+    width: 96%;
+    margin: 0 auto;
+    word-wrap: break-word;
+    margin-top: 20px;
+    background-color: #ccf2ff;
+    border-radius: 4px;
+    padding: 10px;
+    color: black;
+}
+
+.random-post:hover {
+    cursor: pointer;
+}
+
+.random-post p {
+    padding: 10px 0;
+    color: black;
+}
+
+.random-post a {
+    padding: 10px 0;
+}
