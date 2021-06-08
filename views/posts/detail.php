@@ -5,7 +5,9 @@ if (session_status() === PHP_SESSION_NONE) {
 $warning = 'login';
 ?>
 <link rel="stylesheet" href="assets/stylesheets/pages/comment.css">
-<div class="text-box" style="top: 25%; text-indent: -5.4%"><h1 style="text-align: left; margin-left: 6%">Blog</h1><br></div>
+<div class="text-box" style="top: 25%; text-indent: -5.4%">
+    <h1 style="text-align: left; margin-left: 6%">Blog</h1><br>
+</div>
 </header>
 <div class="post-content" style="display: flex">
     <div class="left-content">
@@ -30,17 +32,17 @@ $warning = 'login';
     </div>
     <div class="right-content" style="position: relative;">
         <div style="position: absolute;">
-            <div class="fixed-right"> 
+            <div class="fixed-right">
                 <?php if (count($listPost) >= 2) { ?>
-                    <div style="margin-bottom: 50px">
+                    <div style="margin-bottom: 30px">
                         <h3>More from <?php echo $post->author->given_name ?>: </h3>
                         <hr style="width: 95%">
                         <div class="list-post" style="margin-top: 10px">
                             <ul>
                                 <?php
-                                if (count($listPost) > 10) {
+                                if (count($listPost) > 4) {
                                     $appeared = [];
-                                    for ($i = 0; $i < 10; $i++) {
+                                    for ($i = 0; $i < 4; $i++) {
                                         do {
                                             $index = rand(0, count($listPost) - 1);
                                         } while (in_array($index, $appeared));
@@ -66,8 +68,13 @@ $warning = 'login';
                     <div class="list-post">
                         <ul>
                             <?php
-                            foreach ($other as $item) {
-                                echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $item->_id . "'>" . $item->title . "</a> - <a href='?controller=users&action=profile&id=" . $item->author->_id . "'>" . $item->author->given_name . "</a></li>";
+                            $otherAppeared = [];
+                            for ($i = 0; $i < 4; $i++) {
+                                do {
+                                    $index = rand(0, count($other) - 1);
+                                } while (in_array($index, $otherAppeared));
+                                echo "<li style='margin-bottom: 10px'><a href='?controller=posts&action=detail&id=" . $other[$index]->_id . "'>" . $other[$index]->title . "</a> - <a href='?controller=users&action=profile&id=" . $other[$index]->author->_id . "'>" . $other[$index]->author->given_name . "</a></li>";
+                                array_push($otherAppeared, $index);
                             }
                             ?>
                         </ul>
@@ -76,6 +83,45 @@ $warning = 'login';
             </div>
         </div>
     </div>
+</div>
+
+<?php if (count($related) > 0) {
+    echo '<div class="more-content" style="background-color: #f0f0f0; width: 70%; padding: 15px; margin-left: 1%; margin-top: 1%">';
+    echo '<b>Related</b>';
+    echo '<div class="related">';
+    $relatedAppeared = [];
+    if (count($related) > 4) {
+        for ($i = 0; $i < 4; $i++) {
+            do {
+                $index = rand(0, count($related) - 1);
+            } while (in_array($index, $relatedAppeared));
+            echo <<<EOD
+            <div class="post-container" onclick="window.location.href = '?controller=posts&action=detail&id={$related[$index]->_id}'">
+            EOD;
+            echo '<div class="ellipsis">' . $related[$index]->title . "</div><hr>";
+            echo "<a href='?controller=users&action=profile&id=" . $related[$index]->author->_id . "'>" . $related[$index]->author->given_name . "</a><br>";
+            echo '<span><i class="fas fa-comments-alt"></i></span> ';
+            if (isset($related[$index]->comments) && !empty($related[$index]->comments))
+                echo count($related[$index]->comments) . "</div>";
+            else echo "0</div>";
+            array_push($relatedAppeared, $index);
+        }
+    } else {
+        foreach ($related as $rp) {
+            echo <<<EOD
+            <div class="post-container" onclick="window.location.href = '?controller=posts&action=detail&id={$rp->_id}'">
+            EOD;
+            echo '<div class="ellipsis">' . $rp->title . "</div><hr>";
+            echo "<a href='?controller=users&action=profile&id=" . $rp->author->_id . "'>" . $rp->author->given_name . "</a><br>";
+            echo '<span><i class="fas fa-comments-alt"></i></span> ';
+            if (isset($rp->comments) && !empty($rp->comments))
+                echo count($rp->comments) . "</div>";
+            else echo "0</div>";
+        }
+    }
+} ?>
+
+</div>
 </div>
 
 <div class="comment-box">
@@ -135,10 +181,10 @@ $warning = 'login';
             'content': document.comment.content.value
         };
 
-        xhrPost(
-            url = 'index.php?controller=posts&action=postComment',
-            data = data,
-            success = function(txtResponse) {
+        xhrPost({
+            url: 'index.php?controller=posts&action=postComment',
+            data: data,
+            success: function(txtResponse) {
                 let commentLst = document.getElementById('comment-list');
                 let comment = JSON.parse(txtResponse);
                 let avatar = comment['avatar'] ? comment['avatar'] : 'https://i.pinimg.com/564x/85/8f/29/858f29fb77a5882831df52bf5de55d13.jpg';
@@ -149,7 +195,7 @@ $warning = 'login';
                 let commentHtml = `
                 <div class="comment-item">
                     <div class="comment-left">
-                        <div class="avatar-container"><a href="${profileUrl}" target="_blank"><img class="comment-avatar" height="40" src="${avatar}" width="40"></a></div>
+                        <div class="avatar-container" style="font-weight: 600"><a href="${profileUrl}" target="_blank"><img class="comment-avatar" height="60" src="${avatar}" width="60"></a></div>
                     </div>
                     <div class="comment-right">
                         <div class="comment-header">
@@ -165,7 +211,7 @@ $warning = 'login';
                 commentLst.innerHTML = commentHtml + commentLst.innerHTML;
                 window.comment.reset();
             },
-            error = function(statusCode, txtResponse) {
+            error: function(statusCode, txtResponse) {
                 if (statusCode == '401') {
                     // alert("You should login before commenting to this post!");
                     var popup = document.querySelector('.popup');
@@ -176,7 +222,7 @@ $warning = 'login';
                     if (popup.classList.contains('popup-hide')) popup.classList.remove('popup-hide');
                 }
             }
-        );
+        });
     }
 
     function btnCloseOnClick() {

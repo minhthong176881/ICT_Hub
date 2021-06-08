@@ -2,7 +2,7 @@
     <?php
     session_start();
     echo $user->family_name . " " . $user->given_name ?></h1>
-<h3 style="text-align: left; margin-left: 20%"><?php echo $user->username ?></h3>
+<h3 style="text-align: left; margin-left: 22%"><?php echo $user->username ?></h3>
 </div>
 </header>
 <div class="profile-content">

@@ -4,7 +4,7 @@
 <footer>
     <hr>
     <h4>About Us</h4>
-    <p>Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj. <br> Lorem ipsum dolor sit amet, asdjfh kcadsjhf askj,sahfdkj.</p>
+    <p>This is an online library for ICT student which contains all subjects of global ICT course, <br> also a website for sharing knowledge, discussion.<br>If you have any question, feel free to contact with us. You will get nothing and we will have an unread email.</p>
     <div class="icons">
         <a href="https://www.facebook.com/minhthong176881" target="_blank"><i class="fab fa-facebook"></i></a>
         <a href="https://twitter.com/Minh__Thong" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -23,7 +23,13 @@
                 document.querySelector('.fixed-right').style.position = 'fixed';
                 document.querySelector('.fixed-right').style.top = '10px';
             }
-        } else {
+        } else if (document.body.scrollTop > document.body.scrollHeight - 500 || document.documentElement.scrollTop > document.documentElement.scrollHeight - 500) {
+            if (document.querySelector('.fixed-right') != null) {
+                document.querySelector('.fixed-right').style.top = '';
+                document.querySelector('.fixed-right').style.position = '';
+            }
+        }
+        else {
             // document.getElementById("nav-bar").style.display = "initial";
             scrollButton.style.display = 'none';
             if (document.querySelector('.fixed-right') != null) {

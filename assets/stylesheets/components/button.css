@@ -119,3 +119,32 @@
     cursor: pointer;
     background-color: #ff6b6b;
 }
+
+.btn-paging {
+    border: 0.1px #ccc solid;
+    text-align: center;
+    width: 30px;
+    margin: 10px;
+    height: 25px;
+    border-radius: 4px;
+}
+
+.btn-paging:hover {
+    cursor: pointer;
+    background-color: #16aae9;
+    color: white;
+    font-weight: 600;
+    border: none;
+}
+
+.selected-paging {
+    background-color: #16aae9;
+    color: white;
+    font-weight: 600;
+    border: none;
+}
+
+.btn-paging-disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}

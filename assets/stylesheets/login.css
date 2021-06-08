@@ -1,6 +1,6 @@
 .container {
     width: 500px;
-    height: 600px;
+    /* height: 600px; */
     background-color: white;
     margin: auto;
     margin-top: 40px;
@@ -46,11 +46,11 @@
 }
 
 
-.outer {
+.outter {
     width: 100%;
     text-align: center;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 .inner {
@@ -94,7 +94,7 @@ a {
 }
 
 .required:after {
-	content: "*";
+	content: " *";
 	color: red;
 }
 

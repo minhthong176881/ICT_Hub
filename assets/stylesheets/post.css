@@ -30,7 +30,7 @@
 .right-content {
     width: 25%;
     padding: 10px;
-    margin-left: 2%;
+    margin-left: 1%;
     margin-top: 2%
 }
 
@@ -52,10 +52,39 @@
 
 .post-tag-content {
     width: 80%;
-    margin:auto;
+    margin: auto;
     padding: 30px 50px 10px 50px;
 }
 
 .post-header {
-    height: 20vh;
+    height: 50vh;
+}
+
+.related {
+    display: flex;
+    margin: auto;
+    margin-left: 2%;
+    margin-top: 2%
+}
+
+.post-container {
+    background-color: white;
+    border: 0.1px #ccc solid;
+    width: 24%;
+    margin-right: 2%;
+    padding: 10px;
+    box-shadow: 5px 5px #ccc;
+    border-radius: 4px;
+}
+
+.post-container:hover {
+    cursor: pointer;
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    margin-bottom: 5px;
 }

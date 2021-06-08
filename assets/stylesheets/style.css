@@ -458,3 +458,8 @@ footer h4 {
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+
+.lecturer-info p {
+  margin-bottom: 5px;
+  padding: 0;
+}
