@@ -7,16 +7,15 @@
     <div class="form-input">
         <h3>Register account</h3>
         <form method="POST" action="?controller=users&action=postRegister">
-            <p>
-                <input type="text" id="given-name" name="given_name" placeholder="First name" <?php if (!empty($given_name)) print "value=\"$given_name\""; ?> required>
+            <div class="name-reg" style="display: flex; margin-bottom: 10px">
+                <input type="text" style="width: 40%; margin-left: 25px" id="given-name" name="given_name" placeholder="First name" <?php if (!empty($given_name)) print "value=\"$given_name\""; ?> required>
                 <label class="required"></label>
                 <br>
-            </p>
-            <p>
-                <input type="text" id="family-name" name="family_name" placeholder="Last name" <?php if (!empty($family_name)) print "value=\"$family_name\""; ?> required>
-                <label class="required"></label>
+
+                <input style="width: 40%; margin-left: auto;" type="text" id="family-name" name="family_name" placeholder="Last name" <?php if (!empty($family_name)) print "value=\"$family_name\""; ?> required>
+                <label class="required" style="margin-right: 30px"></label>
                 <br>
-            </p>
+            </div>
             <p>
                 <input type="text" id="username" name="username" placeholder="Username" <?php if (!empty($username)) print "value=\"$username\""; ?> required>
                 <label class="required"></label>
@@ -38,17 +37,15 @@
                 ?>
             </p>
             <p>
-                <input type="text" id="email" name="email" placeholder="Email" <?php if (!empty($email)) print "value=\"$email\""; ?>>
+                <input style="margin-left: -10px" type="text" id="email" name="email" placeholder="Email" <?php if (!empty($email)) print "value=\"$email\""; ?>>
                 <br>
             </p>
-            <p>
-                <input type="text" id="class" name="class" placeholder="Class (e.g. ICT 02 K62)" <?php if (!empty($class)) print "value=\"$class\""; ?>>
+            <div style="display: flex; margin-bottom: 20px; margin-top: 10px">
+                <input style="width: 40%; margin-left: 28px" type="text" id="class" name="class" placeholder="Class (e.g. ICT 02 K62)" <?php if (!empty($class)) print "value=\"$class\""; ?>>
                 <br>
-            </p>
-            <p>
-                <input type="text" id="school-year" name="school_year" placeholder="School year (e.g. K62)" <?php if (!empty($school_year)) print "value=\"$school_year\""; ?>>
+                <input  style="width: 40%; margin-left: auto; margin-right: 38px" type="text" id="school-year" name="school_year" placeholder="School year (e.g. K62)" <?php if (!empty($school_year)) print "value=\"$school_year\""; ?>>
                 <br>
-            </p>
+            </div>
             <button class="button-login" type="submit">Register</button>
             <?php
                 if (isset($registerSuccess) && $registerSuccess == false) {
