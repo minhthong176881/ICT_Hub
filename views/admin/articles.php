@@ -25,7 +25,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>New articles</h3>
-                        <!-- <button>See all <span class="fas fa-arrow-right"></span></button> -->
+                        <button onclick="createArticle()">Create Articles <span class="fas fa-arrow-right"></span></button>
                     </div>
 
                     <div class="card-body">
@@ -61,15 +61,18 @@
 </div>
 
 <script>
+    const createArticle = () => {
+            window.location.href = "?controller=admin&action=createArticle";
+        }
     const deleteArticle = (id) => {
         if (confirm('Do you really want to delete this article?')) {
             // Delete it!
-            xhrPost(
-                url = '?controller=admin&action=deleteArticle',
-                data = {
+            xhrPost({
+                url: '?controller=admin&action=deleteArticle',
+                data: {
                     'id': id
                 },
-                success = function(responseTxt) {
+                success: (responseTxt) => {
                     response = JSON.parse(responseTxt);
                     if (response.result == "OK") {
                         alert("Delete successfully!");
@@ -81,11 +84,11 @@
 
 
                 },
-                error = function(status, responseTxt) {
+                error: (status, responseTxt) => {
                     alert('Server error!');
                     // window.location.reload();
                 }
-            )
+            })
 
         } else {
             // Do nothing!

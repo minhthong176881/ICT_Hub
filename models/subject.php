@@ -40,4 +40,18 @@ class Subject {
         }
         return $list;
     }
+    public function updateOne($id, $subject) {
+        $req = $this->subject->updateOne(
+            ['_id' => new MongoDB\BSON\ObjectID($id)],
+            ['$set' => $subject]
+        );
+        return $req->getModifiedCount();
+    }
+    public function addArticleToSubject($subjectId, $article) {
+        $req = $this->subject->updateOne(
+            ['_id' => new MongoDB\BSON\ObjectID($subjectId)],
+            ['$push' => ["articles" => $article]]
+        );
+        return $req->getModifiedCount();
+    }
 }

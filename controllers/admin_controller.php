@@ -118,6 +118,42 @@ class AdminController extends BaseController {
     
         $this->render('articles', $data);
     }
+    public function createArticle(){
+        $subjects = new Subject();
+        $subjects = $subjects->all();
+
+        session_start();
+        $user_given_name = $_SESSION['given_name'];
+        $userId = $_SESSION['userId'];
+        $data = [
+            "subjects" => $subjects,
+            "user_given_name" => $user_given_name,
+            "userId" => $userId
+        ];
+        $this->render('createArticle', $data);
+    }
+    public function addArticle($title, $inputSubject, $inputSubjectId, $content){
+        try {
+            $subjectObj = new Subject();
+            // $subject = $subjectObj->getById($inputSubjectId);
+            $articleObj = new Article();
+
+            $article = [
+                "title" => $title,
+                "html" => $content
+            ];
+            $result1 = $articleObj->insertOne($article);
+            // array_push($subject->articles, $article);
+            $result2 = $subjectObj->addArticleToSubject($inputSubjectId, $article);
+            if ($result1 && $result2) {
+                Utility::returnResult("OK");
+            } else {
+                Utility::returnResult("ERROR");
+            }
+        } catch (Exception $e) {
+            Utility::returnResult("ERROR");
+        }
+    }
 
     public function deleteArticle($id){
         $article = new Article();

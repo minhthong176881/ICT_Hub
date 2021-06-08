@@ -13,7 +13,7 @@
         <div class="user-wrapper">
             <img src="assets/img/dominhthong.jpg" width="30px" height="30px" alt="">
             <div>
-                <h4><?= $user_given_name?></h4>
+                <h4><?= $user_given_name ?></h4>
                 <p>Super Admin</p>
             </div>
         </div>
@@ -42,19 +42,17 @@
                                     ?>
                                         <tr>
                                             <td><?= $post->title ? $post->title : "No title" ?></td>
-                                            <td><?= $post?->author ? $post->author->given_name: "No user" ?></td>
+                                            <td><?= $post?->author ? $post->author->given_name : "No user" ?></td>
                                             <td>
                                                 <span class="status purple"></span>
                                                 <?php
-                                                if(($post->tags)){
-                                                    foreach($post->tags as $tag){ ?>
+                                                if (($post->tags)) {
+                                                    foreach ($post->tags as $tag) { ?>
                                                         <a href=""> <?= $tag->name ?></a> &ensp;
                                                         <?php
                                                     }
-                                                    
-                                                }
-                                                else echo 'No tag';
-                                                ?>
+                                                } else echo 'No tag';
+                                                        ?>
                                             </td>
                                         </tr>
                                     <?php
@@ -157,18 +155,14 @@
                                         <small><?= $user->email ?></small>
                                     </div>
                                 </div>
+                            
                                 <div class="contact">
-                                    <!-- <span class="fas fa-users"></span> -->
-                                    <!-- <span class="fas fa-phone"></span> -->
-                                    <?php if ($user->external == true) {
+                                <?php if ($user->external == true) {
                                         echo '<span class="fab fa-facebook"></span>';
                                     }
                                     ?>
-                                </div>
-                                <div class="contact">
-                                    <span class="fas fa-times" style="cursor: pointer;"
-                                     onclick="deleteUser('<?= $user->_id ?>')"> </span>
-                                    
+                                    <span class="fas fa-times" style="cursor: pointer;" onclick="deleteUser('<?= $user->_id ?>')"> </span>
+
                                 </div>
                             </div>
                         <?php
@@ -256,12 +250,12 @@
     const deleteUser = (id) => {
         if (confirm('Do you really want to delete this user?')) {
             // Delete it!
-            xhrPost(
-                url = '?controller=admin&action=deleteUser',
-                data = {
+            xhrPost({
+                url: '?controller=admin&action=deleteUser',
+                data: {
                     'id': id
                 },
-                success = function(responseTxt) {
+                success: (responseTxt) => {
                     response = JSON.parse(responseTxt);
                     if (response.result == "OK") {
                         alert("Delete successfully!");
@@ -273,11 +267,11 @@
 
 
                 },
-                error = function(status, responseTxt) {
+                error: (status, responseTxt) => {
                     alert('Server error!');
                     // window.location.reload();
                 }
-            )
+            })
 
         } else {
             // Do nothing!
