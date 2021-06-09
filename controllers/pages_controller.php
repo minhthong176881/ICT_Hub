@@ -42,7 +42,7 @@ class PagesController extends BaseController
         $semester = new Semester();
         $articles = [];
         if (isset($_GET['id'])) {
-            if (!isset($_GET['articleId'])) $selectedArticle = $article->all()[0];
+            if (!isset($_GET['articleId'])) $selectedArticle = $article->all()[1];
             else $selectedArticle = $article->getById($_GET['articleId']);
             $selectedSubject = $subject->getById($_GET['id']);
             $selectedSemester = $semester->getBySubjectId($_GET['id']);
@@ -100,14 +100,22 @@ class PagesController extends BaseController
     {
         $subject = new Subject();
         $lecturer = new Lecturer();
+        $semester = new Semester();
         $subjects = $subject->all();
         $listSubject = [];
+        $subject8 = [];
         foreach ($subjects as $sub) {
             $currentLecturer = $lecturer->getBySubjectId($sub->_id);
             $sub = (object) array_merge((array) $sub, array('lecturer' => $currentLecturer));
             array_push($listSubject, $sub);
+            $currentSemester = $semester->getBySubjectId($sub->_id);
+            if (!empty($currentSemester)) {
+                if (str_contains($currentSemester->name, '8')) {
+                    array_push($subject8, $sub);
+                }
+            }
         }
-        $data = array('subjects' => $listSubject);
+        $data = array('subjects' => $listSubject, 'subject8' => $subject8);
         $this->render('course', $data);
     }
 
