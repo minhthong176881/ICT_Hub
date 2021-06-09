@@ -7,6 +7,8 @@ $controllers = array(
     'admin' => ['index']
 );
 
+ini_set('session.cookie_httponly', 1);
+
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) 
 {
     include_once('controllers/' . $controller . '_controller.php');
